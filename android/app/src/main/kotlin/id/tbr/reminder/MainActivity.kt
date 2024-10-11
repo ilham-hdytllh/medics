@@ -1,4 +1,4 @@
-package com.example.medics
+package id.tbr.reminder
 
 import io.flutter.embedding.android.FlutterActivity
 

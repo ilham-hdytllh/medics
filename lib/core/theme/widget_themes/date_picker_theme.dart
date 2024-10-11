@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
 
-/// Custom Class for Light & Dark Text Themes
-class TDatePickerTheme {
-  TDatePickerTheme._(); // To avoid creating instances
+class CustomDatePickerTheme {
+  CustomDatePickerTheme._();
 
-  /// Customizable Light Text Theme
   static DatePickerThemeData lightDatePickerTheme = DatePickerThemeData(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(TSizes.cardRadiusSm),
+      borderRadius: BorderRadius.circular(CustomSizes.cardRadiusSm),
     ),
     elevation: 0,
     confirmButtonStyle: ButtonStyle(
@@ -28,40 +26,40 @@ class TDatePickerTheme {
         ),
       ),
     ),
-    backgroundColor: TColors.white,
+    backgroundColor: CustomColors.white,
     surfaceTintColor: Colors.transparent,
-    headerForegroundColor: TColors.white,
-    headerBackgroundColor: TColors.primary,
+    headerForegroundColor: CustomColors.white,
+    headerBackgroundColor: CustomColors.primary,
     dayBackgroundColor: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.selected)) {
-        return TColors.primary;
+        return CustomColors.primary;
       }
-      return TColors.white;
+      return CustomColors.white;
     }),
     todayForegroundColor: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.selected)) {
-        return TColors.white;
+        return CustomColors.white;
       }
-      return TColors.primary;
+      return CustomColors.primary;
     }),
     todayBackgroundColor: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.selected)) {
-        return TColors.primary;
+        return CustomColors.primary;
       }
-      return TColors.white;
+      return CustomColors.white;
     }),
     yearBackgroundColor: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.selected)) {
-        return TColors.primary;
+        return CustomColors.primary;
       }
-      return TColors.white;
+      return CustomColors.white;
     }),
   );
 
   /// Customizable Dark Text Theme
   static DatePickerThemeData darkDatePickerTheme = DatePickerThemeData(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(TSizes.cardRadiusSm),
+      borderRadius: BorderRadius.circular(CustomSizes.cardRadiusSm),
     ),
     elevation: 0,
     confirmButtonStyle: ButtonStyle(
@@ -80,33 +78,33 @@ class TDatePickerTheme {
         ),
       ),
     ),
-    backgroundColor: TColors.black,
+    backgroundColor: CustomColors.black,
     surfaceTintColor: Colors.transparent,
-    headerForegroundColor: TColors.black,
-    headerBackgroundColor: TColors.primary,
+    headerForegroundColor: CustomColors.black,
+    headerBackgroundColor: CustomColors.primary,
     dayBackgroundColor: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.selected)) {
-        return TColors.primary;
+        return CustomColors.primary;
       }
-      return TColors.black;
+      return CustomColors.black;
     }),
     todayForegroundColor: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.selected)) {
-        return TColors.black;
+        return CustomColors.black;
       }
-      return TColors.primary;
+      return CustomColors.primary;
     }),
     todayBackgroundColor: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.selected)) {
-        return TColors.primary;
+        return CustomColors.primary;
       }
-      return TColors.black;
+      return CustomColors.black;
     }),
     yearBackgroundColor: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.selected)) {
-        return TColors.primary;
+        return CustomColors.primary;
       }
-      return TColors.black;
+      return CustomColors.black;
     }),
   );
 }

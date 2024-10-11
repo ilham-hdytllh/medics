@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:in_pos_multimerchant/utils/constants/colors.dart';
+
+import '../../core/constants/colors.dart';
 
 class CustomVerticalDivider extends StatelessWidget {
   const CustomVerticalDivider({super.key});
@@ -9,7 +10,7 @@ class CustomVerticalDivider extends StatelessWidget {
     return const VerticalDivider(
       width: 1,
       thickness: 2,
-      color: TColors.grey,
+      color: CustomColors.grey,
     );
   }
 }

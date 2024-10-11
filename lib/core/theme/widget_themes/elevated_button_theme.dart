@@ -2,43 +2,44 @@ import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
 
-/* -- Light & Dark Elevated Button Themes -- */
-class TElevatedButtonTheme {
-  TElevatedButtonTheme._(); //To avoid creating instances
+class CustomElevatedButtonTheme {
+  CustomElevatedButtonTheme._();
 
-  /* -- Light Theme -- */
   static final lightElevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       elevation: 0,
-      foregroundColor: TColors.light,
-      backgroundColor: TColors.primary,
-      disabledForegroundColor: TColors.darkGrey,
-      disabledBackgroundColor: TColors.buttonDisabled,
+      foregroundColor: CustomColors.light,
+      backgroundColor: CustomColors.primary,
+      disabledForegroundColor: CustomColors.darkGrey,
+      disabledBackgroundColor: CustomColors.buttonDisabled,
       side: const BorderSide(color: Colors.transparent),
       padding: const EdgeInsets.symmetric(
-          vertical: TSizes.buttonHeight - 10, horizontal: 20),
+          vertical: CustomSizes.buttonHeight - 10, horizontal: 20),
       textStyle: const TextStyle(
-          fontSize: 14, color: TColors.textWhite, fontWeight: FontWeight.w600),
+          fontSize: 14,
+          color: CustomColors.textWhite,
+          fontWeight: FontWeight.w600),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(TSizes.buttonRadius)),
+          borderRadius: BorderRadius.circular(CustomSizes.buttonRadius)),
     ),
   );
 
-  /* -- Dark Theme -- */
   static final darkElevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       elevation: 0,
-      foregroundColor: TColors.light,
-      backgroundColor: TColors.primary,
-      disabledForegroundColor: TColors.darkGrey,
-      disabledBackgroundColor: TColors.darkerGrey,
+      foregroundColor: CustomColors.light,
+      backgroundColor: CustomColors.primary,
+      disabledForegroundColor: CustomColors.darkGrey,
+      disabledBackgroundColor: CustomColors.darkerGrey,
       side: const BorderSide(color: Colors.transparent),
       padding: const EdgeInsets.symmetric(
-          vertical: TSizes.buttonHeight - 10, horizontal: 20),
+          vertical: CustomSizes.buttonHeight - 10, horizontal: 20),
       textStyle: const TextStyle(
-          fontSize: 14, color: TColors.textWhite, fontWeight: FontWeight.w600),
+          fontSize: 14,
+          color: CustomColors.textWhite,
+          fontWeight: FontWeight.w600),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(TSizes.buttonRadius)),
+          borderRadius: BorderRadius.circular(CustomSizes.buttonRadius)),
     ),
   );
 }

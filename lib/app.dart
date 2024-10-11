@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:in_pos_multimerchant/bindings/general_bindings.dart';
-import 'package:in_pos_multimerchant/localization/translations.dart';
-import 'package:in_pos_multimerchant/utils/constants/colors.dart';
-import 'package:in_pos_multimerchant/utils/theme/theme.dart';
+
+import 'bindings/general_bindings.dart';
+import 'core/constants/colors.dart';
+import 'core/theme/theme.dart';
+import 'routes/navigation_route.dart';
 
 /// ----- Use this Class to setup themes, initial bindings, any animations and much ------
 class App extends StatelessWidget {
@@ -12,27 +13,18 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      locale: const Locale(
-        'id',
-        'ID',
-      ),
-      fallbackLocale: const Locale(
-        'en',
-        'US',
-      ),
       initialBinding: GeneralBindings(),
-      translations: Transalation(),
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
-      theme: TAppTheme.lightTheme,
-      darkTheme: TAppTheme.darkTheme,
-      // initialRoute: AppLinks.MAINNAVIGATION,
-      // getPages: AppRoutes.pages,
+      theme: CustomAppTheme.lightTheme,
+      darkTheme: CustomAppTheme.lightTheme,
+      initialRoute: AppLinks.ONBOARDING,
+      getPages: AppRoutes.pages,
       home: const Scaffold(
-        backgroundColor: TColors.primary,
+        backgroundColor: CustomColors.primary,
         body: Center(
           child: CircularProgressIndicator(
-            color: TColors.white,
+            color: CustomColors.white,
           ),
         ),
       ),

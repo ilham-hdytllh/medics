@@ -1,13 +1,13 @@
 import 'package:get_storage/get_storage.dart';
 
-class TLocalStorage {
-  static final TLocalStorage _instance = TLocalStorage._internal();
+class LocalStorage {
+  static final LocalStorage _instance = LocalStorage._internal();
 
-  factory TLocalStorage() {
+  factory LocalStorage() {
     return _instance;
   }
 
-  TLocalStorage._internal();
+  LocalStorage._internal();
 
   final _storage = GetStorage();
 

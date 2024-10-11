@@ -18,6 +18,7 @@ class CustomAppBarTheme {
     titleTextStyle: TextStyle(
         fontSize: 18.0, fontWeight: FontWeight.w600, color: CustomColors.black),
   );
+
   static AppBarTheme darkAppBarTheme = const AppBarTheme(
     elevation: 0,
     centerTitle: false,

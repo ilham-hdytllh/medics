@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class CustomColors {
   // App theme colors
-  static const Color primary = Color(0xFFEF4B0A);
-  static Color secondary = Colors.deepOrangeAccent.withOpacity(0.2);
+  static const Color primary = Color(0xFF00695b);
+  static Color secondary = Color(0xFF00695b).withOpacity(0.2);
   static const Color accent = Color(0xFFb0c7ff);
 
   // Text colors

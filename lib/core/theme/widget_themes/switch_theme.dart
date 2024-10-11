@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 
-class TSwitchheme {
-  TSwitchheme._();
+class CustomSwitchheme {
+  CustomSwitchheme._();
 
   static SwitchThemeData lightSwitchTheme = SwitchThemeData(
     thumbColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
       if (states.contains(MaterialState.selected)) {
-        return TColors.primary;
+        return CustomColors.primary;
       }
       if (states.contains(MaterialState.disabled)) {
-        return TColors.darkGrey;
+        return CustomColors.darkGrey;
       }
-      return TColors.darkGrey;
+      return CustomColors.darkGrey;
     }),
     trackColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
       if (states.contains(MaterialState.selected)) {
         return Colors.orangeAccent.withOpacity(0.2);
       }
       if (states.contains(MaterialState.disabled)) {
-        return TColors.grey;
+        return CustomColors.grey;
       }
-      return TColors.grey;
+      return CustomColors.grey;
     }),
     trackOutlineColor: const MaterialStatePropertyAll(Colors.transparent),
   );
@@ -29,21 +29,21 @@ class TSwitchheme {
   static SwitchThemeData darkSwitchTheme = SwitchThemeData(
     thumbColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
       if (states.contains(MaterialState.selected)) {
-        return TColors.primary;
+        return CustomColors.primary;
       }
       if (states.contains(MaterialState.disabled)) {
-        return TColors.lightGrey;
+        return CustomColors.lightGrey;
       }
-      return TColors.lightGrey;
+      return CustomColors.lightGrey;
     }),
     trackColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
       if (states.contains(MaterialState.selected)) {
         return Colors.orangeAccent.withOpacity(0.2);
       }
       if (states.contains(MaterialState.disabled)) {
-        return TColors.grey;
+        return CustomColors.grey;
       }
-      return TColors.grey;
+      return CustomColors.grey;
     }),
     trackOutlineColor: const MaterialStatePropertyAll(Colors.transparent),
   );

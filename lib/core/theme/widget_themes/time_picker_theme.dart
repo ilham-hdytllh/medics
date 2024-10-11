@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
 
-/// Custom Class for Light & Dark Text Themes
-class TTimePickerTheme {
-  TTimePickerTheme._(); // To avoid creating instances
+class CustomTimePickerTheme {
+  CustomTimePickerTheme._();
 
-  /// Customizable Light Text Theme
   static TimePickerThemeData lightTimePickerTheme = TimePickerThemeData(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(TSizes.cardRadiusSm),
+      borderRadius: BorderRadius.circular(CustomSizes.cardRadiusSm),
     ),
     elevation: 0,
     confirmButtonStyle: ButtonStyle(
@@ -28,29 +26,27 @@ class TTimePickerTheme {
         ),
       ),
     ),
-    backgroundColor: TColors.white, // Background color
-    hourMinuteTextColor: TColors.black, // Text color for hours and minutes
-    dayPeriodTextColor: TColors.black, // Text color for AM/PM
+    backgroundColor: CustomColors.white, // Background color
+    hourMinuteTextColor: CustomColors.black, // Text color for hours and minutes
+    dayPeriodTextColor: CustomColors.black, // Text color for AM/PM
     dayPeriodBorderSide: const BorderSide(
-      color: TColors.black,
+      color: CustomColors.black,
     ), // Border color for AM/PM
-    dialHandColor: TColors.primary, // Color of the hour hand
-    dialTextColor: TColors.black, // Text color on the clock dial
+    dialHandColor: CustomColors.primary, // Color of the hour hand
+    dialTextColor: CustomColors.black, // Text color on the clock dial
     dialBackgroundColor: Colors.deepOrangeAccent.withOpacity(0.2),
     dayPeriodColor: Colors.deepOrangeAccent.withOpacity(0.2),
     hourMinuteColor: Colors.deepOrangeAccent.withOpacity(0.2),
-    entryModeIconColor: TColors.black,
+    entryModeIconColor: CustomColors.black,
     helpTextStyle: const TextStyle(
-      color: TColors.black, // Set the text color for "Enter time"
+      color: CustomColors.black,
     ),
-    hourMinuteTextStyle:
-        const TextStyle(fontSize: 30), // Text style for hours and minutes
+    hourMinuteTextStyle: const TextStyle(fontSize: 30),
   );
 
-  /// Customizable Dark Text Theme
   static TimePickerThemeData darkTimePickerTheme = TimePickerThemeData(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(TSizes.cardRadiusSm),
+      borderRadius: BorderRadius.circular(CustomSizes.cardRadiusSm),
     ),
     elevation: 0,
     confirmButtonStyle: ButtonStyle(
@@ -69,21 +65,21 @@ class TTimePickerTheme {
         ),
       ),
     ),
-    backgroundColor: TColors.black, // Background color
-    hourMinuteTextColor: TColors.softGrey, // Text color for hours and minutes
-    dayPeriodTextColor: TColors.softGrey, // Text color for AM/PM
+    backgroundColor: CustomColors.black,
+    hourMinuteTextColor: CustomColors.softGrey,
+    dayPeriodTextColor: CustomColors.softGrey,
     dayPeriodBorderSide: const BorderSide(
-      color: TColors.primary,
-    ), // Border color for AM/PM
-    dialHandColor: TColors.softGrey, // Color of the hour hand
-    dialTextColor: TColors.black, // Text color on the clock dial
-    dialBackgroundColor: TColors.primary,
-    dayPeriodColor: TColors.primary,
-    hourMinuteColor: TColors.primary,
-    entryModeIconColor: TColors.softGrey,
-    helpTextStyle: const TextStyle(
-      color: TColors.softGrey, // Set the text color for "Enter time"
+      color: CustomColors.primary,
     ),
-    hourMinuteTextStyle: const TextStyle(fontSize: 30), // Text
+    dialHandColor: CustomColors.softGrey,
+    dialTextColor: CustomColors.black,
+    dialBackgroundColor: CustomColors.primary,
+    dayPeriodColor: CustomColors.primary,
+    hourMinuteColor: CustomColors.primary,
+    entryModeIconColor: CustomColors.softGrey,
+    helpTextStyle: const TextStyle(
+      color: CustomColors.softGrey,
+    ),
+    hourMinuteTextStyle: const TextStyle(fontSize: 30),
   );
 }

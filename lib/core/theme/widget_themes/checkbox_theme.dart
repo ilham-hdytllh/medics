@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
 
-/// Custom Class for Light & Dark Text Themes
 class CustomCheckboxTheme {
-  TCheckboxTheme._(); // To avoid creating instances
+  CustomCheckboxTheme._();
 
-  /// Customizable Light Text Theme
   static CheckboxThemeData lightCheckboxTheme = CheckboxThemeData(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(CustomSizes.xs),
     ),
-    // side: const BorderSide(color: TColors.primary),
     checkColor: MaterialStateProperty.resolveWith((states) {
       if (states.contains(MaterialState.selected)) {
         return CustomColors.white;
@@ -28,7 +25,6 @@ class CustomCheckboxTheme {
     }),
   );
 
-  /// Customizable Dark Text Theme
   static CheckboxThemeData darkCheckboxTheme = CheckboxThemeData(
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(CustomSizes.xs)),
