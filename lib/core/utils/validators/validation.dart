@@ -1,4 +1,4 @@
-class TValidator {
+class CustomValidator {
   static String? validateEmptyCheckbox(String? fieldName, bool value) {
     if (value == false) {
       return "$fieldName is required";

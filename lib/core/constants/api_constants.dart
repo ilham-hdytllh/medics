@@ -1,5 +1,10 @@
-/* -- LIST OF Constants used in APIs -- */
+class ContantAPI {
+  static String baseUrlAPI = "https://tbr.ridinet.id";
 
-// Example
-const String baseUrlAPI =
-    "https://asia-southeast2-in-foodmenu-multi-merchant.cloudfunctions.net/api";
+  static String loginEmail = "https://tbr.ridinet.id/api/v1/login/email";
+  static String loginGoogle = "https://tbr.ridinet.id/api/v1/login/google";
+  static String signup = "https://tbr.ridinet.id/api/v1/register";
+  static String forgotPassword =
+      "https://tbr.ridinet.id/api/v1/forgot-password";
+  static String logout = "https://tbr.ridinet.id/api/v1/logout";
+}

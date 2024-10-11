@@ -1,4 +1,4 @@
-extension TExtension on String {
+extension CustomExtension on String {
   String capitalizeAll() {
     if (isEmpty) {
       return this;

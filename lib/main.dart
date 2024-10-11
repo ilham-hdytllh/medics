@@ -1,29 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:get/get.dart';
 import 'app.dart';
+import 'data/repositories/authentication/authentication_repository.dart';
 
-Future<void> main() async {
+void main() async {
   // Widget Binding
   final WidgetsBinding widgetsBinding =
       WidgetsFlutterBinding.ensureInitialized();
 
-  // Get x Local Storage
-  await GetStorage.init();
-
   // Await flutter native splash until other item load
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarBrightness: Brightness.dark,
-    ),
+  // Mengunci orientasi ke potret
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+    // Mengatur gaya overlay sistem UI
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.dark,
+      ),
+    );
+  }).then(
+    (value) => Get.put(AuthenticationRepository()),
   );
 
-  runApp(
-    const App(),
-  );
+  runApp(const App());
 }

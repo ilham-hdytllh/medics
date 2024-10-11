@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:medics/presentation/pages/home/home.dart';
 import '../presentation/pages/auth/signup.dart';
 import '../presentation/pages/auth/forgot_password.dart';
 import '../presentation/pages/auth/login.dart';
@@ -14,6 +15,7 @@ class AppRoutes {
         name: AppLinks.FORGOTPASSWORD,
         page: () => const ForgotPasswordScreen()),
     GetPage(name: AppLinks.VERIFYEMAILSCREEN, page: () => SizedBox()),
+    GetPage(name: AppLinks.HOMESCREEN, page: () => const HomeScreen()),
   ];
 }
 
@@ -23,4 +25,5 @@ class AppLinks {
   static const String SIGNUP = "/signup";
   static const String FORGOTPASSWORD = "/forgotPassword";
   static const String VERIFYEMAILSCREEN = "/verifyEmail";
+  static const String HOMESCREEN = "/homeScreen";
 }

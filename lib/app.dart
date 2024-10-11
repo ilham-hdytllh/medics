@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:medics/presentation/pages/auth/forgot_password.dart';
+import 'package:medics/presentation/pages/auth/login.dart';
+import 'package:medics/presentation/pages/auth/signup.dart';
+import 'package:medics/presentation/pages/onboarding/onboarding.dart';
 
 import 'bindings/general_bindings.dart';
 import 'core/constants/colors.dart';
@@ -19,7 +23,21 @@ class App extends StatelessWidget {
       theme: CustomAppTheme.lightTheme,
       darkTheme: CustomAppTheme.lightTheme,
       initialRoute: AppLinks.ONBOARDING,
-      getPages: AppRoutes.pages,
+      onGenerateRoute: (routes) {
+        switch (routes.name) {
+          case AppLinks.ONBOARDING:
+            return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
+          case AppLinks.LOGIN:
+            return MaterialPageRoute(builder: (_) => const LoginScreen());
+          case AppLinks.SIGNUP:
+            return MaterialPageRoute(builder: (_) => const SingUpScreen());
+          case AppLinks.FORGOTPASSWORD:
+            return MaterialPageRoute(
+                builder: (_) => const ForgotPasswordScreen());
+          default:
+            return MaterialPageRoute(builder: (_) => const SizedBox());
+        }
+      },
       home: const Scaffold(
         backgroundColor: CustomColors.primary,
         body: Center(
