@@ -14,37 +14,33 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(OnBoardingController());
     return Scaffold(
       extendBody: true,
       body: Stack(
         children: [
           // Horizontal scrollable pages
-          GetX<OnBoardingController>(
-              init: OnBoardingController(),
-              initState: (_) {},
-              builder: (controller) {
-                return PageView(
-                  controller: controller.pageController,
-                  onPageChanged: controller.updatePageIndicator,
-                  children: [
-                    OnBoardingPage(
-                      image: CustomImages.onBoardingImage1,
-                      title: CustomTexts.onBoardingTitle1,
-                      subTitle: CustomTexts.onBoardingSubTitle1,
-                    ),
-                    OnBoardingPage(
-                      image: CustomImages.onBoardingImage2,
-                      title: CustomTexts.onBoardingTitle2,
-                      subTitle: CustomTexts.onBoardingSubTitle2,
-                    ),
-                    OnBoardingPage(
-                      image: CustomImages.onBoardingImage3,
-                      title: CustomTexts.onBoardingTitle3,
-                      subTitle: CustomTexts.onBoardingSubTitle3,
-                    ),
-                  ],
-                );
-              }),
+          PageView(
+            controller: controller.pageController,
+            onPageChanged: controller.updatePageIndicator,
+            children: [
+              OnBoardingPage(
+                image: CustomImages.onBoardingImage1,
+                title: CustomTexts.onBoardingTitle1,
+                subTitle: CustomTexts.onBoardingSubTitle1,
+              ),
+              OnBoardingPage(
+                image: CustomImages.onBoardingImage2,
+                title: CustomTexts.onBoardingTitle2,
+                subTitle: CustomTexts.onBoardingSubTitle2,
+              ),
+              OnBoardingPage(
+                image: CustomImages.onBoardingImage3,
+                title: CustomTexts.onBoardingTitle3,
+                subTitle: CustomTexts.onBoardingSubTitle3,
+              ),
+            ],
+          ),
           // Skip button
           const OnBoardingSkip(),
           // Dot navigation page indicator
