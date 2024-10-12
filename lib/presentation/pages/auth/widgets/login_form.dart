@@ -42,19 +42,8 @@ class LoginForm extends StatelessWidget {
 
             // Remember Me & Forgot Pw
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                // Remember Me
-                Row(
-                  children: [
-                    Checkbox(
-                      value: true,
-                      onChanged: (value) {},
-                    ),
-                    const Text("Ingat saya"),
-                  ],
-                ),
-
                 // Forget Pw
                 TextButton(
                   onPressed: () => Get.toNamed(AppLinks.FORGOTPASSWORD),

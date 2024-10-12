@@ -96,14 +96,17 @@ class AuthenticationRepository extends GetxController {
         }),
       );
 
-      if (response.statusCode != 200) {
-        throw "Register failed, please try again";
+      if (response.statusCode == 409) {
+        throw "Email already registered";
+      } else if (response.statusCode != 201) {
+        throw "Failed register,something when wrong";
       }
     } on FormatException catch (_) {
       throw const CustomFormatException();
     } on PlatformException catch (e) {
       throw CustomPlatformException(e.code).message;
     } catch (e) {
+      print(e);
       throw "$e";
     }
   }

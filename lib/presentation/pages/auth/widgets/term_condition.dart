@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../getx/auth/signup_controller.dart';
 
 class TermsAndConditionCheckbox extends StatelessWidget {
   const TermsAndConditionCheckbox({
@@ -7,10 +10,14 @@ class TermsAndConditionCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final registerController = Get.find<RegisterController>();
     return Row(
       children: [
         SizedBox(
-          child: Checkbox(value: true, onChanged: (value) {}),
+          child: Obx(() => Checkbox(
+              value: registerController.privacyandpolicy.value,
+              onChanged: (value) =>
+                  registerController.privacyandpolicy.value = value!)),
         ),
         Expanded(
           child: Text("Saya menyetujui semua kondisi dan persyaratan"),
