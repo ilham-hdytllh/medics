@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medics/core/constants/colors.dart';
 import 'package:medics/core/constants/image_strings.dart';
+import 'package:medics/core/utils/helpers/shared_preference.dart';
+import 'package:medics/data/repositories/authentication/authentication_repository.dart';
 import 'package:medics/routes/navigation_route.dart';
 
 import '../../../core/constants/sizes.dart';
@@ -119,7 +121,11 @@ class ProfileScreen extends StatelessWidget {
                   child: Divider(),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () async {
+                    String? token = await SharedPreferencesHelper.getToken();
+
+                    await AuthenticationRepository.instance.logout(token);
+                  },
                   child: ProfileList(
                     icon: IconlyBold.logout,
                     title: "Keluar",
