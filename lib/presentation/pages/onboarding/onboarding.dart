@@ -4,10 +4,10 @@ import 'package:medics/core/constants/text_strings.dart';
 import 'package:medics/presentation/getx/onboarding/onboarding_controller.dart';
 
 import '../../../core/constants/image_strings.dart';
-import 'widgets/onboarding_dot_navigation_mobile.dart';
-import 'widgets/onboarding_next_button_mobile.dart';
-import 'widgets/onboarding_pages_mobile.dart';
-import 'widgets/onboarding_skip_mobile.dart';
+import 'widgets/onboarding_dot_navigation.dart';
+import 'widgets/onboarding_next_button.dart';
+import 'widgets/onboarding_pages.dart';
+import 'widgets/onboarding_skip.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});

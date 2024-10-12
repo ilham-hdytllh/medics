@@ -26,6 +26,7 @@ class AuthenticationRepository extends GetxController {
   // Function to show Relevant Screen
   screenRedirect() async {
     String? token = await SharedPreferencesHelper.getToken();
+    print(deviceStorage.read('isFirstTime'));
     if (token != null) {
       // if user is logged in
       Get.offAllNamed(AppLinks.HOMESCREEN);
@@ -49,7 +50,7 @@ class AuthenticationRepository extends GetxController {
           'Content-Type': 'application/json',
         },
         body: json.encode({
-          'username': email,
+          'email': email,
           'password': password,
         }),
       );
@@ -57,17 +58,154 @@ class AuthenticationRepository extends GetxController {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
 
-        if (data['status'] == true) {
+        if (data['success'] == true) {
           // Save token and user data in shared preferences
-          await SharedPreferencesHelper.saveToken(data['token']);
-          await SharedPreferencesHelper.saveUserData(data['data']);
+          await SharedPreferencesHelper.saveToken(data['access_token']);
+          await SharedPreferencesHelper.saveUserData(data['user']);
 
-          return {"status": data['status'], "message": data['message']};
+          return {"status": data['success'], "message": data['message']};
         } else {
-          return {"status": data['status'], "message": data['message']};
+          return {"status": data['success'], "message": data['message']};
         }
       } else {
         throw "Login failed, please check your credential";
+      }
+    } on FormatException catch (_) {
+      throw const CustomFormatException();
+    } on PlatformException catch (e) {
+      throw CustomPlatformException(e.code).message;
+    } catch (e) {
+      throw "$e";
+    }
+  }
+
+  // Register
+  Future<void> register(String name, String email, String password) async {
+    try {
+      // Make POST request to API
+      final response = await http.post(
+        Uri.parse(ContantAPI.signup),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          'name': name,
+          'email': email,
+          'password': password,
+        }),
+      );
+
+      if (response.statusCode != 200) {
+        throw "Register failed, please try again";
+      }
+    } on FormatException catch (_) {
+      throw const CustomFormatException();
+    } on PlatformException catch (e) {
+      throw CustomPlatformException(e.code).message;
+    } catch (e) {
+      throw "$e";
+    }
+  }
+
+  // Forgot Password
+  Future<void> forgotPassword(String email) async {
+    try {
+      // Make POST request to API
+      final response = await http.post(
+        Uri.parse(ContantAPI.forgotPassword),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({'email': email}),
+      );
+
+      if (response.statusCode != 200) {
+        throw "Reset passoword failed, please try again";
+      }
+    } on FormatException catch (_) {
+      throw const CustomFormatException();
+    } on PlatformException catch (e) {
+      throw CustomPlatformException(e.code).message;
+    } catch (e) {
+      throw "$e";
+    }
+  }
+
+  // Forgot Password
+  Future<void> updateProfile(
+    String token,
+    String name,
+    String address,
+    String phone,
+  ) async {
+    try {
+      // Make POST request to API
+      final response = await http.put(
+        Uri.parse(ContantAPI.updateProfile),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token', // Set the authorization header
+        },
+        body: json.encode({'name': name, 'address': address, 'phone': phone}),
+      );
+
+      if (response.statusCode != 200) {
+        throw "Reset passoword failed, please try again";
+      }
+    } on FormatException catch (_) {
+      throw const CustomFormatException();
+    } on PlatformException catch (e) {
+      throw CustomPlatformException(e.code).message;
+    } catch (e) {
+      throw "$e";
+    }
+  }
+
+  // Update Password
+  Future<void> updatePassword(
+      String token, String currentPassword, String newPassword) async {
+    try {
+      // Make POST request to API
+      final response = await http.put(
+        Uri.parse(ContantAPI.updatePassword),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token', // Set the authorization header
+        },
+        body: json.encode(
+            {'current_password': currentPassword, 'new_password': newPassword}),
+      );
+
+      if (response.statusCode != 200) {
+        throw "Reset passoword failed, please try again";
+      }
+    } on FormatException catch (_) {
+      throw const CustomFormatException();
+    } on PlatformException catch (e) {
+      throw CustomPlatformException(e.code).message;
+    } catch (e) {
+      throw "$e";
+    }
+  }
+
+  // Update Password
+  Future<void> getProfile(String token) async {
+    try {
+      // Make POST request to API
+      final response = await http.get(
+        Uri.parse(ContantAPI.getProfile),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (response.statusCode != 200) {
+        throw "Reset passoword failed, please try again";
       }
     } on FormatException catch (_) {
       throw const CustomFormatException();

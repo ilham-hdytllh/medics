@@ -7,4 +7,9 @@ class ContantAPI {
   static String forgotPassword =
       "https://tbr.ridinet.id/api/v1/forgot-password";
   static String logout = "https://tbr.ridinet.id/api/v1/logout";
+
+  static String getProfile = "https://tbr.ridinet.id/api/v1/user/profile";
+  static String updateProfile = "https://tbr.ridinet.id/api/v1/user/profile";
+  static String updatePassword =
+      "https://tbr.ridinet.id/api/v1/user/profile/edit-password";
 }

@@ -20,6 +20,8 @@ class CustomAppTheme {
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     fontFamily: 'Roboto',
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
     dataTableTheme: CustomDataTableTheme.lightDataTableTheme,
     switchTheme: CustomSwitchheme.lightSwitchTheme,
     disabledColor: CustomColors.grey,
@@ -48,6 +50,8 @@ class CustomAppTheme {
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     fontFamily: 'Roboto',
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
     dataTableTheme: CustomDataTableTheme.darkDataTableTheme,
     switchTheme: CustomSwitchheme.darkSwitchTheme,
     disabledColor: CustomColors.grey,

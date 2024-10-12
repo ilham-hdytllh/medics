@@ -18,14 +18,15 @@ class OnBoardingDotNavigation extends StatelessWidget {
     return Positioned(
       left: 10,
       right: 10,
-      bottom: CustomDeviceUtils.getBottomNavigationBarHeight() + 85,
+      bottom: CustomDeviceUtils.getBottomNavigationBarHeight() + 75,
       child: Center(
         child: SmoothPageIndicator(
           controller: controller.pageController,
           onDotClicked: controller.dotNavigationClick,
           count: 3,
           effect: ExpandingDotsEffect(
-              activeDotColor: dark ? CustomColors.light : CustomColors.dark,
+              activeDotColor:
+                  dark ? CustomColors.secondary : CustomColors.primary,
               dotHeight: 6),
         ),
       ),

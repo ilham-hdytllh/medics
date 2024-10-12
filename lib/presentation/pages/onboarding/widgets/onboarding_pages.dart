@@ -21,7 +21,7 @@ class OnBoardingPage extends StatelessWidget {
         children: [
           Image.asset(
             image,
-            height: CustomHelperFunctions.screenWidth() * 0.5,
+            height: CustomHelperFunctions.screenHeight() * 0.4,
           ),
           const SizedBox(
             height: CustomSizes.spaceBtwSections,
