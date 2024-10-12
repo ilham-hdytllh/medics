@@ -119,9 +119,9 @@ class AuthenticationRepository extends GetxController {
         },
         body: json.encode({'email': email}),
       );
-
+      final data = json.decode(response.body);
       if (response.statusCode != 200) {
-        throw "Reset passoword failed, please try again";
+        throw data["message"];
       }
     } on FormatException catch (_) {
       throw const CustomFormatException();
