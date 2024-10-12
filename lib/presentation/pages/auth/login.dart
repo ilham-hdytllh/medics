@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
 
+import '../../../bindings/general_bindings.dart';
 import '../../../core/constants/sizes.dart';
 import '../../../core/constants/text_strings.dart';
 import 'widgets/form_divider.dart';
@@ -13,6 +14,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GeneralBindings().dependencies();
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(CustomSizes.defaultSpacePadding),

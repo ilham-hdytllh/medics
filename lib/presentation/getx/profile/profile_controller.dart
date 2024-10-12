@@ -10,6 +10,7 @@ class ProfileController extends GetxController {
   static ProfileController get instance => Get.find();
 
   /// Variables
+  GlobalKey<FormState> profileKey = GlobalKey<FormState>();
   RxBool isLoading = false.obs;
   Rx<UserModel> userProfile =
       Rx<UserModel>(UserModel(name: '', email: '', address: '', phone: ''));

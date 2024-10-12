@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -23,6 +24,15 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final profileController = Get.put(ProfileController());
     return Scaffold(
+      extendBody: true,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.light,
+          statusBarBrightness: Brightness.light,
+        ),
+      ),
       backgroundColor: CustomColors.primary.withOpacity(0.8),
       body: SingleChildScrollView(
         child: Obx(() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
 
@@ -11,6 +12,11 @@ class CustomAppBarTheme {
     scrolledUnderElevation: 0,
     backgroundColor: Colors.transparent,
     surfaceTintColor: Colors.transparent,
+    systemOverlayStyle: SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.dark,
+    ),
     iconTheme:
         IconThemeData(color: CustomColors.black, size: CustomSizes.iconMd),
     actionsIconTheme:
@@ -25,6 +31,11 @@ class CustomAppBarTheme {
     scrolledUnderElevation: 0,
     backgroundColor: Colors.transparent,
     surfaceTintColor: Colors.transparent,
+    systemOverlayStyle: SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.light,
+    ),
     iconTheme:
         IconThemeData(color: CustomColors.black, size: CustomSizes.iconMd),
     actionsIconTheme:

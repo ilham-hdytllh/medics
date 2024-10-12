@@ -195,8 +195,12 @@ class AuthenticationRepository extends GetxController {
             {'current_password': currentPassword, 'new_password': newPassword}),
       );
 
+      final body = json.decode(response.body);
       switch (response.statusCode) {
         case 200:
+          print("success");
+        case 400:
+          throw body['message'];
         case 401:
           await SharedPreferencesHelper.clearToken();
           Get.offAllNamed(AppLinks.LOGIN);
@@ -208,7 +212,7 @@ class AuthenticationRepository extends GetxController {
           Get.deleteAll();
           throw 'Session expired';
         default:
-          throw "Reset password failed, please try again";
+          throw "Update password failed, please try again";
       }
     } on FormatException catch (_) {
       throw const CustomFormatException();

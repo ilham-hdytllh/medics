@@ -15,6 +15,7 @@ class FormUpdateProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     final profileController = Get.find<ProfileController>();
     return Form(
+      key: profileController.profileKey,
       child: Padding(
         padding:
             const EdgeInsets.symmetric(vertical: CustomSizes.spaceBtwItems),
@@ -50,8 +51,6 @@ class FormUpdateProfile extends StatelessWidget {
             TextFormField(
               keyboardType: TextInputType.text,
               onTapOutside: (value) => FocusScope.of(context).unfocus(),
-              validator: (value) =>
-                  CustomValidator.validateEmptyText("Telphone", value),
               controller: profileController.telp.value,
               decoration: InputDecoration(
                   prefixIcon: Icon(IconlyLight.call), labelText: "Telphone"),
@@ -63,8 +62,6 @@ class FormUpdateProfile extends StatelessWidget {
             TextFormField(
               keyboardType: TextInputType.text,
               onTapOutside: (value) => FocusScope.of(context).unfocus(),
-              validator: (value) =>
-                  CustomValidator.validateEmptyText("Alamat", value),
               controller: profileController.address.value,
               decoration: InputDecoration(
                   prefixIcon: Icon(IconlyLight.location), labelText: "Alamat"),
