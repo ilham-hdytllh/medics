@@ -40,7 +40,7 @@ class AuthenticationRepository extends GetxController {
   }
 
   // Login
-  Future<Map<String, dynamic>> loginEmail(String email, String password) async {
+  Future<void> loginEmail(String email, String password) async {
     try {
       // Make POST request to API
       final response = await http.post(
@@ -55,20 +55,16 @@ class AuthenticationRepository extends GetxController {
         }),
       );
 
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
+      final data = json.decode(response.body);
 
-        if (data['success'] == true) {
-          // Save token and user data in shared preferences
-          await SharedPreferencesHelper.saveToken(data['access_token']);
-          await SharedPreferencesHelper.saveUserData(data['user']);
-
-          return {"status": data['success'], "message": data['message']};
-        } else {
-          return {"status": data['success'], "message": data['message']};
-        }
+      if (response.statusCode == 401) {
+        throw data['message'];
+      } else if (response.statusCode == 200) {
+        // Save token and user data in shared preferences
+        await SharedPreferencesHelper.saveToken(data['access_token']);
+        await SharedPreferencesHelper.saveUserData(data['user']);
       } else {
-        throw "Login failed, please check your credential";
+        throw "Login failed, something when wrong";
       }
     } on FormatException catch (_) {
       throw const CustomFormatException();
@@ -95,9 +91,9 @@ class AuthenticationRepository extends GetxController {
           'password': password,
         }),
       );
-
+      final data = json.decode(response.body);
       if (response.statusCode == 409) {
-        throw "Email already registered";
+        throw data['message'];
       } else if (response.statusCode != 201) {
         throw "Failed register,something when wrong";
       }

@@ -36,17 +36,15 @@ class LoginController extends GetxController {
 
       // Register user in the firebase auth & save data in firebase
       await AuthenticationRepository.instance
-          .loginEmail(email.value.text.trim(), email.value.text.trim());
+          .loginEmail(email.value.text.trim(), password.value.text.trim());
 
       // clear all controller
       email.value.clear();
       password.value.clear();
       obsecure.value = true;
 
-      // show message generic eror to user
-      CustomSnackbar.successSnackbar(
-          title: "Success",
-          message: "Akun berhasil di daftarkan, silahkan login");
+      // Redirect screen
+      await AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       // show message generic eror to user
       CustomSnackbar.errorSnackbar(title: "Error", message: e.toString());
