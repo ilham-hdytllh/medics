@@ -72,7 +72,7 @@ class LoginForm extends StatelessWidget {
                         .bodyLarge!
                         .copyWith(color: CustomColors.primary),
                   ),
-                )
+                ),
               ],
             ),
 

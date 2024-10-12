@@ -26,7 +26,7 @@ class MainScreen extends StatelessWidget {
         () => BottomNavigationBar(
           enableFeedback: false,
           selectedItemColor: CustomColors.primary,
-          unselectedItemColor: CustomColors.grey,
+          unselectedItemColor: CustomColors.primary,
           elevation: 0,
           type: BottomNavigationBarType.fixed,
           backgroundColor: CustomColors.white,

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:medics/routes/navigation_route.dart';
 import '../../../core/constants/api_constants.dart';
@@ -14,8 +13,6 @@ import '../../models/user.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
-
-  final deviceStorage = GetStorage();
 
   @override
   void onReady() {
@@ -134,7 +131,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  // Forgot Password
+  // Update Profile
   Future<void> updateProfile(
     String token,
     String name,
@@ -223,7 +220,7 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  // Update Password
+  // Get Profile
   Future<UserModel> getProfile(String? token) async {
     try {
       // Make GET request to API

@@ -12,4 +12,8 @@ class ContantAPI {
   static String updateProfile = "https://tbr.ridinet.id/api/v1/user/profile";
   static String updatePassword =
       "https://tbr.ridinet.id/api/v1/user/profile/edit-password";
+
+  static String getFlyer = "https://tbr.ridinet.id/api/v1/content/flayers";
+  static String getEvents = "https://tbr.ridinet.id/api/v1/content/events";
+  static String getNews = "https://tbr.ridinet.id/api/v1/content/news";
 }

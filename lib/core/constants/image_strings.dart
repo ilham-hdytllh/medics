@@ -1,6 +1,7 @@
 class CustomImages {
   // -- Logos
   static const String logo = "assets/logos/logo.png";
+  static const String doctor = "assets/images/doctor.png";
   static const String google = "assets/logos/google.png";
 
   // -- OnBoarding
@@ -10,8 +11,4 @@ class CustomImages {
 
   // -- Profile
   static const String emptyProfile = "assets/images/profile_empty.png";
-
-  // -- Carousel
-  static const String carousel1 = "assets/images/10.png";
-  static const String carousel2 = "assets/images/11.png";
 }
