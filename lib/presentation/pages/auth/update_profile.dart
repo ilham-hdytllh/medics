@@ -42,7 +42,7 @@ class UpdateProfileScreen extends StatelessWidget {
                 height: CustomSizes.spaceBtwItems,
               ),
               // Form
-              const FormUpdateProfile(),
+              FormUpdateProfile(),
 
               const SizedBox(
                 height: CustomSizes.spaceBtwItems,

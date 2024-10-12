@@ -31,4 +31,16 @@ class SharedPreferencesHelper {
     await prefs.remove('token');
     await prefs.remove('userData');
   }
+
+  /// Save the isFirstTime flag
+  static Future<void> setFirstTime(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isFirstTime', value);
+  }
+
+  /// Retrieve the isFirstTime flag
+  static Future<bool> isFirstTime() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('isFirstTime') ?? true; // Default to true if null
+  }
 }

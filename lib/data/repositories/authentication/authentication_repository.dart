@@ -10,6 +10,7 @@ import '../../../core/constants/api_constants.dart';
 import '../../../core/utils/exceptions/format_exceptions.dart';
 import '../../../core/utils/exceptions/platform_exceptions.dart';
 import '../../../core/utils/helpers/shared_preference.dart';
+import '../../models/user.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -26,16 +27,17 @@ class AuthenticationRepository extends GetxController {
   // Function to show Relevant Screen
   screenRedirect() async {
     String? token = await SharedPreferencesHelper.getToken();
-    print(deviceStorage.read('isFirstTime'));
+    bool? isFirstTime = await SharedPreferencesHelper.isFirstTime();
     if (token != null) {
       // if user is logged in
       Get.offAllNamed(AppLinks.HOMESCREEN);
     } else {
       // Local Storage
-      deviceStorage.writeIfNull('isFirstTime', true);
-      deviceStorage.read('isFirstTime') != true
-          ? Get.offAllNamed(AppLinks.LOGIN)
-          : Get.offAllNamed(AppLinks.ONBOARDING);
+      if (isFirstTime) {
+        Get.offAllNamed(AppLinks.ONBOARDING);
+      } else {
+        Get.offAllNamed(AppLinks.LOGIN);
+      }
     }
   }
 
@@ -139,6 +141,7 @@ class AuthenticationRepository extends GetxController {
     String address,
     String phone,
   ) async {
+    print(token);
     try {
       // Make POST request to API
       final response = await http.put(
@@ -150,9 +153,22 @@ class AuthenticationRepository extends GetxController {
         },
         body: json.encode({'name': name, 'address': address, 'phone': phone}),
       );
-
-      if (response.statusCode != 200) {
-        throw "Reset passoword failed, please try again";
+      print(response.statusCode);
+      switch (response.statusCode) {
+        case 200:
+          print("Sukses");
+        case 401:
+          await SharedPreferencesHelper.clearToken();
+          Get.offAllNamed(AppLinks.LOGIN);
+          Get.deleteAll();
+          throw 'Session expired';
+        case 403:
+          await SharedPreferencesHelper.clearToken();
+          Get.offAllNamed(AppLinks.LOGIN);
+          Get.deleteAll();
+          throw 'Session expired';
+        default:
+          throw "Update profile failed, please try again";
       }
     } on FormatException catch (_) {
       throw const CustomFormatException();
@@ -179,8 +195,20 @@ class AuthenticationRepository extends GetxController {
             {'current_password': currentPassword, 'new_password': newPassword}),
       );
 
-      if (response.statusCode != 200) {
-        throw "Reset passoword failed, please try again";
+      switch (response.statusCode) {
+        case 200:
+        case 401:
+          await SharedPreferencesHelper.clearToken();
+          Get.offAllNamed(AppLinks.LOGIN);
+          Get.deleteAll();
+          throw 'Session expired';
+        case 403:
+          await SharedPreferencesHelper.clearToken();
+          Get.offAllNamed(AppLinks.LOGIN);
+          Get.deleteAll();
+          throw 'Session expired';
+        default:
+          throw "Reset password failed, please try again";
       }
     } on FormatException catch (_) {
       throw const CustomFormatException();
@@ -192,9 +220,9 @@ class AuthenticationRepository extends GetxController {
   }
 
   // Update Password
-  Future<void> getProfile(String token) async {
+  Future<UserModel> getProfile(String? token) async {
     try {
-      // Make POST request to API
+      // Make GET request to API
       final response = await http.get(
         Uri.parse(ContantAPI.getProfile),
         headers: {
@@ -202,9 +230,27 @@ class AuthenticationRepository extends GetxController {
           'Authorization': 'Bearer $token',
         },
       );
-
-      if (response.statusCode != 200) {
-        throw "Reset passoword failed, please try again";
+      final body = json.decode(response.body);
+      switch (response.statusCode) {
+        case 200:
+          // Decode the response body
+          final Map<String, dynamic> data = body['data'];
+          // Return the UserModel object
+          return UserModel.fromJson(data);
+        case 401:
+          await SharedPreferencesHelper.clearToken();
+          Get.offAllNamed(AppLinks.LOGIN);
+          Get.deleteAll();
+          throw 'Session expired';
+        case 403:
+          await SharedPreferencesHelper.clearToken();
+          Get.offAllNamed(AppLinks.LOGIN);
+          Get.deleteAll();
+          throw 'Session expired';
+        default:
+          print("kosjg");
+          // Return the UserModel object
+          return UserModel.empty();
       }
     } on FormatException catch (_) {
       throw const CustomFormatException();
@@ -232,13 +278,16 @@ class AuthenticationRepository extends GetxController {
           case 200:
             await SharedPreferencesHelper.clearToken();
             Get.offAllNamed(AppLinks.LOGIN);
+            Get.deleteAll();
           case 401:
             await SharedPreferencesHelper.clearToken();
             Get.offAllNamed(AppLinks.LOGIN);
+            Get.deleteAll();
             throw 'Session expired';
           case 403:
             await SharedPreferencesHelper.clearToken();
             Get.offAllNamed(AppLinks.LOGIN);
+            Get.deleteAll();
             throw 'Session expired';
           default:
             throw 'Failed logout: ${response.statusCode}';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/sizes.dart';
 import '../../../../core/utils/device/device_utility.dart';
@@ -18,14 +19,18 @@ class OnBoardingNextButton extends StatelessWidget {
         child: SizedBox(
           height: CustomSizes.inputFieldHeight,
           width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () => OnBoardingController.instance.nextPage(),
-            style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.all(0),
-                foregroundColor: CustomColors.white,
-                backgroundColor: CustomColors.primary),
-            child: Text(
-              "Next",
+          child: Obx(
+            () => ElevatedButton(
+              onPressed: () => OnBoardingController.instance.nextPage(),
+              style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(0),
+                  foregroundColor: CustomColors.white,
+                  backgroundColor: CustomColors.primary),
+              child: Text(
+                OnBoardingController.instance.currentPageIndex.value == 2
+                    ? "Masuk"
+                    : "Next",
+              ),
             ),
           ),
         ));

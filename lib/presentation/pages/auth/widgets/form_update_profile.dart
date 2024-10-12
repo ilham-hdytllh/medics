@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:medics/presentation/getx/profile/profile_controller.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/sizes.dart';
+import '../../../../core/utils/validators/validation.dart';
 
 class FormUpdateProfile extends StatelessWidget {
   const FormUpdateProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final profileController = Get.find<ProfileController>();
     return Form(
       child: Padding(
         padding:
@@ -18,6 +22,11 @@ class FormUpdateProfile extends StatelessWidget {
           children: [
             // Nama
             TextFormField(
+              keyboardType: TextInputType.text,
+              onTapOutside: (value) => FocusScope.of(context).unfocus(),
+              validator: (value) =>
+                  CustomValidator.validateEmptyText("Nama", value),
+              controller: profileController.name.value,
               decoration: const InputDecoration(
                   prefixIcon: Icon(Iconsax.user), labelText: "Nama"),
             ),
@@ -26,6 +35,11 @@ class FormUpdateProfile extends StatelessWidget {
             ),
             // Email
             TextFormField(
+              keyboardType: TextInputType.emailAddress,
+              onTapOutside: (value) => FocusScope.of(context).unfocus(),
+              validator: (value) => CustomValidator.validateEmail(value),
+              controller: profileController.email.value,
+              readOnly: true,
               decoration: const InputDecoration(
                   prefixIcon: Icon(Iconsax.direct_right), labelText: "Email"),
             ),
@@ -34,6 +48,11 @@ class FormUpdateProfile extends StatelessWidget {
             ),
             // Telphone
             TextFormField(
+              keyboardType: TextInputType.text,
+              onTapOutside: (value) => FocusScope.of(context).unfocus(),
+              validator: (value) =>
+                  CustomValidator.validateEmptyText("Telphone", value),
+              controller: profileController.telp.value,
               decoration: InputDecoration(
                   prefixIcon: Icon(IconlyLight.call), labelText: "Telphone"),
             ),
@@ -42,6 +61,11 @@ class FormUpdateProfile extends StatelessWidget {
             ),
             // Address
             TextFormField(
+              keyboardType: TextInputType.text,
+              onTapOutside: (value) => FocusScope.of(context).unfocus(),
+              validator: (value) =>
+                  CustomValidator.validateEmptyText("Alamat", value),
+              controller: profileController.address.value,
               decoration: InputDecoration(
                   prefixIcon: Icon(IconlyLight.location), labelText: "Alamat"),
             ),
@@ -50,20 +74,48 @@ class FormUpdateProfile extends StatelessWidget {
             ),
 
             // Sign In Button
-            SizedBox(
-              height: CustomSizes.inputFieldHeight,
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(0),
-                    foregroundColor: CustomColors.white,
-                    backgroundColor: CustomColors.primary),
-                child: Text(
-                  "Simpan",
-                ),
-              ),
-            ),
+            Obx(() => SizedBox(
+                  height: CustomSizes.inputFieldHeight,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      profileController.isLoading.value == false
+                          ? await profileController.updateProfile()
+                          : null;
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(0),
+                      disabledBackgroundColor: CustomColors.grey,
+                      disabledForegroundColor: CustomColors.primary,
+                      foregroundColor: CustomColors.white,
+                      backgroundColor: CustomColors.primary,
+                    ),
+                    child: profileController.isLoading.value
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 25,
+                                height: 25,
+                                child: CircularProgressIndicator(
+                                  color: CustomColors.white,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Please wait..",
+                              ),
+                            ],
+                          )
+                        : Text(
+                            "Simpan",
+                          ),
+                  ),
+                )),
           ],
         ),
       ),

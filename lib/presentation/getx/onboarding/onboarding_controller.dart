@@ -1,7 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:medics/core/utils/helpers/shared_preference.dart';
 import 'package:medics/routes/navigation_route.dart';
 
 class OnBoardingController extends GetxController {
@@ -27,14 +26,8 @@ class OnBoardingController extends GetxController {
   /// Update current index & jump to next page
   void nextPage() {
     if (currentPageIndex.value == 2) {
-      final storage = GetStorage();
-      if (kDebugMode) {
-        print(storage.read('isFirstTime'));
-      }
-      storage.write("isFirstTime", false);
-      if (kDebugMode) {
-        print(storage.read('isFirstTime'));
-      }
+      SharedPreferencesHelper.setFirstTime(false);
+
       Get.offAllNamed(AppLinks.LOGIN);
     } else {
       int page = currentPageIndex.value + 1;
