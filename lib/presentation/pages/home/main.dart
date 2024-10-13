@@ -12,7 +12,7 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pagesController = Get.put(PagesController());
+    final pagesController = Get.put(HomeController());
     return Scaffold(
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),

@@ -5,44 +5,18 @@ import 'package:medics/data/repositories/events/event_repository.dart';
 import '../../../core/utils/helpers/network_manager.dart';
 import '../../../core/utils/helpers/shared_preference.dart';
 
-class EventListController extends GetxController {
-  static EventListController get instance => Get.find();
+class EventDetailController extends GetxController {
+  static EventDetailController get instance => Get.find();
 
   // Variable
   RxBool isLoading = false.obs;
-  List<EventModel> events = <EventModel>[].obs;
   Rx<EventModel?> eventDetail = Rx<EventModel?>(null);
 
   @override
   void onInit() {
-    fetchEvent();
+    final int eventID = Get.arguments;
+    fetchEventDetail(eventID);
     super.onInit();
-  }
-
-  Future<void> fetchEvent() async {
-    try {
-      // start loading
-      isLoading.value = true;
-
-      // check internet
-      final isConnected = await NetworkManager.instance.isConnected();
-      if (!isConnected) {
-        isLoading.value = false;
-        return;
-      }
-
-      String? token = await SharedPreferencesHelper.getToken();
-
-      List<EventModel> listEvent =
-          await EventRepository.instance.getEvents(token!);
-
-      events.addAll(listEvent);
-    } catch (e) {
-      print(e);
-    } finally {
-      // remove loader
-      isLoading.value = false;
-    }
   }
 
   Future<void> fetchEventDetail(int eventID) async {

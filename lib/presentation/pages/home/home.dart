@@ -9,11 +9,10 @@ import 'package:medics/core/utils/extension/capitalize.dart';
 import 'package:medics/core/utils/extension/date.dart';
 import 'package:medics/presentation/getx/flyer/flyer_controller.dart';
 import 'package:medics/presentation/getx/news/news_controller.dart';
-import 'package:medics/presentation/pages/home/detail_event.dart';
+import 'package:medics/routes/navigation_route.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../core/constants/colors.dart';
 import '../../getx/events/event_controller.dart';
-import 'detail_news.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -21,8 +20,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final flyerController = Get.put(FlyerController());
-    final newsController = Get.put(NewsController());
-    final eventController = Get.put(EventController());
+    final newsController = Get.put(NewsListController());
+    final eventController = Get.put(EventListController());
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -131,26 +130,44 @@ class HomeScreen extends StatelessWidget {
                       ),
                       itemBuilder: (BuildContext context, int index,
                               int pageViewIndex) =>
-                          Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        decoration: BoxDecoration(
-                          color: CustomColors.white,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Stack(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: AspectRatio(
-                                aspectRatio: 16 / 9,
-                                child: CachedNetworkImage(
-                                  imageUrl: flyerController.flyers[index].image,
-                                  progressIndicatorBuilder:
-                                      (context, url, downloadProgress) =>
-                                          Shimmer.fromColors(
-                                    baseColor: CustomColors.errorBg,
-                                    highlightColor: CustomColors.lightGrey,
-                                    child: Container(
+                          GestureDetector(
+                        onTap: () => Get.toNamed(AppLinks.DETAILFLYER,
+                            arguments: flyerController.flyers[index].url),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          decoration: BoxDecoration(
+                            color: CustomColors.white,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: AspectRatio(
+                                  aspectRatio: 16 / 9,
+                                  child: CachedNetworkImage(
+                                    imageUrl:
+                                        flyerController.flyers[index].image,
+                                    progressIndicatorBuilder:
+                                        (context, url, downloadProgress) =>
+                                            Shimmer.fromColors(
+                                      baseColor: CustomColors.errorBg,
+                                      highlightColor: CustomColors.lightGrey,
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        color: CustomColors.errorBg,
+                                        child: Center(
+                                          child: Icon(
+                                            IconlyLight.dangerCircle,
+                                            size: CustomSizes.iconMd,
+                                            color: CustomColors.black,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    errorWidget: (context, url, error) =>
+                                        Container(
                                       width: double.infinity,
                                       height: double.infinity,
                                       color: CustomColors.errorBg,
@@ -162,44 +179,33 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                       ),
                                     ),
+                                    fit: BoxFit.cover,
                                   ),
-                                  errorWidget: (context, url, error) =>
-                                      Container(
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    color: CustomColors.errorBg,
-                                    child: Center(
-                                      child: Icon(
-                                        IconlyLight.dangerCircle,
-                                        size: CustomSizes.iconMd,
-                                        color: CustomColors.black,
-                                      ),
-                                    ),
-                                  ),
-                                  fit: BoxFit.cover,
                                 ),
                               ),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: Container(
-                                padding: EdgeInsets.only(bottom: 30, left: 10),
-                                alignment: Alignment.bottomLeft,
-                                height:
-                                    80, // Set the height to be the same for all items
-                                decoration: BoxDecoration(
-                                  color: CustomColors.white.withOpacity(0.6),
-                                ),
-                                child: Text(
-                                  flyerController.flyers[index].title
-                                      .capitalizeAll(),
-                                  style: Theme.of(context).textTheme.titleLarge,
+                              Positioned(
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                                child: Container(
+                                  padding:
+                                      EdgeInsets.only(bottom: 30, left: 10),
+                                  alignment: Alignment.bottomLeft,
+                                  height:
+                                      80, // Set the height to be the same for all items
+                                  decoration: BoxDecoration(
+                                    color: CustomColors.white.withOpacity(0.6),
+                                  ),
+                                  child: Text(
+                                    flyerController.flyers[index].title
+                                        .capitalizeAll(),
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -282,11 +288,8 @@ class HomeScreen extends StatelessWidget {
                           physics: BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
                             return GestureDetector(
-                              onTap: () => Get.to(
-                                EventDetailPage(
-                                  eventID: eventController.events[index].id,
-                                ),
-                              ),
+                              onTap: () => Get.toNamed(AppLinks.DETAILEVENT,
+                                  arguments: eventController.events[index].id),
                               child: Container(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 5),
@@ -478,9 +481,8 @@ class HomeScreen extends StatelessWidget {
                           physics: BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
                             return GestureDetector(
-                              onTap: () => Get.to(NewsDetailPage(
-                                newsId: newsController.news[index].id,
-                              )),
+                              onTap: () => Get.toNamed(AppLinks.DETAILNEWS,
+                                  arguments: newsController.news[index].id),
                               child: Container(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 5),

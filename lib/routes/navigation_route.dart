@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/presentation/pages/auth/update_password.dart';
+import 'package:medics/presentation/pages/home/detail_event.dart';
+import 'package:medics/presentation/pages/home/detail_news.dart';
 import 'package:medics/presentation/pages/home/main.dart';
 import 'package:medics/presentation/pages/profile/profile.dart';
 import '../presentation/pages/alarm/alarm_screen.dart';
@@ -8,6 +10,7 @@ import '../presentation/pages/auth/signup.dart';
 import '../presentation/pages/auth/forgot_password.dart';
 import '../presentation/pages/auth/login.dart';
 import '../presentation/pages/auth/update_profile.dart';
+import '../presentation/pages/home/detail_flyer.dart';
 import '../presentation/pages/onboarding/onboarding.dart';
 
 class AppRoutes {
@@ -27,6 +30,9 @@ class AppRoutes {
         name: AppLinks.UPDATEPASSWORD,
         page: () => const UpdatePasswordScreen()),
     GetPage(name: AppLinks.ALARM, page: () => const AlarmScreen()),
+    GetPage(name: AppLinks.DETAILFLYER, page: () => DetailFlyer()),
+    GetPage(name: AppLinks.DETAILEVENT, page: () => EventDetailPage()),
+    GetPage(name: AppLinks.DETAILNEWS, page: () => NewsDetailPage()),
   ];
 }
 
@@ -41,4 +47,7 @@ class AppLinks {
   static const String UPDATEPROFILE = "/updateProfile";
   static const String UPDATEPASSWORD = "/updatePassword";
   static const String ALARM = "/alarm";
+  static const String DETAILFLYER = "/detailFlyer";
+  static const String DETAILEVENT = "/detailEvent";
+  static const String DETAILNEWS = "/detailNews";
 }

@@ -6,51 +6,38 @@ import 'package:get/get.dart';
 import 'package:medics/core/constants/colors.dart';
 import 'package:medics/core/utils/extension/capitalize.dart';
 import 'package:medics/core/utils/extension/date.dart';
-import 'package:medics/presentation/getx/events/event_controller.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../core/constants/sizes.dart';
+import '../../getx/events/event_detail_controller.dart';
 
 class EventDetailPage extends StatelessWidget {
-  final int eventID;
-
-  EventDetailPage({required this.eventID}) {
-    final EventController controller = Get.find();
-    controller.fetchEventDetail(eventID);
-  }
-
   @override
   Widget build(BuildContext context) {
-    final EventController controller = Get.find();
-
     return Scaffold(
-      appBar: AppBar(),
-      body: Obx(() {
-        if (controller.isLoading.value) {
-          return Center(
-            child: SizedBox(
-              width: 25,
-              height: 25,
+      appBar: AppBar(
+        title: Text("Detail Event"),
+      ),
+      body: GetX<EventDetailController>(
+        init: EventDetailController(),
+        builder: (controller) {
+          if (controller.isLoading.value) {
+            return Center(
               child: CircularProgressIndicator(
                 color: CustomColors.primary,
               ),
-            ),
-          );
-        }
+            );
+          }
 
-        final eventDetail = controller.eventDetail.value;
+          final eventDetail = controller.eventDetail.value;
 
-        if (eventDetail == null) {
-          return Center(child: Text("No data found"));
-        }
+          if (eventDetail == null) {
+            return Center(child: Text("No data found"));
+          }
 
-        return SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: SingleChildScrollView(
+          return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: CustomSizes.md),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -58,9 +45,6 @@ class EventDetailPage extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineLarge,
                   ),
                   Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
                         "${eventDetail.dateOfEvent.formatDateTime()} - ${eventDetail.location.capitalizeAll()}",
@@ -68,9 +52,7 @@ class EventDetailPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: CustomSizes.spaceBtwItems,
-                  ),
+                  const SizedBox(height: CustomSizes.spaceBtwItems),
                   Center(
                     child: CachedNetworkImage(
                       imageUrl: eventDetail.image,
@@ -108,22 +90,18 @@ class EventDetailPage extends StatelessWidget {
                       fit: BoxFit.fitWidth,
                     ),
                   ),
-                  const SizedBox(
-                    height: CustomSizes.spaceBtwSections,
-                  ),
+                  const SizedBox(height: CustomSizes.spaceBtwSections),
                   HtmlWidget(
                     eventDetail.description ?? "",
                     textStyle: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  const SizedBox(
-                    height: 12,
-                  ),
+                  const SizedBox(height: 12),
                 ],
               ),
             ),
-          ),
-        );
-      }),
+          );
+        },
+      ),
     );
   }
 }
