@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:medics/presentation/pages/alarm/alarm_screen.dart';
 import 'package:medics/presentation/pages/auth/forgot_password.dart';
 import 'package:medics/presentation/pages/auth/login.dart';
 import 'package:medics/presentation/pages/auth/signup.dart';
@@ -48,6 +49,8 @@ class App extends StatelessWidget {
           case AppLinks.UPDATEPASSWORD:
             return MaterialPageRoute(
                 builder: (_) => const UpdatePasswordScreen());
+          case AppLinks.ALARM:
+            return MaterialPageRoute(builder: (_) => const AlarmScreen());
           default:
             return MaterialPageRoute(builder: (_) => const SizedBox());
         }

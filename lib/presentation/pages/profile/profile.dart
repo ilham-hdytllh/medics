@@ -150,6 +150,18 @@ Widget _buildUserProfile(BuildContext context, UserModel user) {
             child: Divider(),
           ),
           GestureDetector(
+            onTap: () => Get.toNamed(AppLinks.ALARM),
+            child: ProfileList(
+              icon: IconlyBold.timeCircle,
+              title: "Alarm",
+              color: Colors.black87,
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+            child: Divider(),
+          ),
+          GestureDetector(
             onTap: () async {
               String? token = await SharedPreferencesHelper.getToken();
 

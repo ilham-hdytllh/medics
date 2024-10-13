@@ -44,6 +44,8 @@ class CustomColors {
   static const Color lightGrey = Color(0xFFF9F9F9);
   static const Color white = Color(0xFFFFFFFF);
 
+  static const Color errorBg = Color(0xFFe0e0e0);
+
   // Shadow Card
   static List<BoxShadow> boxShadow1 = [
     BoxShadow(

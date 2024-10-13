@@ -74,6 +74,39 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
+  // Login Google
+  Future<void> loginGoogle(String email) async {
+    try {
+      // Make POST request to API
+      final response = await http.post(
+        Uri.parse(ContantAPI.loginGoogle),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({'email': email}),
+      );
+
+      final data = json.decode(response.body);
+
+      if (response.statusCode == 401) {
+        throw data['message'];
+      } else if (response.statusCode == 200) {
+        // Save token and user data in shared preferences
+        await SharedPreferencesHelper.saveToken(data['access_token']);
+        await SharedPreferencesHelper.saveUserData(data['user']);
+      } else {
+        throw "Login failed, something when wrong";
+      }
+    } on FormatException catch (_) {
+      throw const CustomFormatException();
+    } on PlatformException catch (e) {
+      throw CustomPlatformException(e.code).message;
+    } catch (e) {
+      throw "$e";
+    }
+  }
+
   // Register
   Future<void> register(String name, String email, String password) async {
     try {

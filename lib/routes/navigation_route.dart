@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:medics/presentation/pages/auth/update_password.dart';
 import 'package:medics/presentation/pages/home/main.dart';
 import 'package:medics/presentation/pages/profile/profile.dart';
+import '../presentation/pages/alarm/alarm_screen.dart';
 import '../presentation/pages/auth/signup.dart';
 import '../presentation/pages/auth/forgot_password.dart';
 import '../presentation/pages/auth/login.dart';
@@ -25,6 +26,7 @@ class AppRoutes {
     GetPage(
         name: AppLinks.UPDATEPASSWORD,
         page: () => const UpdatePasswordScreen()),
+    GetPage(name: AppLinks.ALARM, page: () => const AlarmScreen()),
   ];
 }
 
@@ -38,4 +40,5 @@ class AppLinks {
   static const String PROFILE = "/profile";
   static const String UPDATEPROFILE = "/updateProfile";
   static const String UPDATEPASSWORD = "/updatePassword";
+  static const String ALARM = "/alarm";
 }

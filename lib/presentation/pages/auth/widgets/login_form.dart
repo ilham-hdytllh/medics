@@ -87,7 +87,7 @@ class LoginForm extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () async {
                       loginController.isLoading.value == false
-                          ? await loginController.singinWithEmailPassword()
+                          ? await loginController.signinWithEmailPassword()
                           : null;
                     },
                     style: ElevatedButton.styleFrom(

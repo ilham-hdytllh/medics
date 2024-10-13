@@ -11,6 +11,7 @@ class EventController extends GetxController {
   // Variable
   RxBool isLoading = false.obs;
   List<EventModel> events = <EventModel>[].obs;
+  Rx<EventModel?> eventDetail = Rx<EventModel?>(null);
 
   @override
   void onInit() {
@@ -40,6 +41,26 @@ class EventController extends GetxController {
       print(e);
     } finally {
       // remove loader
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> fetchEventDetail(int eventID) async {
+    try {
+      isLoading.value = true;
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        isLoading.value = false;
+        return;
+      }
+
+      String? token = await SharedPreferencesHelper.getToken();
+      EventModel detailEvent =
+          await EventRepository.instance.getEventDetail(token!, eventID);
+      eventDetail.value = detailEvent;
+    } catch (e) {
+      print(e);
+    } finally {
       isLoading.value = false;
     }
   }

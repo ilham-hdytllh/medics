@@ -4,6 +4,7 @@ class EventModel {
   final String image;
   final String dateOfEvent;
   final String location;
+  final String? description;
 
   EventModel({
     required this.id,
@@ -11,15 +12,16 @@ class EventModel {
     required this.image,
     required this.dateOfEvent,
     required this.location,
+    this.description,
   });
 
   static EventModel empty() => EventModel(
-        id: 0,
-        title: "",
-        image: "",
-        dateOfEvent: "",
-        location: "",
-      );
+      id: 0,
+      title: "",
+      image: "",
+      dateOfEvent: "",
+      location: "",
+      description: "");
 
   Map<String, dynamic> toJson() {
     return {
@@ -28,6 +30,7 @@ class EventModel {
       'image': image,
       'date_of_event': dateOfEvent,
       'location': location,
+      'description': description,
     };
   }
 
@@ -39,6 +42,7 @@ class EventModel {
       image: json["image"] ?? "",
       dateOfEvent: json["date_of_event"] ?? "",
       location: json["location"] ?? "",
+      description: json["description"] ?? "",
     );
   }
 }

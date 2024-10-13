@@ -47,4 +47,38 @@ class EventRepository extends GetxController {
       throw "$e";
     }
   }
+
+  // Event detail
+  Future<EventModel> getEventDetail(String? token, int id) async {
+    try {
+      // Make GET request to API
+      final response = await http.get(
+        Uri.parse("${ContantAPI.getEvents}/$id"),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      switch (response.statusCode) {
+        case 200:
+          final body = json.decode(response.body);
+          return EventModel.fromJson(body['data']);
+        case 401:
+        case 403:
+          await SharedPreferencesHelper.clearToken();
+          Get.offAllNamed(AppLinks.LOGIN);
+          Get.deleteAll();
+          throw 'Session expired';
+        default:
+          return EventModel.empty();
+      }
+    } on FormatException catch (_) {
+      throw const CustomFormatException();
+    } on PlatformException catch (e) {
+      throw CustomPlatformException(e.code).message;
+    } catch (e) {
+      throw "$e";
+    }
+  }
 }

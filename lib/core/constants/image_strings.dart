@@ -11,4 +11,7 @@ class CustomImages {
 
   // -- Profile
   static const String emptyProfile = "assets/images/profile_empty.png";
+
+  // -- Alarm
+  static const String development = "assets/images/development.svg";
 }

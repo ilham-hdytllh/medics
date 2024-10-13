@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -8,8 +9,11 @@ import 'package:medics/core/utils/extension/capitalize.dart';
 import 'package:medics/core/utils/extension/date.dart';
 import 'package:medics/presentation/getx/flyer/flyer_controller.dart';
 import 'package:medics/presentation/getx/news/news_controller.dart';
+import 'package:medics/presentation/pages/home/detail_event.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../../core/constants/colors.dart';
 import '../../getx/events/event_controller.dart';
+import 'detail_news.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,6 +26,13 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        centerTitle: false,
+        titleSpacing: 0.0,
+        title: Image.asset(
+          CustomImages.logo,
+          height: 120,
+          fit: BoxFit.fitHeight,
+        ),
       ),
       body: RefreshIndicator(
         backgroundColor: CustomColors.white,
@@ -57,7 +68,40 @@ class HomeScreen extends StatelessWidget {
               ),
               Obx(() {
                 if (flyerController.isLoading.value) {
-                  return SizedBox();
+                  return CarouselSlider.builder(
+                    itemCount: 4,
+                    options: CarouselOptions(
+                      height: 160,
+                      aspectRatio: 16 / 8,
+                      viewportFraction: 0.8, // Show adjacent items
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      disableCenter: true,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 3),
+                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      onPageChanged: (index, onPageChanged) {},
+                      scrollDirection: Axis.horizontal,
+                    ),
+                    itemBuilder:
+                        (BuildContext context, int index, int pageViewIndex) =>
+                            Shimmer.fromColors(
+                      baseColor: CustomColors.errorBg,
+                      highlightColor: CustomColors.lightGrey,
+                      child: Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        decoration: BoxDecoration(
+                          color: CustomColors.white,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ),
+                  );
                 } else if (flyerController.flyers.isEmpty) {
                   return SizedBox();
                 } else {
@@ -93,8 +137,38 @@ class HomeScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             child: AspectRatio(
                               aspectRatio: 16 / 9,
-                              child: Image.network(
-                                flyerController.flyers[index].image,
+                              child: CachedNetworkImage(
+                                imageUrl: flyerController.flyers[index].image,
+                                progressIndicatorBuilder:
+                                    (context, url, downloadProgress) =>
+                                        Shimmer.fromColors(
+                                  baseColor: CustomColors.errorBg,
+                                  highlightColor: CustomColors.lightGrey,
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    color: CustomColors.errorBg,
+                                    child: Center(
+                                      child: Icon(
+                                        IconlyLight.dangerCircle,
+                                        size: CustomSizes.iconMd,
+                                        color: CustomColors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                errorWidget: (context, url, error) => Container(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  color: CustomColors.errorBg,
+                                  child: Center(
+                                    child: Icon(
+                                      IconlyLight.dangerCircle,
+                                      size: CustomSizes.iconMd,
+                                      color: CustomColors.black,
+                                    ),
+                                  ),
+                                ),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -154,7 +228,33 @@ class HomeScreen extends StatelessWidget {
               ),
               Obx(() {
                 if (eventController.isLoading.value) {
-                  return SizedBox();
+                  return SizedBox(
+                    height: 150,
+                    child: ListView.builder(
+                        padding: EdgeInsets.only(left: 5),
+                        itemCount: 4,
+                        scrollDirection: Axis.horizontal,
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: Shimmer.fromColors(
+                              baseColor: CustomColors.errorBg,
+                              highlightColor: CustomColors.lightGrey,
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
+                                width: 260,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                  color: CustomColors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                  );
                 } else if (eventController.events.isEmpty) {
                   return SizedBox();
                 } else {
@@ -165,97 +265,118 @@ class HomeScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         physics: BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
-                          return Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
-                            width: 260,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              color: CustomColors.white,
-                              borderRadius: BorderRadius.circular(20),
+                          return GestureDetector(
+                            onTap: () => Get.to(
+                              EventDetailPage(
+                                eventID: eventController.events[index].id,
+                              ),
                             ),
-                            child: Stack(
-                              children: [
-                                // Image that fills the entire container
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Image.network(
-                                    eventController.events[index].image,
-                                    fit: BoxFit.cover,
-                                    width: 260,
-                                    height: 150,
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 0,
-                                  left: 0,
-                                  right: 0,
-                                  child: Container(
-                                    padding:
-                                        EdgeInsets.only(bottom: 10, left: 10),
-                                    alignment: Alignment.bottomLeft,
-                                    height: 80,
-                                    decoration: BoxDecoration(
-                                      color:
-                                          CustomColors.white.withOpacity(0.6),
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          eventController.events[index].title
-                                              .capitalizeAll(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleLarge,
-                                        ),
-                                        const SizedBox(height: 6),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Icon(
-                                              IconlyLight.location,
-                                              size: 17,
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5),
+                              width: 260,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                color: CustomColors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Stack(
+                                children: [
+                                  // Image that fills the entire container
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: CachedNetworkImage(
+                                      imageUrl:
+                                          eventController.events[index].image,
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              Shimmer.fromColors(
+                                        baseColor: CustomColors.errorBg,
+                                        highlightColor: CustomColors.lightGrey,
+                                        child: Container(
+                                          width: 260,
+                                          height: 150,
+                                          color: CustomColors.errorBg,
+                                          child: Center(
+                                            child: Icon(
+                                              IconlyLight.dangerCircle,
+                                              size: CustomSizes.iconMd,
                                               color: CustomColors.black,
                                             ),
-                                            const SizedBox(width: 3),
-                                            Text(
-                                              eventController
-                                                  .events[index].location
-                                                  .capitalizeAll(),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelLarge,
-                                            ),
-                                          ],
+                                          ),
                                         ),
-                                        const SizedBox(height: 5),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Icon(
-                                              IconlyLight.calendar,
-                                              size: 17,
-                                              color: CustomColors.black,
-                                            ),
-                                            const SizedBox(width: 5),
-                                            Text(
-                                              eventController
-                                                  .events[index].dateOfEvent
-                                                  .formatDateTime(),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelLarge,
-                                            ),
-                                          ],
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          Container(
+                                        width: 260,
+                                        height: 150,
+                                        color: CustomColors.errorBg,
+                                        child: Center(
+                                          child: Icon(
+                                            IconlyLight.dangerCircle,
+                                            size: CustomSizes.iconMd,
+                                            color: CustomColors.black,
+                                          ),
                                         ),
-                                      ],
+                                      ),
+                                      fit: BoxFit.cover,
+                                      width: 260,
+                                      height: 150,
                                     ),
                                   ),
-                                ),
-                              ],
+                                  Positioned(
+                                    bottom: 0,
+                                    left: 0,
+                                    right: 0,
+                                    child: Container(
+                                      padding:
+                                          EdgeInsets.only(bottom: 10, left: 10),
+                                      alignment: Alignment.bottomLeft,
+                                      height: 60,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            CustomColors.white.withOpacity(0.6),
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            eventController.events[index].title
+                                                .capitalizeAll(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleLarge,
+                                          ),
+                                          const SizedBox(height: 6),
+                                          Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Icon(
+                                                IconlyLight.calendar,
+                                                size: 17,
+                                                color: CustomColors.black,
+                                              ),
+                                              const SizedBox(width: 5),
+                                              Text(
+                                                eventController
+                                                    .events[index].dateOfEvent
+                                                    .formatDateTime(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         }),
@@ -292,7 +413,33 @@ class HomeScreen extends StatelessWidget {
               ),
               Obx(() {
                 if (newsController.isLoading.value) {
-                  return SizedBox();
+                  return SizedBox(
+                    height: 150,
+                    child: ListView.builder(
+                        padding: const EdgeInsets.only(left: 5),
+                        itemCount: 4,
+                        scrollDirection: Axis.horizontal,
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: Shimmer.fromColors(
+                              baseColor: CustomColors.errorBg,
+                              highlightColor: CustomColors.lightGrey,
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
+                                width: 260,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                  color: CustomColors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                  );
                 } else if (newsController.news.isEmpty) {
                   return SizedBox();
                 } else {
@@ -303,77 +450,96 @@ class HomeScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         physics: BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
-                          return Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
-                            width: 260,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              color: CustomColors.white,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Stack(
-                              children: [
-                                // Image that fills the entire container
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: Image.network(
-                                    newsController.news[index].image,
-                                    fit: BoxFit.cover,
-                                    width: 260,
-                                    height: 150,
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 0,
-                                  left: 0,
-                                  right: 0,
-                                  child: Container(
-                                    padding:
-                                        EdgeInsets.only(bottom: 10, left: 10),
-                                    alignment: Alignment.centerLeft,
-                                    height: 80,
-                                    decoration: BoxDecoration(
-                                      color:
-                                          CustomColors.white.withOpacity(0.6),
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          newsController.news[index].title
-                                              .capitalizeAll(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleLarge,
-                                        ),
-                                        const SizedBox(height: 6),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Icon(
-                                              IconlyLight.calendar,
-                                              size: 17,
+                          return GestureDetector(
+                            onTap: () => Get.to(NewsDetailPage(
+                              newsId: newsController.news[index].id,
+                            )),
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5),
+                              width: 260,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                color: CustomColors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Stack(
+                                children: [
+                                  // Image that fills the entire container
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: CachedNetworkImage(
+                                      imageUrl:
+                                          newsController.news[index].image,
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              Shimmer.fromColors(
+                                        baseColor: CustomColors.errorBg,
+                                        highlightColor: CustomColors.lightGrey,
+                                        child: Container(
+                                          width: 260,
+                                          height: 150,
+                                          color: CustomColors.errorBg,
+                                          child: Center(
+                                            child: Icon(
+                                              IconlyLight.dangerCircle,
+                                              size: CustomSizes.iconMd,
                                               color: CustomColors.black,
                                             ),
-                                            const SizedBox(width: 5),
-                                            Text(
-                                              newsController
-                                                  .news[index].publishedAt
-                                                  .formatDateTime(),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelLarge,
-                                            ),
-                                          ],
+                                          ),
                                         ),
-                                      ],
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          Container(
+                                        width: 260,
+                                        height: 150,
+                                        color: CustomColors.errorBg,
+                                        child: Center(
+                                          child: Icon(
+                                            IconlyLight.dangerCircle,
+                                            size: CustomSizes.iconMd,
+                                            color: CustomColors.black,
+                                          ),
+                                        ),
+                                      ),
+                                      fit: BoxFit.cover,
+                                      width: 260,
+                                      height: 150,
                                     ),
                                   ),
-                                ),
-                              ],
+                                  Positioned(
+                                    bottom: 0,
+                                    left: 0,
+                                    right: 0,
+                                    child: Container(
+                                      padding:
+                                          EdgeInsets.only(bottom: 10, left: 10),
+                                      alignment: Alignment.centerLeft,
+                                      height: 60,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            CustomColors.white.withOpacity(0.6),
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            newsController.news[index].title
+                                                .capitalizeAll(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleLarge,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         }),

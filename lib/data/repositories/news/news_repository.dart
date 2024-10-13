@@ -48,4 +48,38 @@ class NewsRepository extends GetxController {
       throw "$e";
     }
   }
+
+  // Detail
+  Future<NewsModel> getNewsDetail(String? token, int id) async {
+    try {
+      // Make GET request to API
+      final response = await http.get(
+        Uri.parse("${ContantAPI.getNews}/$id"),
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      switch (response.statusCode) {
+        case 200:
+          final body = json.decode(response.body);
+          return NewsModel.fromJson(body['data']);
+        case 401:
+        case 403:
+          await SharedPreferencesHelper.clearToken();
+          Get.offAllNamed(AppLinks.LOGIN);
+          Get.deleteAll();
+          throw 'Session expired';
+        default:
+          return NewsModel.empty();
+      }
+    } on FormatException catch (_) {
+      throw const CustomFormatException();
+    } on PlatformException catch (e) {
+      throw CustomPlatformException(e.code).message;
+    } catch (e) {
+      throw "$e";
+    }
+  }
 }

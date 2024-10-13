@@ -11,6 +11,7 @@ class NewsController extends GetxController {
   // Variable
   RxBool isLoading = false.obs;
   List<NewsModel> news = <NewsModel>[].obs;
+  Rx<NewsModel?> newsDetail = Rx<NewsModel?>(null);
 
   @override
   void onInit() {
@@ -39,6 +40,26 @@ class NewsController extends GetxController {
       print(e);
     } finally {
       // remove loader
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> fetchNewsDetail(int newsId) async {
+    try {
+      isLoading.value = true;
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        isLoading.value = false;
+        return;
+      }
+
+      String? token = await SharedPreferencesHelper.getToken();
+      NewsModel detailNews =
+          await NewsRepository.instance.getNewsDetail(token!, newsId);
+      newsDetail.value = detailNews;
+    } catch (e) {
+      print(e);
+    } finally {
       isLoading.value = false;
     }
   }
