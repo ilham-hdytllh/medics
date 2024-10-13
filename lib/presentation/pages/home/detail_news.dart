@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:medics/core/utils/extension/date.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/sizes.dart';
@@ -12,10 +15,7 @@ class NewsDetailPage extends StatelessWidget {
 
   NewsDetailPage({required this.newsId}) {
     final NewsController controller = Get.find();
-    // Memastikan data diambil hanya sekali
-    if (controller.newsDetail.value == null) {
-      controller.fetchNewsDetail(newsId);
-    }
+    controller.fetchNewsDetail(newsId);
   }
 
   @override
@@ -72,8 +72,38 @@ class NewsDetailPage extends StatelessWidget {
                     height: CustomSizes.spaceBtwItems,
                   ),
                   Center(
-                    child: Image.network(
-                      newsDetail.image,
+                    child: CachedNetworkImage(
+                      imageUrl: newsDetail.image,
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) =>
+                              Shimmer.fromColors(
+                        baseColor: CustomColors.errorBg,
+                        highlightColor: CustomColors.lightGrey,
+                        child: Container(
+                          width: 270,
+                          height: 150,
+                          color: CustomColors.errorBg,
+                          child: Center(
+                            child: Icon(
+                              IconlyLight.dangerCircle,
+                              size: CustomSizes.iconMd,
+                              color: CustomColors.black,
+                            ),
+                          ),
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Container(
+                        width: 270,
+                        height: 150,
+                        color: CustomColors.errorBg,
+                        child: Center(
+                          child: Icon(
+                            IconlyLight.dangerCircle,
+                            size: CustomSizes.iconMd,
+                            color: CustomColors.black,
+                          ),
+                        ),
+                      ),
                       width: 270,
                       fit: BoxFit.fitWidth,
                     ),
