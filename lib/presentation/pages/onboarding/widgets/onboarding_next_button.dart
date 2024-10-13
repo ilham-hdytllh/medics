@@ -12,6 +12,7 @@ class OnBoardingNextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<OnBoardingController>();
     return Positioned(
         bottom: CustomDeviceUtils.getBottomNavigationBarHeight(),
         left: 15,
@@ -27,7 +28,8 @@ class OnBoardingNextButton extends StatelessWidget {
                   foregroundColor: CustomColors.white,
                   backgroundColor: CustomColors.primary),
               child: Text(
-                OnBoardingController.instance.currentPageIndex.value == 2
+                controller.currentPageIndex.value ==
+                        (controller.onboardings.length - 1)
                     ? "Masuk"
                     : "Next",
               ),

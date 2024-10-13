@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medics/core/constants/text_strings.dart';
 import 'package:medics/presentation/getx/onboarding/onboarding_controller.dart';
 
-import '../../../core/constants/image_strings.dart';
 import 'widgets/onboarding_dot_navigation.dart';
 import 'widgets/onboarding_next_button.dart';
 import 'widgets/onboarding_pages.dart';
@@ -14,32 +12,25 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(OnBoardingController());
+    final controller = Get.find<OnBoardingController>();
     return Scaffold(
       extendBody: true,
       body: Stack(
         children: [
           // Horizontal scrollable pages
-          PageView(
-            controller: controller.pageController,
-            onPageChanged: controller.updatePageIndicator,
-            children: [
-              OnBoardingPage(
-                image: CustomImages.onBoardingImage1,
-                title: CustomTexts.onBoardingTitle1,
-                subTitle: CustomTexts.onBoardingSubTitle1,
-              ),
-              OnBoardingPage(
-                image: CustomImages.onBoardingImage2,
-                title: CustomTexts.onBoardingTitle2,
-                subTitle: CustomTexts.onBoardingSubTitle2,
-              ),
-              OnBoardingPage(
-                image: CustomImages.onBoardingImage3,
-                title: CustomTexts.onBoardingTitle3,
-                subTitle: CustomTexts.onBoardingSubTitle3,
-              ),
-            ],
+          Obx(
+            () => PageView.builder(
+              controller: controller.pageController,
+              itemCount: controller.onboardings.length,
+              onPageChanged: (index) {
+                controller.pageChanged(index);
+              },
+              itemBuilder: (context, index) {
+                return OnBoardingPage(
+                    image: controller.onboardings[index].image,
+                    title: controller.onboardings[index].title);
+              },
+            ),
           ),
           // Skip button
           const OnBoardingSkip(),

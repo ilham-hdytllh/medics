@@ -11,11 +11,12 @@ class OnBoardingSkip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(OnBoardingController());
+    final controller = Get.find<OnBoardingController>();
     return Positioned(
       top: CustomDeviceUtils.getAppBarHeight(),
       right: CustomSizes.defaultSpace,
-      child: Obx(() => controller.currentPageIndex.value < 2
+      child: Obx(() => controller.currentPageIndex.value <
+              (controller.onboardings.length - 1)
           ? GestureDetector(
               onTap: () => OnBoardingController.instance.skipPage(),
               child: const Text("Skip"),

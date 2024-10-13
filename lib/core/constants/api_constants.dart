@@ -16,4 +16,6 @@ class ContantAPI {
   static String getFlyer = "https://tbr.ridinet.id/api/v1/content/flayers";
   static String getEvents = "https://tbr.ridinet.id/api/v1/content/events";
   static String getNews = "https://tbr.ridinet.id/api/v1/content/news";
+
+  static String getOnboarding = "https://tbr.ridinet.id/api/v1/intros";
 }
