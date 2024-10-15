@@ -6,6 +6,7 @@ import 'package:medics/data/repositories/onboarding/onboarding.dart';
 import 'package:medics/presentation/getx/onboarding/onboarding_controller.dart';
 import '../core/utils/helpers/network_manager.dart';
 import '../data/repositories/flyer/flyer_repository.dart';
+import '../presentation/getx/alarm/alarm.dart';
 
 class GeneralBindings extends Bindings {
   @override
@@ -17,5 +18,6 @@ class GeneralBindings extends Bindings {
     Get.put(FlyerRepository());
     Get.put(NewsRepository());
     Get.put(EventRepository());
+    Get.put(AlarmController());
   }
 }
