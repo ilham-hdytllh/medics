@@ -25,9 +25,14 @@ class AuthenticationRepository extends GetxController {
   screenRedirect() async {
     String? token = await SharedPreferencesHelper.getToken();
     bool? isFirstTime = await SharedPreferencesHelper.isFirstTime();
+    int? fase = await SharedPreferencesHelper.getFase();
     if (token != null) {
-      // if user is logged in
-      Get.offAllNamed(AppLinks.CHOOSEFASE);
+      if (fase == null) {
+        Get.offAllNamed(AppLinks.CHOOSEFASE);
+      } else {
+        // if user is logged in
+        Get.offAllNamed(AppLinks.HOMESCREEN);
+      }
     } else {
       // Local Storage
       if (isFirstTime) {

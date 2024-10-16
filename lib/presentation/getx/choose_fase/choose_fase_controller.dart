@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:medics/core/utils/helpers/shared_preference.dart';
 
+import '../../../core/utils/helpers/alarm_helper.dart';
 import '../../../routes/navigation_route.dart';
 
 class ChooseFaseController extends GetxController {
@@ -16,5 +17,8 @@ class ChooseFaseController extends GetxController {
     }
 
     Get.offNamed(AppLinks.HOMESCREEN);
+
+    AlarmHelper alarmHelper = AlarmHelper();
+    await alarmHelper.scheduleAlarm();
   }
 }
