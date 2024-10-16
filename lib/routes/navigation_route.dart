@@ -10,6 +10,7 @@ import '../presentation/pages/auth/signup.dart';
 import '../presentation/pages/auth/forgot_password.dart';
 import '../presentation/pages/auth/login.dart';
 import '../presentation/pages/auth/update_profile.dart';
+import '../presentation/pages/choose_fase/choose_fase.dart';
 import '../presentation/pages/home/detail_flyer.dart';
 import '../presentation/pages/onboarding/onboarding.dart';
 
@@ -33,6 +34,7 @@ class AppRoutes {
     GetPage(name: AppLinks.DETAILFLYER, page: () => DetailFlyer()),
     GetPage(name: AppLinks.DETAILEVENT, page: () => EventDetailPage()),
     GetPage(name: AppLinks.DETAILNEWS, page: () => NewsDetailPage()),
+    GetPage(name: AppLinks.CHOOSEFASE, page: () => ChooseFaseScreen()),
   ];
 }
 
@@ -50,4 +52,5 @@ class AppLinks {
   static const String DETAILFLYER = "/detailFlyer";
   static const String DETAILEVENT = "/detailEvent";
   static const String DETAILNEWS = "/detailNews";
+  static const String CHOOSEFASE = "/chooseFase";
 }

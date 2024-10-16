@@ -6,7 +6,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:medics/core/constants/colors.dart';
 import 'package:medics/core/constants/image_strings.dart';
 import 'package:medics/core/utils/extension/capitalize.dart';
-import 'package:medics/core/utils/helpers/notification_helper.dart';
 import 'package:medics/core/utils/helpers/shared_preference.dart';
 import 'package:medics/data/models/user.dart';
 import 'package:medics/data/repositories/authentication/authentication_repository.dart';
@@ -28,13 +27,6 @@ class ProfileScreen extends StatelessWidget {
       extendBody: true,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {
-                NotificationHelper.scheduleNotification("Test", "AS");
-              },
-              icon: Icon(Icons.access_alarm))
-        ],
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.light,

@@ -27,7 +27,7 @@ class AuthenticationRepository extends GetxController {
     bool? isFirstTime = await SharedPreferencesHelper.isFirstTime();
     if (token != null) {
       // if user is logged in
-      Get.offAllNamed(AppLinks.HOMESCREEN);
+      Get.offAllNamed(AppLinks.CHOOSEFASE);
     } else {
       // Local Storage
       if (isFirstTime) {
@@ -55,6 +55,8 @@ class AuthenticationRepository extends GetxController {
       );
 
       final data = json.decode(response.body);
+
+      print(data);
 
       if (response.statusCode == 401) {
         throw data['message'];

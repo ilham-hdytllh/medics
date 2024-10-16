@@ -43,4 +43,16 @@ class SharedPreferencesHelper {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool('isFirstTime') ?? true; // Default to true if null
   }
+
+  /// Save the selected fase (1 or 2)
+  static Future<void> saveFase(int fase) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('selectedFase', fase);
+  }
+
+  /// Get the selected fase (returns 1 or 2)
+  static Future<int?> getFase() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('selectedFase');
+  }
 }

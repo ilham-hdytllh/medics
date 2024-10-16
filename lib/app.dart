@@ -19,33 +19,6 @@ class App extends StatelessWidget {
       darkTheme: CustomAppTheme.lightTheme,
       initialRoute: AppLinks.ONBOARDING,
       getPages: AppRoutes.pages,
-      // onGenerateRoute: (routes) {
-      //   switch (routes.name) {
-      //     case AppLinks.ONBOARDING:
-      //       return MaterialPageRoute(builder: (_) => const OnBoardingScreen());
-      //     case AppLinks.LOGIN:
-      //       return MaterialPageRoute(builder: (_) => const LoginScreen());
-      //     case AppLinks.SIGNUP:
-      //       return MaterialPageRoute(builder: (_) => const SingUpScreen());
-      //     case AppLinks.FORGOTPASSWORD:
-      //       return MaterialPageRoute(
-      //           builder: (_) => const ForgotPasswordScreen());
-      //     case AppLinks.HOMESCREEN:
-      //       return MaterialPageRoute(builder: (_) => const MainScreen());
-      //     case AppLinks.PROFILE:
-      //       return MaterialPageRoute(builder: (_) => const ProfileScreen());
-      //     case AppLinks.UPDATEPROFILE:
-      //       return MaterialPageRoute(
-      //           builder: (_) => const UpdateProfileScreen());
-      //     case AppLinks.UPDATEPASSWORD:
-      //       return MaterialPageRoute(
-      //           builder: (_) => const UpdatePasswordScreen());
-      //     case AppLinks.ALARM:
-      //       return MaterialPageRoute(builder: (_) => const AlarmScreen());
-      //     default:
-      //       return MaterialPageRoute(builder: (_) => const SizedBox());
-      //   }
-      // },
       home: const Scaffold(
         backgroundColor: CustomColors.primary,
         body: Center(

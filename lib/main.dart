@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
+import 'package:medics/core/utils/helpers/alarm_helper.dart';
 import 'app.dart';
-import 'core/utils/helpers/notification_helper.dart';
 import 'data/repositories/authentication/authentication_repository.dart';
 
 void main() async {
@@ -11,7 +11,9 @@ void main() async {
   final WidgetsBinding widgetsBinding =
       WidgetsFlutterBinding.ensureInitialized();
 
-  NotificationHelper.init();
+  // NotificationHelper.init();
+
+  AlarmHelper.init();
 
   // Await flutter native splash until other item load
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);

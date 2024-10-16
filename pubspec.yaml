@@ -16,6 +16,7 @@ dependencies:
   # Icons
   cupertino_icons: ^1.0.8
   iconsax: ^0.0.8
+  flutter_iconly: ^1.0.2
 
   # Utility
   http: ^1.1.0
@@ -34,16 +35,16 @@ dependencies:
   flutter_widget_from_html: ^0.15.2
   flutter_svg: ^2.0.10+1
   flutter_inappwebview: ^6.1.5
-  flutter_local_notifications: ^17.2.3
+  # flutter_local_notifications: ^17.2.3
   timezone: ^0.9.4
-  android_alarm_manager_plus: ^4.0.4
+  # android_alarm_manager_plus: ^4.0.4
   permission_handler: ^11.3.1
+  # auto_start_flutter: ^0.1.1
+  alarm: ^4.0.4
+  shimmer: ^3.0.0
 
   # State Management
   get: ^4.6.6
-  get_storage: ^2.1.1
-  flutter_iconly: ^1.0.2
-  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

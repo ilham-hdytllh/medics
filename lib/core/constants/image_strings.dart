@@ -14,4 +14,5 @@ class CustomImages {
 
   // -- Alarm
   static const String development = "assets/images/development.svg";
+  static const String medical = "assets/images/medical.svg";
 }
