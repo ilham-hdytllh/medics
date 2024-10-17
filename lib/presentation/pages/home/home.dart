@@ -197,8 +197,7 @@ class HomeScreen extends StatelessWidget {
                                     color: CustomColors.white.withOpacity(0.6),
                                   ),
                                   child: Text(
-                                    flyerController.flyers[index].title
-                                        .capitalizeAll(),
+                                    flyerController.flyers[index].title,
                                     style:
                                         Theme.of(context).textTheme.titleLarge,
                                   ),
