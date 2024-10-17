@@ -6,7 +6,7 @@ import 'package:medics/core/utils/helpers/shared_preference.dart';
 import '../../../core/utils/helpers/alarm_helper.dart';
 import '../../../routes/navigation_route.dart';
 
-class ChooseFaseController extends GetxController {
+class CompleteBiodataUpdateController extends GetxController {
   final isLoading = false.obs;
   final isCustomJob = false.obs;
   RxInt activeFase = 0.obs;
@@ -38,6 +38,30 @@ class ChooseFaseController extends GetxController {
   List<String> live = ['Sendiri', 'Bersama Suami/Istri', 'Bersama Keluarga'];
   List<String> fase = ['Phase 1', 'Phase 2'];
 
+  @override
+  void onInit() async {
+    super.onInit();
+
+    Map<String, dynamic>? biodata = await SharedPreferencesHelper.getBiodata();
+    if (biodata != null) {
+      nameController.value.text = biodata['name'];
+      placeController.value.text = biodata['place'];
+      dateController.value.text = biodata['date'];
+      addressController.value.text = biodata['address'];
+      ageController.value.text = biodata['age'];
+      selectedGender.value = biodata['gender'];
+      selectedEducation.value = biodata['education'];
+      selectedJob.value = biodata['job'];
+      selectedLive.value = biodata['live'];
+      selectedPhase.value = biodata['phase'];
+      if (job.contains(biodata['job'])) {
+        isCustomJob.value = false;
+      } else {
+        isCustomJob.value = true;
+      }
+    }
+  }
+
   Future<void> chooseFase() async {
     if (selectedPhase == 'Phase 1') {
       activeFase.value = 1;
@@ -56,8 +80,7 @@ class ChooseFaseController extends GetxController {
       'gender': selectedGender.value,
       'education': selectedEducation.value,
       'job': selectedJob.value,
-      'live': selectedLive.value,
-      'phase': selectedPhase.value,
+      'live': selectedLive.value
     };
     await SharedPreferencesHelper.saveBiodata(biodata);
 

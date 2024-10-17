@@ -138,6 +138,18 @@ Widget _buildUserProfile(BuildContext context, UserModel user) {
             child: Divider(),
           ),
           GestureDetector(
+            onTap: () => Get.toNamed(AppLinks.COMPLETEBIODATA),
+            child: ProfileList(
+              icon: IconlyBold.profile,
+              title: "Biodata",
+              color: Colors.black87,
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+            child: Divider(),
+          ),
+          GestureDetector(
             onTap: () => Get.toNamed(AppLinks.UPDATEPASSWORD),
             child: ProfileList(
               icon: IconlyBold.lock,

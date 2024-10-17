@@ -5,6 +5,7 @@ import 'package:medics/presentation/pages/home/detail_event.dart';
 import 'package:medics/presentation/pages/home/detail_news.dart';
 import 'package:medics/presentation/pages/home/main.dart';
 import 'package:medics/presentation/pages/profile/profile.dart';
+import '../bindings/complete_biodata.dart';
 import '../presentation/pages/alarm/alarm_screen.dart';
 import '../presentation/pages/auth/signup.dart';
 import '../presentation/pages/auth/forgot_password.dart';
@@ -13,6 +14,7 @@ import '../presentation/pages/auth/update_profile.dart';
 import '../presentation/pages/choose_fase/choose_fase.dart';
 import '../presentation/pages/home/detail_flyer.dart';
 import '../presentation/pages/onboarding/onboarding.dart';
+import '../presentation/pages/profile/complete_biodata.dart';
 
 class AppRoutes {
   static final pages = [
@@ -35,6 +37,10 @@ class AppRoutes {
     GetPage(name: AppLinks.DETAILEVENT, page: () => EventDetailPage()),
     GetPage(name: AppLinks.DETAILNEWS, page: () => NewsDetailPage()),
     GetPage(name: AppLinks.CHOOSEFASE, page: () => ChooseFaseScreen()),
+    GetPage(
+        name: AppLinks.COMPLETEBIODATA,
+        page: () => CompleteBiodataUpdate(),
+        binding: CompleteBiodataBindings()),
   ];
 }
 
@@ -53,4 +59,5 @@ class AppLinks {
   static const String DETAILEVENT = "/detailEvent";
   static const String DETAILNEWS = "/detailNews";
   static const String CHOOSEFASE = "/chooseFase";
+  static const String COMPLETEBIODATA = "/completeBiodata";
 }
