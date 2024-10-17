@@ -277,6 +277,18 @@ Widget _buildShimmerEffect() {
             child: Divider(),
           ),
           GestureDetector(
+            onTap: () => Get.toNamed(AppLinks.UPDATEPROFILE),
+            child: ProfileList(
+              icon: IconlyBold.profile,
+              title: "Biodata",
+              color: Colors.black87,
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+            child: Divider(),
+          ),
+          GestureDetector(
             onTap: () => Get.toNamed(AppLinks.UPDATEPASSWORD),
             child: ProfileList(
               icon: IconlyBold.lock,
