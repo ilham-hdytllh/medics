@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:alarm/alarm.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
@@ -196,11 +197,19 @@ class AuthenticationRepository extends GetxController {
           print("Sukses");
         case 401:
           await SharedPreferencesHelper.clearToken();
+          await SharedPreferencesHelper.clearUserData();
+          await SharedPreferencesHelper.clearFase();
+          await SharedPreferencesHelper.clearBiodata();
+          Alarm.stop(1);
           Get.offAllNamed(AppLinks.LOGIN);
           Get.deleteAll();
           throw 'Session expired';
         case 403:
           await SharedPreferencesHelper.clearToken();
+          await SharedPreferencesHelper.clearUserData();
+          await SharedPreferencesHelper.clearFase();
+          await SharedPreferencesHelper.clearBiodata();
+          Alarm.stop(1);
           Get.offAllNamed(AppLinks.LOGIN);
           Get.deleteAll();
           throw 'Session expired';
@@ -240,11 +249,19 @@ class AuthenticationRepository extends GetxController {
           throw body['message'];
         case 401:
           await SharedPreferencesHelper.clearToken();
+          await SharedPreferencesHelper.clearUserData();
+          await SharedPreferencesHelper.clearFase();
+          await SharedPreferencesHelper.clearBiodata();
+          Alarm.stop(1);
           Get.offAllNamed(AppLinks.LOGIN);
           Get.deleteAll();
           throw 'Session expired';
         case 403:
           await SharedPreferencesHelper.clearToken();
+          await SharedPreferencesHelper.clearUserData();
+          await SharedPreferencesHelper.clearFase();
+          await SharedPreferencesHelper.clearBiodata();
+          Alarm.stop(1);
           Get.offAllNamed(AppLinks.LOGIN);
           Get.deleteAll();
           throw 'Session expired';
@@ -280,16 +297,23 @@ class AuthenticationRepository extends GetxController {
           return UserModel.fromJson(data);
         case 401:
           await SharedPreferencesHelper.clearToken();
+          await SharedPreferencesHelper.clearUserData();
+          await SharedPreferencesHelper.clearFase();
+          await SharedPreferencesHelper.clearBiodata();
+          Alarm.stop(1);
           Get.offAllNamed(AppLinks.LOGIN);
           Get.deleteAll();
           throw 'Session expired';
         case 403:
           await SharedPreferencesHelper.clearToken();
+          await SharedPreferencesHelper.clearUserData();
+          await SharedPreferencesHelper.clearFase();
+          await SharedPreferencesHelper.clearBiodata();
+          Alarm.stop(1);
           Get.offAllNamed(AppLinks.LOGIN);
           Get.deleteAll();
           throw 'Session expired';
         default:
-          print("kosjg");
           // Return the UserModel object
           return UserModel.empty();
       }
@@ -318,15 +342,27 @@ class AuthenticationRepository extends GetxController {
         switch (response.statusCode) {
           case 200:
             await SharedPreferencesHelper.clearToken();
+            await SharedPreferencesHelper.clearUserData();
+            await SharedPreferencesHelper.clearFase();
+            await SharedPreferencesHelper.clearBiodata();
+            Alarm.stop(1);
             Get.offAllNamed(AppLinks.LOGIN);
             Get.deleteAll();
           case 401:
             await SharedPreferencesHelper.clearToken();
+            await SharedPreferencesHelper.clearUserData();
+            await SharedPreferencesHelper.clearFase();
+            await SharedPreferencesHelper.clearBiodata();
+            Alarm.stop(1);
             Get.offAllNamed(AppLinks.LOGIN);
             Get.deleteAll();
             throw 'Session expired';
           case 403:
             await SharedPreferencesHelper.clearToken();
+            await SharedPreferencesHelper.clearUserData();
+            await SharedPreferencesHelper.clearFase();
+            await SharedPreferencesHelper.clearBiodata();
+            Alarm.stop(1);
             Get.offAllNamed(AppLinks.LOGIN);
             Get.deleteAll();
             throw 'Session expired';
@@ -335,6 +371,10 @@ class AuthenticationRepository extends GetxController {
         }
       } else {
         await SharedPreferencesHelper.clearToken();
+        await SharedPreferencesHelper.clearUserData();
+        await SharedPreferencesHelper.clearFase();
+        await SharedPreferencesHelper.clearBiodata();
+        Alarm.stop(1);
         Get.offAllNamed(AppLinks.LOGIN);
         throw 'Session expired';
       }

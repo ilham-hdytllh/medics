@@ -7,6 +7,7 @@ import '../../../core/utils/helpers/alarm_helper.dart';
 import '../../../routes/navigation_route.dart';
 
 class ChooseFaseController extends GetxController {
+  GlobalKey<FormState> biodataKey = GlobalKey<FormState>();
   final isLoading = false.obs;
   final isCustomJob = false.obs;
   RxInt activeFase = 0.obs;
@@ -39,6 +40,12 @@ class ChooseFaseController extends GetxController {
   List<String> fase = ['Phase 1', 'Phase 2'];
 
   Future<void> chooseFase() async {
+    // form validation
+    if (!biodataKey.currentState!.validate()) {
+      isLoading.value = false;
+      return;
+    }
+
     if (selectedPhase == 'Phase 1') {
       activeFase.value = 1;
       await SharedPreferencesHelper.saveFase(1);

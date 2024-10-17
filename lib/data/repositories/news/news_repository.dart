@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:alarm/alarm.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -34,6 +35,10 @@ class NewsRepository extends GetxController {
         case 401:
         case 403:
           await SharedPreferencesHelper.clearToken();
+          await SharedPreferencesHelper.clearUserData();
+          await SharedPreferencesHelper.clearFase();
+          await SharedPreferencesHelper.clearBiodata();
+          Alarm.stop(1);
           Get.offAllNamed(AppLinks.LOGIN);
           Get.deleteAll();
           throw 'Session expired';
@@ -68,6 +73,10 @@ class NewsRepository extends GetxController {
         case 401:
         case 403:
           await SharedPreferencesHelper.clearToken();
+          await SharedPreferencesHelper.clearUserData();
+          await SharedPreferencesHelper.clearFase();
+          await SharedPreferencesHelper.clearBiodata();
+          Alarm.stop(1);
           Get.offAllNamed(AppLinks.LOGIN);
           Get.deleteAll();
           throw 'Session expired';

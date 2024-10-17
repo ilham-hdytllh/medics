@@ -7,15 +7,21 @@ class SharedPreferencesHelper {
     await prefs.setString('token', token);
   }
 
+  static Future<String?> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('token');
+  }
+
+  static Future<void> clearToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('token');
+    await prefs.remove('userData');
+  }
+
   static Future<void> saveUserData(Map<String, dynamic> userData) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(
         'userData', json.encode(userData)); // Use json.encode here
-  }
-
-  static Future<String?> getToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('token');
   }
 
   static Future<Map<String, dynamic>?> getUserData() async {
@@ -26,9 +32,9 @@ class SharedPreferencesHelper {
         : null; // Use json.decode here
   }
 
-  static Future<void> clearToken() async {
+  /// Hapus user data yang disimpan
+  static Future<void> clearUserData() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('token');
     await prefs.remove('userData');
   }
 
@@ -56,6 +62,12 @@ class SharedPreferencesHelper {
     return prefs.getInt('selectedFase');
   }
 
+  /// Hapus fase yang disimpan
+  static Future<void> clearFase() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('selectedFase');
+  }
+
   static Future<void> saveBiodata(Map<String, dynamic> biodata) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('biodata', json.encode(biodata));
@@ -65,5 +77,11 @@ class SharedPreferencesHelper {
     final prefs = await SharedPreferences.getInstance();
     String? biodata = prefs.getString('biodata');
     return biodata != null ? json.decode(biodata) : null;
+  }
+
+  /// Hapus biodata yang disimpan
+  static Future<void> clearBiodata() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('biodata');
   }
 }
