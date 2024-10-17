@@ -1,8 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:medics/core/utils/helpers/alarm_helper.dart';
+import 'package:medics/firebase_options.dart';
 import 'app.dart';
 import 'data/repositories/authentication/authentication_repository.dart';
 
@@ -10,6 +12,9 @@ void main() async {
   // Widget Binding
   final WidgetsBinding widgetsBinding =
       WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize firebase & auth repository
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // NotificationHelper.init();
 

@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:medics/core/utils/helpers/shared_preference.dart';
-
 import '../../../core/utils/helpers/alarm_helper.dart';
-import '../../../routes/navigation_route.dart';
 
 class CompleteBiodataUpdateController extends GetxController {
   final isLoading = false.obs;
@@ -15,6 +13,7 @@ class CompleteBiodataUpdateController extends GetxController {
   final dateController = TextEditingController().obs;
   final addressController = TextEditingController().obs;
   final ageController = TextEditingController().obs;
+  final jobController = TextEditingController().obs;
   RxString selectedGender = 'Laki-Laki'.obs;
   RxString selectedEducation = 'Tidak Sekolah'.obs;
   RxString selectedJob = 'Petani'.obs;
@@ -51,13 +50,16 @@ class CompleteBiodataUpdateController extends GetxController {
       ageController.value.text = biodata['age'];
       selectedGender.value = biodata['gender'];
       selectedEducation.value = biodata['education'];
-      selectedJob.value = biodata['job'];
+      print(biodata['job']);
+      print(job.contains(biodata['job']));
       selectedLive.value = biodata['live'];
       selectedPhase.value = biodata['phase'];
       if (job.contains(biodata['job'])) {
         isCustomJob.value = false;
+        selectedJob.value = biodata['job'];
       } else {
         isCustomJob.value = true;
+        jobController.value.text = biodata['job'];
       }
     }
   }
@@ -79,12 +81,13 @@ class CompleteBiodataUpdateController extends GetxController {
       'age': ageController.value.text.trim(),
       'gender': selectedGender.value,
       'education': selectedEducation.value,
-      'job': selectedJob.value,
-      'live': selectedLive.value
+      'job': isCustomJob.value ? jobController.value.text : selectedJob.value,
+      'live': selectedLive.value,
+      'phase': selectedPhase.value
     };
     await SharedPreferencesHelper.saveBiodata(biodata);
 
-    Get.offNamed(AppLinks.HOMESCREEN);
+    Get.back();
 
     AlarmHelper alarmHelper = AlarmHelper();
     await alarmHelper.scheduleAlarm();

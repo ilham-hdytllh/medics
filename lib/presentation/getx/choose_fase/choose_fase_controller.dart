@@ -16,6 +16,7 @@ class ChooseFaseController extends GetxController {
   final dateController = TextEditingController().obs;
   final addressController = TextEditingController().obs;
   final ageController = TextEditingController().obs;
+  final jobController = TextEditingController().obs;
   RxString selectedGender = 'Laki-Laki'.obs;
   RxString selectedEducation = 'Tidak Sekolah'.obs;
   RxString selectedJob = 'Petani'.obs;
@@ -62,9 +63,11 @@ class ChooseFaseController extends GetxController {
       'age': ageController.value.text.trim(),
       'gender': selectedGender.value,
       'education': selectedEducation.value,
-      'job': selectedJob.value,
+      'job': isCustomJob.value == true
+          ? jobController.value.text
+          : selectedJob.value,
       'live': selectedLive.value,
-      'phase': selectedPhase.value,
+      'phase': selectedPhase.value
     };
     await SharedPreferencesHelper.saveBiodata(biodata);
 

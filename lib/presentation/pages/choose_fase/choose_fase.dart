@@ -162,6 +162,7 @@ class ChooseFaseScreen extends StatelessWidget {
                                   CustomValidator.validateEmptyText(
                                       "Jenis Pekerjaan", value),
                               onChanged: (newValue) {
+                                controller.jobController.value.text = newValue;
                                 controller.selectedJob.value = newValue;
                               },
                             )

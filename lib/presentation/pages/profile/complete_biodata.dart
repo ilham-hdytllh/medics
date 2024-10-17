@@ -15,7 +15,7 @@ class CompleteBiodataUpdate extends StatelessWidget {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Lengkapi Form Ini"),
+          title: Text("Ubah Biodata"),
         ),
         body: SizedBox(
           width: double.infinity,
@@ -141,6 +141,7 @@ class CompleteBiodataUpdate extends StatelessWidget {
                   Obx(
                     () => controller.isCustomJob.value
                         ? TextFormField(
+                            controller: controller.jobController.value,
                             onChanged: (newValue) {
                               controller.selectedJob.value = newValue;
                             },
@@ -262,7 +263,7 @@ class CompleteBiodataUpdate extends StatelessWidget {
                                 ],
                               )
                             : Text(
-                                "Lanjut",
+                                "Simpan",
                               ),
                       ),
                     ),

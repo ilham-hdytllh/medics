@@ -11,7 +11,7 @@ class AlarmController extends GetxController {
 
     int? fase = await SharedPreferencesHelper.getFase();
 
-    faseValue.value = fase!;
+    faseValue.value = fase ?? 1;
   }
 
   void changeFase(int fase) async {
