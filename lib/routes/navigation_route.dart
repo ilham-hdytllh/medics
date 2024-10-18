@@ -6,6 +6,7 @@ import 'package:medics/presentation/pages/home/detail_news.dart';
 import 'package:medics/presentation/pages/home/main.dart';
 import 'package:medics/presentation/pages/profile/profile.dart';
 import '../bindings/complete_biodata.dart';
+import '../bindings/general_bindings.dart';
 import '../presentation/pages/alarm/alarm_screen.dart';
 import '../presentation/pages/auth/signup.dart';
 import '../presentation/pages/auth/forgot_password.dart';
@@ -19,7 +20,10 @@ import '../presentation/pages/profile/complete_biodata.dart';
 class AppRoutes {
   static final pages = [
     GetPage(name: AppLinks.ONBOARDING, page: () => const OnBoardingScreen()),
-    GetPage(name: AppLinks.LOGIN, page: () => const LoginScreen()),
+    GetPage(
+        name: AppLinks.LOGIN,
+        page: () => const LoginScreen(),
+        binding: GeneralBindings()),
     GetPage(name: AppLinks.SIGNUP, page: () => const SingUpScreen()),
     GetPage(
         name: AppLinks.FORGOTPASSWORD,

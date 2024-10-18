@@ -63,6 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '928928943719',
     projectId: 'tbr-medics',
     storageBucket: 'tbr-medics.appspot.com',
+    androidClientId: '928928943719-240l1fooakp9mg5mkuhunu9au3kd5ef0.apps.googleusercontent.com',
+    iosClientId: '928928943719-v8dv1jrm4h2ba482jsev69jcaapcp409.apps.googleusercontent.com',
     iosBundleId: 'id.tbr.reminder',
   );
 

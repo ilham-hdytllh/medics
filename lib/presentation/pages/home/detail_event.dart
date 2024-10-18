@@ -4,7 +4,6 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 import 'package:medics/core/constants/colors.dart';
-import 'package:medics/core/utils/extension/capitalize.dart';
 import 'package:medics/core/utils/extension/date.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../core/constants/sizes.dart';
@@ -47,7 +46,7 @@ class EventDetailPage extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "${eventDetail.dateOfEvent.formatDateTime()} - ${eventDetail.location.capitalizeAll()}",
+                        "${eventDetail.dateOfEvent.formatDateTime()} - ${eventDetail.location}",
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],

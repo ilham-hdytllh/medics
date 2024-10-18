@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
 
-import '../../../bindings/general_bindings.dart';
 import '../../../core/constants/sizes.dart';
 import '../../../core/constants/text_strings.dart';
 import 'widgets/form_divider.dart';
@@ -14,8 +14,16 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GeneralBindings().dependencies();
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        titleSpacing: 0,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.dark,
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.all(CustomSizes.defaultSpacePadding),
         child: SingleChildScrollView(

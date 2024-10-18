@@ -5,7 +5,6 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:get/get.dart';
 import 'package:medics/core/constants/image_strings.dart';
 import 'package:medics/core/constants/sizes.dart';
-import 'package:medics/core/utils/extension/capitalize.dart';
 import 'package:medics/core/utils/extension/date.dart';
 import 'package:medics/presentation/getx/flyer/flyer_controller.dart';
 import 'package:medics/presentation/getx/news/news_controller.dart';
@@ -365,8 +364,7 @@ class HomeScreen extends StatelessWidget {
                                           children: [
                                             Text(
                                               eventController
-                                                  .events[index].title
-                                                  .capitalizeAll(),
+                                                  .events[index].title,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleLarge,
@@ -557,8 +555,7 @@ class HomeScreen extends StatelessWidget {
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             Text(
-                                              newsController.news[index].title
-                                                  .capitalizeAll(),
+                                              newsController.news[index].title,
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleLarge,

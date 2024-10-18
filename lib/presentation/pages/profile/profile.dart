@@ -178,8 +178,6 @@ Widget _buildUserProfile(BuildContext context, UserModel user) {
               String? token = await SharedPreferencesHelper.getToken();
 
               await AuthenticationRepository.instance.logout(token);
-
-              HomeController.instance.currentPage.value = 0;
             },
             child: ProfileList(
               icon: IconlyBold.logout,

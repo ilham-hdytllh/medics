@@ -58,13 +58,6 @@ class LoginController extends GetxController {
 
   // Google Sign IN
   Future<void> signinWithGoogle() async {
-    const List<String> scopes = <String>[
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ];
-    GoogleSignIn _googleSignIn = GoogleSignIn(
-      scopes: scopes,
-    );
     try {
       // start loading
       isLoadingGoogle.value = true;
@@ -76,11 +69,14 @@ class LoginController extends GetxController {
         return;
       }
 
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      String? _email = googleUser?.email;
+      String? _email;
+      GoogleSignIn _googleSignIn = GoogleSignIn();
 
-      print(_email);
-      print("kontol");
+      final GoogleSignInAccount? _googleUser = await _googleSignIn.signIn();
+
+      if (_googleUser != null) {
+        _email = _googleUser.email;
+      }
 
       // Register user in the firebase auth & save data in firebase
       // await AuthenticationRepository.instance.loginGoogle(_email!);

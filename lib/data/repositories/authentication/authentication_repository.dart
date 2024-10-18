@@ -161,7 +161,7 @@ class AuthenticationRepository extends GetxController {
       );
       final data = json.decode(response.body);
       if (response.statusCode != 200) {
-        throw data["message"];
+        throw data["message"] ?? 'Terjadi kesalahan coba lagi nanti.';
       }
     } on FormatException catch (_) {
       throw const CustomFormatException();
@@ -341,39 +341,36 @@ class AuthenticationRepository extends GetxController {
 
         switch (response.statusCode) {
           case 200:
-            await SharedPreferencesHelper.clearToken();
-            await SharedPreferencesHelper.clearUserData();
-            await SharedPreferencesHelper.clearFase();
-            await SharedPreferencesHelper.clearBiodata();
+            SharedPreferencesHelper.clearToken();
+            SharedPreferencesHelper.clearUserData();
+            SharedPreferencesHelper.clearFase();
+            SharedPreferencesHelper.clearBiodata();
             Alarm.stop(1);
             Get.offAllNamed(AppLinks.LOGIN);
-            Get.deleteAll();
           case 401:
-            await SharedPreferencesHelper.clearToken();
-            await SharedPreferencesHelper.clearUserData();
-            await SharedPreferencesHelper.clearFase();
-            await SharedPreferencesHelper.clearBiodata();
+            SharedPreferencesHelper.clearUserData();
+            SharedPreferencesHelper.clearFase();
+            SharedPreferencesHelper.clearToken();
+            SharedPreferencesHelper.clearBiodata();
             Alarm.stop(1);
             Get.offAllNamed(AppLinks.LOGIN);
-            Get.deleteAll();
             throw 'Session expired';
           case 403:
-            await SharedPreferencesHelper.clearToken();
-            await SharedPreferencesHelper.clearUserData();
-            await SharedPreferencesHelper.clearFase();
-            await SharedPreferencesHelper.clearBiodata();
+            SharedPreferencesHelper.clearToken();
+            SharedPreferencesHelper.clearUserData();
+            SharedPreferencesHelper.clearFase();
+            SharedPreferencesHelper.clearBiodata();
             Alarm.stop(1);
             Get.offAllNamed(AppLinks.LOGIN);
-            Get.deleteAll();
             throw 'Session expired';
           default:
             throw 'Failed logout: ${response.statusCode}';
         }
       } else {
-        await SharedPreferencesHelper.clearToken();
-        await SharedPreferencesHelper.clearUserData();
-        await SharedPreferencesHelper.clearFase();
-        await SharedPreferencesHelper.clearBiodata();
+        SharedPreferencesHelper.clearToken();
+        SharedPreferencesHelper.clearUserData();
+        SharedPreferencesHelper.clearFase();
+        SharedPreferencesHelper.clearBiodata();
         Alarm.stop(1);
         Get.offAllNamed(AppLinks.LOGIN);
         throw 'Session expired';

@@ -8,13 +8,21 @@ extension StringDateTimeExtension on String {
     // Format the date
     final DateFormat dayFormat = DateFormat('d');
     final DateFormat monthFormat = DateFormat('MMMM');
-    final DateFormat yearFormat = DateFormat('YYYY');
 
     String day = dayFormat.format(dateTime);
     String month = monthFormat.format(dateTime);
+
+    return '$day $month';
+  }
+
+  String formatYear() {
+    // Parse the string to DateTime
+    DateTime dateTime = DateTime.parse(this);
+    final DateFormat yearFormat = DateFormat('yyyy');
+
     String year = yearFormat.format(dateTime);
 
-    return '$day $month' '$year';
+    return '$year';
   }
 
   String formatTime() {
@@ -29,6 +37,6 @@ extension StringDateTimeExtension on String {
 
   String formatDateTime() {
     // Combine both formatted date and time
-    return '${formatDate()} ${formatTime()}';
+    return '${formatDate()} ${formatYear()} ${formatTime()} ';
   }
 }

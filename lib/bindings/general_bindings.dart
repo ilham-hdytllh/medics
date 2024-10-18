@@ -3,11 +3,8 @@ import 'package:medics/data/repositories/authentication/authentication_repositor
 import 'package:medics/data/repositories/events/event_repository.dart';
 import 'package:medics/data/repositories/news/news_repository.dart';
 import 'package:medics/data/repositories/onboarding/onboarding.dart';
-import 'package:medics/presentation/getx/home/home_controller.dart';
-import 'package:medics/presentation/getx/onboarding/onboarding_controller.dart';
 import '../core/utils/helpers/network_manager.dart';
 import '../data/repositories/flyer/flyer_repository.dart';
-import '../presentation/getx/alarm/alarm.dart';
 
 class GeneralBindings extends Bindings {
   @override
@@ -15,11 +12,8 @@ class GeneralBindings extends Bindings {
     Get.put(NetworkManager());
     Get.put(AuthenticationRepository());
     Get.put(OnboardingRepository());
-    Get.put(HomeController());
-    Get.put(OnBoardingController());
     Get.put(FlyerRepository());
     Get.put(NewsRepository());
     Get.put(EventRepository());
-    Get.put(AlarmController());
   }
 }

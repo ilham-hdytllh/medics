@@ -23,7 +23,7 @@ class AuthHeader extends StatelessWidget {
             height: 170,
             child: Image.asset(
               CustomImages.logo,
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
           ),
         ),
