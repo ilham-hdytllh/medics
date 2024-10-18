@@ -11,6 +11,7 @@ import 'widget_themes/elevated_button_theme.dart';
 import 'widget_themes/outlined_button_theme.dart';
 import 'widget_themes/switch_theme.dart';
 import 'widget_themes/text_field_theme.dart';
+import 'widget_themes/text_selection_theme.dart';
 import 'widget_themes/text_theme.dart';
 import 'widget_themes/time_picker_theme.dart';
 
@@ -41,6 +42,7 @@ class CustomAppTheme {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(foregroundColor: CustomColors.primary),
     ),
+    textSelectionTheme: CustomTextSelectionTheme.textSelectionTheme,
     iconTheme: const IconThemeData(
       size: CustomSizes.iconMd,
       color: CustomColors.black,
@@ -71,6 +73,7 @@ class CustomAppTheme {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(foregroundColor: CustomColors.primary),
     ),
+    textSelectionTheme: CustomTextSelectionTheme.textSelectionTheme,
     iconTheme: const IconThemeData(
       size: CustomSizes.iconMd,
       color: CustomColors.white,
