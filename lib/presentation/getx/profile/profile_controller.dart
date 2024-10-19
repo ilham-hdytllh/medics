@@ -18,6 +18,7 @@ class ProfileController extends GetxController {
   final email = TextEditingController().obs;
   final telp = TextEditingController().obs;
   final address = TextEditingController().obs;
+  String? logGoogle;
 
   @override
   void onInit() {
@@ -38,6 +39,11 @@ class ProfileController extends GetxController {
       }
 
       String? token = await SharedPreferencesHelper.getToken();
+
+      Map<String, dynamic>? loggedGoogle =
+          await SharedPreferencesHelper.getUserData();
+
+      logGoogle = loggedGoogle!['is_google_login'];
 
       // Register user in the firebase auth & save data in firebase
       userProfile.value =

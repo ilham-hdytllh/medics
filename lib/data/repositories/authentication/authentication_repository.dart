@@ -4,6 +4,7 @@ import 'package:alarm/alarm.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:medics/routes/navigation_route.dart';
 import '../../../core/constants/api_constants.dart';
@@ -61,8 +62,6 @@ class AuthenticationRepository extends GetxController {
       );
 
       final data = json.decode(response.body);
-
-      print(data);
 
       if (response.statusCode == 401) {
         throw data['message'];
@@ -328,6 +327,8 @@ class AuthenticationRepository extends GetxController {
 
   // logout
   Future<void> logout(String? token) async {
+    GoogleSignIn _googleSignIn = GoogleSignIn();
+
     try {
       if (token != null) {
         // Make POST request to API
@@ -345,6 +346,7 @@ class AuthenticationRepository extends GetxController {
             SharedPreferencesHelper.clearUserData();
             SharedPreferencesHelper.clearFase();
             SharedPreferencesHelper.clearBiodata();
+            _googleSignIn.signOut();
             Alarm.stop(1);
             Get.offAllNamed(AppLinks.LOGIN);
           case 401:
@@ -352,6 +354,7 @@ class AuthenticationRepository extends GetxController {
             SharedPreferencesHelper.clearFase();
             SharedPreferencesHelper.clearToken();
             SharedPreferencesHelper.clearBiodata();
+            _googleSignIn.signOut();
             Alarm.stop(1);
             Get.offAllNamed(AppLinks.LOGIN);
             throw 'Session expired';
@@ -360,6 +363,7 @@ class AuthenticationRepository extends GetxController {
             SharedPreferencesHelper.clearUserData();
             SharedPreferencesHelper.clearFase();
             SharedPreferencesHelper.clearBiodata();
+            _googleSignIn.signOut();
             Alarm.stop(1);
             Get.offAllNamed(AppLinks.LOGIN);
             throw 'Session expired';
@@ -371,6 +375,7 @@ class AuthenticationRepository extends GetxController {
         SharedPreferencesHelper.clearUserData();
         SharedPreferencesHelper.clearFase();
         SharedPreferencesHelper.clearBiodata();
+        _googleSignIn.signOut();
         Alarm.stop(1);
         Get.offAllNamed(AppLinks.LOGIN);
         throw 'Session expired';

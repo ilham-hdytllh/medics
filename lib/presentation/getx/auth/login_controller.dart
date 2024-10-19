@@ -79,13 +79,13 @@ class LoginController extends GetxController {
       }
 
       // Register user in the firebase auth & save data in firebase
-      // await AuthenticationRepository.instance.loginGoogle(_email!);
+      await AuthenticationRepository.instance.loginGoogle(_email!);
 
       // clear all controller
       obsecure.value = true;
 
       // Redirect screen
-      // await AuthenticationRepository.instance.screenRedirect();
+      await AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       print(e);
       // show message generic eror to user

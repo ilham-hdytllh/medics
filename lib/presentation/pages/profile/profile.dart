@@ -37,10 +37,10 @@ class ProfileScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Obx(() {
           if (profileController.isLoading.value) {
-            return _buildShimmerEffect();
+            return _buildShimmerEffect(profileController);
           } else {
-            return _buildUserProfile(
-                context, profileController.userProfile.value);
+            return _buildUserProfile(context,
+                profileController.userProfile.value, profileController);
           }
         }),
       ),
@@ -48,7 +48,8 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-Widget _buildUserProfile(BuildContext context, UserModel user) {
+Widget _buildUserProfile(
+    BuildContext context, UserModel user, ProfileController controller) {
   return Column(
     children: [
       SizedBox(
@@ -145,18 +146,22 @@ Widget _buildUserProfile(BuildContext context, UserModel user) {
               color: Colors.black87,
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-            child: Divider(),
-          ),
-          GestureDetector(
-            onTap: () => Get.toNamed(AppLinks.UPDATEPASSWORD),
-            child: ProfileList(
-              icon: IconlyBold.lock,
-              title: "Password",
-              color: Colors.black87,
-            ),
-          ),
+          controller.logGoogle == "0"
+              ? const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                  child: Divider(),
+                )
+              : SizedBox(),
+          controller.logGoogle == "0"
+              ? GestureDetector(
+                  onTap: () => Get.toNamed(AppLinks.UPDATEPASSWORD),
+                  child: ProfileList(
+                    icon: IconlyBold.lock,
+                    title: "Password",
+                    color: Colors.black87,
+                  ),
+                )
+              : SizedBox(),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
             child: Divider(),
@@ -191,7 +196,7 @@ Widget _buildUserProfile(BuildContext context, UserModel user) {
   );
 }
 
-Widget _buildShimmerEffect() {
+Widget _buildShimmerEffect(ProfileController controller) {
   return Column(
     children: [
       SizedBox(
@@ -286,18 +291,22 @@ Widget _buildShimmerEffect() {
             padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
             child: Divider(),
           ),
-          GestureDetector(
-            onTap: () => Get.toNamed(AppLinks.UPDATEPASSWORD),
-            child: ProfileList(
-              icon: IconlyBold.lock,
-              title: "Password",
-              color: Colors.black87,
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-            child: Divider(),
-          ),
+          controller.logGoogle == "0"
+              ? GestureDetector(
+                  onTap: () => Get.toNamed(AppLinks.UPDATEPASSWORD),
+                  child: ProfileList(
+                    icon: IconlyBold.lock,
+                    title: "Password",
+                    color: Colors.black87,
+                  ),
+                )
+              : SizedBox(),
+          controller.logGoogle == "0"
+              ? const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                  child: Divider(),
+                )
+              : SizedBox(),
           GestureDetector(
             onTap: () => Get.toNamed(AppLinks.ALARM),
             child: ProfileList(
