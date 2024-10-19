@@ -14,6 +14,8 @@ import '../presentation/pages/auth/login.dart';
 import '../presentation/pages/auth/update_profile.dart';
 import '../presentation/pages/choose_fase/choose_fase.dart';
 import '../presentation/pages/home/detail_flyer.dart';
+import '../presentation/pages/home/event_show_all.dart';
+import '../presentation/pages/home/news_show_all.dart';
 import '../presentation/pages/onboarding/onboarding.dart';
 import '../presentation/pages/profile/complete_biodata.dart';
 
@@ -45,6 +47,8 @@ class AppRoutes {
         name: AppLinks.COMPLETEBIODATA,
         page: () => CompleteBiodataUpdate(),
         binding: CompleteBiodataBindings()),
+    GetPage(name: AppLinks.ALLNEWS, page: () => NewsShowAllScreen()),
+    GetPage(name: AppLinks.ALLEVENT, page: () => EventShowAllScreen()),
   ];
 }
 
@@ -64,4 +68,6 @@ class AppLinks {
   static const String DETAILNEWS = "/detailNews";
   static const String CHOOSEFASE = "/chooseFase";
   static const String COMPLETEBIODATA = "/completeBiodata";
+  static const String ALLNEWS = "/allNews";
+  static const String ALLEVENT = "/allEvent";
 }

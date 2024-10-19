@@ -223,7 +223,7 @@ class HomeScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.headlineSmall!,
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () => Get.toNamed(AppLinks.ALLEVENT),
                         child: Text(
                           "Lihat Semua",
                           style: Theme.of(context)
@@ -415,7 +415,7 @@ class HomeScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.headlineSmall!,
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () => Get.toNamed(AppLinks.ALLNEWS),
                         child: Text(
                           "Lihat Semua",
                           style: Theme.of(context)
