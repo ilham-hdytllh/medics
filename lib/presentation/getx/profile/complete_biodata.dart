@@ -93,6 +93,8 @@ class CompleteBiodataUpdateController extends GetxController {
 
     await BiodataRepository.instance.updateBiodata(token, model);
 
+    AlarmHelper alarmHelper = AlarmHelper();
+
     if (selectedPhase == 'Fase Awal') {
       activeFase.value = 1;
       await SharedPreferencesHelper.saveFase(1);
@@ -101,7 +103,6 @@ class CompleteBiodataUpdateController extends GetxController {
       await SharedPreferencesHelper.saveFase(2);
     }
 
-    AlarmHelper alarmHelper = AlarmHelper();
     await alarmHelper.scheduleAlarm();
 
     Get.back();

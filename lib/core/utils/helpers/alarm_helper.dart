@@ -1,13 +1,14 @@
+import 'dart:async';
 import 'dart:io';
-
 import 'package:alarm/alarm.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:medics/core/utils/helpers/shared_preference.dart';
+import 'package:medics/data/repositories/medicine/medicine_repository.dart';
 import 'package:permission_handler/permission_handler.dart';
-// import 'package:auto_start_flutter/auto_start_flutter.dart';
 
 class AlarmHelper {
   static init() async {
+    print('alarm init');
     await Alarm.init();
     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
         FlutterLocalNotificationsPlugin();
@@ -26,11 +27,21 @@ class AlarmHelper {
       await Permission.scheduleExactAlarm.request();
     }
 
+    Future<void> fecthRepo() async {
+      print('fetchRepo');
+      String? token = await SharedPreferencesHelper.getToken();
+      if (token != null) {
+        MediciniRepository controller = MediciniRepository();
+        await controller.medicinePost(token);
+      }
+    }
+
     AlarmHelper alarmHelper = AlarmHelper();
 
     Alarm.updateStream.stream.listen((alarm) async {
       print('update');
       await alarmHelper.scheduleAlarm();
+      await fecthRepo();
     });
 
     Alarm.ringStream.stream.listen((alarm) async {
@@ -39,6 +50,7 @@ class AlarmHelper {
   }
 
   Future<void> scheduleAlarm() async {
+    print('schedule alarm');
     // Mendapatkan fase dari SharedPreferences
     int? fase = await SharedPreferencesHelper.getFase();
     DateTime now = DateTime.now();

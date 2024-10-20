@@ -107,8 +107,8 @@ class ChooseFaseScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 2, top: 15),
                       child: Text('Jenis Kelamin'),
                     ),
-                    Obx(
-                      () => DropdownButtonFormField(
+                    Obx(() {
+                      return DropdownButtonFormField(
                         dropdownColor: CustomColors.white,
                         items: controller.gender
                             .map<DropdownMenuItem<String>>((String value) {
@@ -124,8 +124,8 @@ class ChooseFaseScreen extends StatelessWidget {
                         },
                         style: Theme.of(context).textTheme.bodyMedium,
                         value: controller.selectedGender.value,
-                      ),
-                    ),
+                      );
+                    }),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 2, top: 15),
                       child: Text('Tingkat Pendidikan Terakhir'),

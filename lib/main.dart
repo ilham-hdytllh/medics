@@ -17,8 +17,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // NotificationHelper.init();
-
-  AlarmHelper.init();
+  await AlarmHelper.init();
 
   // Await flutter native splash until other item load
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);

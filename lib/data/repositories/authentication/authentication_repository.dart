@@ -198,7 +198,7 @@ class AuthenticationRepository extends GetxController {
           await SharedPreferencesHelper.clearToken();
           await SharedPreferencesHelper.clearUserData();
           await SharedPreferencesHelper.clearFase();
-          await SharedPreferencesHelper.clearBiodata();
+
           Alarm.stop(1);
           Get.offAllNamed(AppLinks.LOGIN);
           Get.deleteAll();
@@ -207,7 +207,7 @@ class AuthenticationRepository extends GetxController {
           await SharedPreferencesHelper.clearToken();
           await SharedPreferencesHelper.clearUserData();
           await SharedPreferencesHelper.clearFase();
-          await SharedPreferencesHelper.clearBiodata();
+
           Alarm.stop(1);
           Get.offAllNamed(AppLinks.LOGIN);
           Get.deleteAll();
@@ -250,7 +250,7 @@ class AuthenticationRepository extends GetxController {
           await SharedPreferencesHelper.clearToken();
           await SharedPreferencesHelper.clearUserData();
           await SharedPreferencesHelper.clearFase();
-          await SharedPreferencesHelper.clearBiodata();
+
           Alarm.stop(1);
           Get.offAllNamed(AppLinks.LOGIN);
           Get.deleteAll();
@@ -259,7 +259,7 @@ class AuthenticationRepository extends GetxController {
           await SharedPreferencesHelper.clearToken();
           await SharedPreferencesHelper.clearUserData();
           await SharedPreferencesHelper.clearFase();
-          await SharedPreferencesHelper.clearBiodata();
+
           Alarm.stop(1);
           Get.offAllNamed(AppLinks.LOGIN);
           Get.deleteAll();
@@ -298,7 +298,7 @@ class AuthenticationRepository extends GetxController {
           await SharedPreferencesHelper.clearToken();
           await SharedPreferencesHelper.clearUserData();
           await SharedPreferencesHelper.clearFase();
-          await SharedPreferencesHelper.clearBiodata();
+
           Alarm.stop(1);
           Get.offAllNamed(AppLinks.LOGIN);
           Get.deleteAll();
@@ -307,7 +307,7 @@ class AuthenticationRepository extends GetxController {
           await SharedPreferencesHelper.clearToken();
           await SharedPreferencesHelper.clearUserData();
           await SharedPreferencesHelper.clearFase();
-          await SharedPreferencesHelper.clearBiodata();
+
           Alarm.stop(1);
           Get.offAllNamed(AppLinks.LOGIN);
           Get.deleteAll();
@@ -345,26 +345,26 @@ class AuthenticationRepository extends GetxController {
             SharedPreferencesHelper.clearToken();
             SharedPreferencesHelper.clearUserData();
             SharedPreferencesHelper.clearFase();
-            SharedPreferencesHelper.clearBiodata();
+
             _googleSignIn.signOut();
-            Alarm.stop(1);
+            Alarm.stopAll();
             Get.offAllNamed(AppLinks.LOGIN);
           case 401:
             SharedPreferencesHelper.clearUserData();
             SharedPreferencesHelper.clearFase();
             SharedPreferencesHelper.clearToken();
-            SharedPreferencesHelper.clearBiodata();
+
             _googleSignIn.signOut();
-            Alarm.stop(1);
+            Alarm.stopAll();
             Get.offAllNamed(AppLinks.LOGIN);
             throw 'Session expired';
           case 403:
             SharedPreferencesHelper.clearToken();
             SharedPreferencesHelper.clearUserData();
             SharedPreferencesHelper.clearFase();
-            SharedPreferencesHelper.clearBiodata();
+
             _googleSignIn.signOut();
-            Alarm.stop(1);
+            Alarm.stopAll();
             Get.offAllNamed(AppLinks.LOGIN);
             throw 'Session expired';
           default:
@@ -374,7 +374,7 @@ class AuthenticationRepository extends GetxController {
         SharedPreferencesHelper.clearToken();
         SharedPreferencesHelper.clearUserData();
         SharedPreferencesHelper.clearFase();
-        SharedPreferencesHelper.clearBiodata();
+
         _googleSignIn.signOut();
         Alarm.stop(1);
         Get.offAllNamed(AppLinks.LOGIN);
