@@ -1,24 +1,26 @@
 import 'dart:convert';
+
 import 'package:alarm/alarm.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:medics/data/models/event.dart';
 import 'package:http/http.dart' as http;
+import 'package:medics/data/models/biodata.dart';
+
 import '../../../core/constants/api_constants.dart';
 import '../../../core/utils/exceptions/format_exceptions.dart';
 import '../../../core/utils/exceptions/platform_exceptions.dart';
 import '../../../core/utils/helpers/shared_preference.dart';
 import '../../../routes/navigation_route.dart';
 
-class EventRepository extends GetxController {
-  static EventRepository get instance => Get.find();
+class BiodataRepository extends GetxController {
+  static BiodataRepository get instance => Get.find();
 
-  // Get Events
-  Future<List<EventModel>> getEvents(String? token) async {
+  // Biodata get
+  Future<BiodataModel?> getBiodata(String? token) async {
     try {
       // Make GET request to API
       final response = await http.get(
-        Uri.parse(ContantAPI.getEvents),
+        Uri.parse("${ContantAPI.biodata}"),
         headers: {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
@@ -28,9 +30,7 @@ class EventRepository extends GetxController {
       switch (response.statusCode) {
         case 200:
           final body = json.decode(response.body);
-          return (body['data'] as List)
-              .map((e) => EventModel.fromJson(e))
-              .toList();
+          return BiodataModel.fromJson(body['data']);
         case 401:
         case 403:
           await SharedPreferencesHelper.clearToken();
@@ -42,7 +42,7 @@ class EventRepository extends GetxController {
           Get.deleteAll();
           throw 'Session expired';
         default:
-          return [];
+          return null;
       }
     } on FormatException catch (_) {
       throw const CustomFormatException();
@@ -53,22 +53,46 @@ class EventRepository extends GetxController {
     }
   }
 
-  // Event detail
-  Future<EventModel> getEventDetail(String? token, int id) async {
+  // Biodata update
+  Future<void> updateBiodata(String? token, BiodataModel biodataModel) async {
     try {
+      print(json.encode({
+        "nama": biodataModel.nama,
+        "tempat_lahir": biodataModel.tempatLahir,
+        "tanggal_lahir": biodataModel.tanggalLahir,
+        "alamat": biodataModel.alamat,
+        "usia": int.parse(biodataModel.usia!),
+        "jenis_kelamin": biodataModel.jenisKelamin,
+        "pendidikan": biodataModel.pendidikan,
+        "pekerjaan": biodataModel.pekerjaan,
+        "status_tinggal": biodataModel.statusTinggal,
+        "fase": biodataModel.fase
+      }));
       // Make GET request to API
-      final response = await http.get(
-        Uri.parse("${ContantAPI.getEvents}/$id"),
+      final response = await http.put(
+        Uri.parse("${ContantAPI.biodata}"),
         headers: {
-          'Accept': 'application/json',
+          'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
         },
+        body: json.encode({
+          "nama": biodataModel.nama,
+          "tempat_lahir": biodataModel.tempatLahir,
+          "tanggal_lahir": biodataModel.tanggalLahir,
+          "alamat": biodataModel.alamat,
+          "usia": int.parse(biodataModel.usia!),
+          "jenis_kelamin": biodataModel.jenisKelamin,
+          "pendidikan": biodataModel.pendidikan,
+          "pekerjaan": biodataModel.pekerjaan,
+          "status_tinggal": biodataModel.statusTinggal,
+          "fase": biodataModel.fase
+        }),
       );
 
+      print(response.body);
       switch (response.statusCode) {
         case 200:
-          final body = json.decode(response.body);
-          return EventModel.fromJson(body['data']);
+          print('success');
         case 401:
         case 403:
           await SharedPreferencesHelper.clearToken();
@@ -80,7 +104,7 @@ class EventRepository extends GetxController {
           Get.deleteAll();
           throw 'Session expired';
         default:
-          return EventModel.empty();
+          throw 'Terjadi kesalahan coba lagi nanti';
       }
     } on FormatException catch (_) {
       throw const CustomFormatException();

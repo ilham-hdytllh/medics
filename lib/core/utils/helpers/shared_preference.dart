@@ -67,21 +67,4 @@ class SharedPreferencesHelper {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('selectedFase');
   }
-
-  static Future<void> saveBiodata(Map<String, dynamic> biodata) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('biodata', json.encode(biodata));
-  }
-
-  static Future<Map<String, dynamic>?> getBiodata() async {
-    final prefs = await SharedPreferences.getInstance();
-    String? biodata = prefs.getString('biodata');
-    return biodata != null ? json.decode(biodata) : null;
-  }
-
-  /// Hapus biodata yang disimpan
-  static Future<void> clearBiodata() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('biodata');
-  }
 }

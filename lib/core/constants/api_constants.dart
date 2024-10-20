@@ -18,4 +18,9 @@ class ContantAPI {
   static String getNews = "https://tbr.ridinet.id/api/v1/content/news";
 
   static String getOnboarding = "https://tbr.ridinet.id/api/v1/intros";
+
+  static String biodata = "https://tbr.ridinet.id/api/v1/user/biodata";
+
+  static String sendMedicine =
+      "https://tbr.ridinet.id/api/v1/send-take-medicine";
 }

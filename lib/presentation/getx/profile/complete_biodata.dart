@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:medics/core/utils/helpers/shared_preference.dart';
+import 'package:medics/data/repositories/biodata/biodata_repository.dart';
 import '../../../core/utils/helpers/alarm_helper.dart';
+import '../../../data/models/biodata.dart';
 
 class CompleteBiodataUpdateController extends GetxController {
   final isLoading = false.obs;
@@ -18,7 +20,7 @@ class CompleteBiodataUpdateController extends GetxController {
   RxString selectedEducation = 'Tidak Sekolah'.obs;
   RxString selectedJob = 'Petani'.obs;
   RxString selectedLive = 'Sendiri'.obs;
-  RxString selectedPhase = 'Phase 1'.obs;
+  RxString selectedPhase = 'Fase Awal'.obs;
   List<String> gender = ['Laki-Laki', 'Perempuan'];
   List<String> education = [
     'Tidak Sekolah',
@@ -35,37 +37,63 @@ class CompleteBiodataUpdateController extends GetxController {
     'Karyawan'
   ];
   List<String> live = ['Sendiri', 'Bersama Suami/Istri', 'Bersama Keluarga'];
-  List<String> fase = ['Phase 1', 'Phase 2'];
+  List<String> fase = ['Fase Awal', 'Fase Lanjutan'];
 
   @override
   void onInit() async {
     super.onInit();
+    await getAndStoreToController();
+  }
 
-    Map<String, dynamic>? biodata = await SharedPreferencesHelper.getBiodata();
+  Future<void> getAndStoreToController() async {
+    String? token = await SharedPreferencesHelper.getToken();
+    BiodataModel? biodata = await BiodataRepository.instance.getBiodata(token);
+
     if (biodata != null) {
-      nameController.value.text = biodata['name'];
-      placeController.value.text = biodata['place'];
-      dateController.value.text = biodata['date'];
-      addressController.value.text = biodata['address'];
-      ageController.value.text = biodata['age'];
-      selectedGender.value = biodata['gender'];
-      selectedEducation.value = biodata['education'];
-      print(biodata['job']);
-      print(job.contains(biodata['job']));
-      selectedLive.value = biodata['live'];
-      selectedPhase.value = biodata['phase'];
-      if (job.contains(biodata['job'])) {
+      nameController.value.text = biodata.nama ?? "";
+      placeController.value.text = biodata.tempatLahir ?? "";
+      dateController.value.text = biodata.tanggalLahir ?? "";
+      addressController.value.text = biodata.alamat ?? "";
+      ageController.value.text = biodata.usia ?? "";
+      selectedGender.value = biodata.jenisKelamin ?? selectedGender.value;
+      selectedEducation.value = biodata.pendidikan ?? selectedEducation.value;
+      selectedLive.value = biodata.statusTinggal ?? selectedLive.value;
+      selectedPhase.value = biodata.fase ?? selectedPhase.value;
+      if (biodata.pekerjaan == null) {
         isCustomJob.value = false;
-        selectedJob.value = biodata['job'];
+        selectedJob.value = biodata.pekerjaan ?? selectedJob.value;
+      } else if (job.contains(biodata.pekerjaan)) {
+        isCustomJob.value = false;
+        selectedJob.value = biodata.pekerjaan ?? selectedJob.value;
       } else {
         isCustomJob.value = true;
-        jobController.value.text = biodata['job'];
+        jobController.value.text = biodata.pekerjaan ?? selectedJob.value;
       }
     }
   }
 
   Future<void> chooseFase() async {
-    if (selectedPhase == 'Phase 1') {
+    String? token = await SharedPreferencesHelper.getToken();
+    BiodataModel model = BiodataModel(
+        id: 0,
+        userId: '20',
+        nama: nameController.value.text.trim(),
+        tempatLahir: placeController.value.text.trim(),
+        tanggalLahir: dateController.value.text.trim(),
+        alamat: addressController.value.text.trim(),
+        usia: ageController.value.text.trim(),
+        jenisKelamin: selectedGender.value,
+        pendidikan: selectedEducation.value,
+        pekerjaan:
+            isCustomJob.value ? jobController.value.text : selectedJob.value,
+        statusTinggal: selectedLive.value,
+        fase: selectedPhase.value,
+        createdAt: '',
+        updatedAt: '');
+
+    await BiodataRepository.instance.updateBiodata(token, model);
+
+    if (selectedPhase == 'Fase Awal') {
       activeFase.value = 1;
       await SharedPreferencesHelper.saveFase(1);
     } else {
@@ -73,24 +101,10 @@ class CompleteBiodataUpdateController extends GetxController {
       await SharedPreferencesHelper.saveFase(2);
     }
 
-    Map<String, dynamic> biodata = {
-      'name': nameController.value.text.trim(),
-      'place': placeController.value.text.trim(),
-      'date': dateController.value.text.trim(),
-      'address': addressController.value.text.trim(),
-      'age': ageController.value.text.trim(),
-      'gender': selectedGender.value,
-      'education': selectedEducation.value,
-      'job': isCustomJob.value ? jobController.value.text : selectedJob.value,
-      'live': selectedLive.value,
-      'phase': selectedPhase.value
-    };
-    await SharedPreferencesHelper.saveBiodata(biodata);
-
-    Get.back();
-
     AlarmHelper alarmHelper = AlarmHelper();
     await alarmHelper.scheduleAlarm();
+
+    Get.back();
   }
 
   Future<void> chooseDate() async {
@@ -103,7 +117,7 @@ class CompleteBiodataUpdateController extends GetxController {
 
     if (selectedDate != null) {
       dateController.value.text =
-          DateFormat('dd-MM-yyyy').format(selectedDate); // Format tanggal
+          DateFormat('yyyy-MM-dd').format(selectedDate); // Format tanggal
     }
   }
 }

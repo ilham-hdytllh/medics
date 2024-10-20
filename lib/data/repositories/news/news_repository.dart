@@ -37,7 +37,7 @@ class NewsRepository extends GetxController {
           await SharedPreferencesHelper.clearToken();
           await SharedPreferencesHelper.clearUserData();
           await SharedPreferencesHelper.clearFase();
-          await SharedPreferencesHelper.clearBiodata();
+
           Alarm.stop(1);
           Get.offAllNamed(AppLinks.LOGIN);
           Get.deleteAll();
@@ -75,7 +75,7 @@ class NewsRepository extends GetxController {
           await SharedPreferencesHelper.clearToken();
           await SharedPreferencesHelper.clearUserData();
           await SharedPreferencesHelper.clearFase();
-          await SharedPreferencesHelper.clearBiodata();
+
           Alarm.stop(1);
           Get.offAllNamed(AppLinks.LOGIN);
           Get.deleteAll();
