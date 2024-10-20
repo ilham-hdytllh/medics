@@ -189,7 +189,7 @@ class HomeScreen extends StatelessWidget {
                                 child: Container(
                                   padding:
                                       EdgeInsets.only(bottom: 30, left: 10),
-                                  alignment: Alignment.bottomLeft,
+                                  alignment: Alignment.centerLeft,
                                   height:
                                       80, // Set the height to be the same for all items
                                   decoration: BoxDecoration(

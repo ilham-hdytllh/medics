@@ -41,11 +41,11 @@ class AlarmHelper {
     Alarm.updateStream.stream.listen((alarm) async {
       print('update');
       await alarmHelper.scheduleAlarm();
-      await fecthRepo();
     });
 
     Alarm.ringStream.stream.listen((alarm) async {
       print('listen');
+      await fecthRepo();
     });
   }
 
