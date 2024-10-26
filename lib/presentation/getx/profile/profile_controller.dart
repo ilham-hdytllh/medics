@@ -18,7 +18,7 @@ class ProfileController extends GetxController {
   final email = TextEditingController().obs;
   final telp = TextEditingController().obs;
   final address = TextEditingController().obs;
-  String? logGoogle;
+  int? logGoogle;
 
   @override
   void onInit() {

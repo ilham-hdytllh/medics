@@ -11,7 +11,7 @@ class CustomDatePickerTheme {
     ),
     elevation: 0,
     confirmButtonStyle: ButtonStyle(
-      textStyle: MaterialStateProperty.all(
+      textStyle: WidgetStateProperty.all(
         const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.normal,
@@ -19,7 +19,7 @@ class CustomDatePickerTheme {
       ),
     ),
     cancelButtonStyle: ButtonStyle(
-      textStyle: MaterialStateProperty.all(
+      textStyle: WidgetStateProperty.all(
         const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.normal,
@@ -30,26 +30,26 @@ class CustomDatePickerTheme {
     surfaceTintColor: Colors.transparent,
     headerForegroundColor: CustomColors.white,
     headerBackgroundColor: CustomColors.primary,
-    dayBackgroundColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    dayBackgroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return CustomColors.primary;
       }
       return CustomColors.white;
     }),
-    todayForegroundColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    todayForegroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return CustomColors.white;
       }
       return CustomColors.primary;
     }),
-    todayBackgroundColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    todayBackgroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return CustomColors.primary;
       }
       return CustomColors.white;
     }),
-    yearBackgroundColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    yearBackgroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return CustomColors.primary;
       }
       return CustomColors.white;
@@ -63,7 +63,7 @@ class CustomDatePickerTheme {
     ),
     elevation: 0,
     confirmButtonStyle: ButtonStyle(
-      textStyle: MaterialStateProperty.all(
+      textStyle: WidgetStateProperty.all(
         const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.normal,
@@ -71,7 +71,7 @@ class CustomDatePickerTheme {
       ),
     ),
     cancelButtonStyle: ButtonStyle(
-      textStyle: MaterialStateProperty.all(
+      textStyle: WidgetStateProperty.all(
         const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.normal,
@@ -82,26 +82,26 @@ class CustomDatePickerTheme {
     surfaceTintColor: Colors.transparent,
     headerForegroundColor: CustomColors.black,
     headerBackgroundColor: CustomColors.primary,
-    dayBackgroundColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    dayBackgroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return CustomColors.primary;
       }
       return CustomColors.black;
     }),
-    todayForegroundColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    todayForegroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return CustomColors.black;
       }
       return CustomColors.primary;
     }),
-    todayBackgroundColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    todayBackgroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return CustomColors.primary;
       }
       return CustomColors.black;
     }),
-    yearBackgroundColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    yearBackgroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return CustomColors.primary;
       }
       return CustomColors.black;

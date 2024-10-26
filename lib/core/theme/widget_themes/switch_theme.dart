@@ -5,46 +5,46 @@ class CustomSwitchheme {
   CustomSwitchheme._();
 
   static SwitchThemeData lightSwitchTheme = SwitchThemeData(
-    thumbColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-      if (states.contains(MaterialState.selected)) {
+    thumbColor: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+      if (states.contains(WidgetState.selected)) {
         return CustomColors.primary;
       }
-      if (states.contains(MaterialState.disabled)) {
+      if (states.contains(WidgetState.disabled)) {
         return CustomColors.darkGrey;
       }
       return CustomColors.darkGrey;
     }),
-    trackColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-      if (states.contains(MaterialState.selected)) {
+    trackColor: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+      if (states.contains(WidgetState.selected)) {
         return Colors.orangeAccent.withOpacity(0.2);
       }
-      if (states.contains(MaterialState.disabled)) {
+      if (states.contains(WidgetState.disabled)) {
         return CustomColors.grey;
       }
       return CustomColors.grey;
     }),
-    trackOutlineColor: const MaterialStatePropertyAll(Colors.transparent),
+    trackOutlineColor: const WidgetStatePropertyAll(Colors.transparent),
   );
 
   static SwitchThemeData darkSwitchTheme = SwitchThemeData(
-    thumbColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-      if (states.contains(MaterialState.selected)) {
+    thumbColor: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+      if (states.contains(WidgetState.selected)) {
         return CustomColors.primary;
       }
-      if (states.contains(MaterialState.disabled)) {
+      if (states.contains(WidgetState.disabled)) {
         return CustomColors.lightGrey;
       }
       return CustomColors.lightGrey;
     }),
-    trackColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-      if (states.contains(MaterialState.selected)) {
+    trackColor: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+      if (states.contains(WidgetState.selected)) {
         return Colors.orangeAccent.withOpacity(0.2);
       }
-      if (states.contains(MaterialState.disabled)) {
+      if (states.contains(WidgetState.disabled)) {
         return CustomColors.grey;
       }
       return CustomColors.grey;
     }),
-    trackOutlineColor: const MaterialStatePropertyAll(Colors.transparent),
+    trackOutlineColor: const WidgetStatePropertyAll(Colors.transparent),
   );
 }

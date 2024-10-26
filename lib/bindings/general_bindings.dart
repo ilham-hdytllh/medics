@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:medics/data/repositories/authentication/authentication_repository.dart';
 import 'package:medics/data/repositories/biodata/biodata_repository.dart';
 import 'package:medics/data/repositories/events/event_repository.dart';
-import 'package:medics/data/repositories/medicine/medicine_repository.dart';
 import 'package:medics/data/repositories/news/news_repository.dart';
 import 'package:medics/data/repositories/onboarding/onboarding.dart';
 import '../core/utils/helpers/network_manager.dart';

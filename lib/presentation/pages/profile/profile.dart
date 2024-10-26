@@ -146,13 +146,13 @@ Widget _buildUserProfile(
               color: Colors.black87,
             ),
           ),
-          controller.logGoogle == "0"
+          controller.logGoogle == 0
               ? const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                   child: Divider(),
                 )
               : SizedBox(),
-          controller.logGoogle == "0"
+          controller.logGoogle == 0
               ? GestureDetector(
                   onTap: () => Get.toNamed(AppLinks.UPDATEPASSWORD),
                   child: ProfileList(
@@ -291,7 +291,7 @@ Widget _buildShimmerEffect(ProfileController controller) {
             padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
             child: Divider(),
           ),
-          controller.logGoogle == "0"
+          controller.logGoogle == 0
               ? GestureDetector(
                   onTap: () => Get.toNamed(AppLinks.UPDATEPASSWORD),
                   child: ProfileList(
@@ -301,7 +301,7 @@ Widget _buildShimmerEffect(ProfileController controller) {
                   ),
                 )
               : SizedBox(),
-          controller.logGoogle == "0"
+          controller.logGoogle == 0
               ? const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                   child: Divider(),

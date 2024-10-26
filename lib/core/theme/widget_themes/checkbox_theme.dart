@@ -9,15 +9,15 @@ class CustomCheckboxTheme {
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(CustomSizes.xs),
     ),
-    checkColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    checkColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return CustomColors.white;
       } else {
         return CustomColors.black;
       }
     }),
-    fillColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    fillColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return CustomColors.primary;
       } else {
         return Colors.transparent;
@@ -28,15 +28,15 @@ class CustomCheckboxTheme {
   static CheckboxThemeData darkCheckboxTheme = CheckboxThemeData(
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(CustomSizes.xs)),
-    checkColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    checkColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return CustomColors.white;
       } else {
         return CustomColors.black;
       }
     }),
-    fillColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    fillColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return CustomColors.primary;
       } else {
         return Colors.transparent;

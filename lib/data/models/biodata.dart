@@ -1,11 +1,11 @@
 class BiodataModel {
   int id;
-  String userId;
+  int userId;
   String? nama;
   String? tempatLahir;
   String? tanggalLahir;
   String? alamat;
-  String? usia;
+  int? usia;
   String? jenisKelamin;
   String? pendidikan;
   String? pekerjaan;
@@ -33,12 +33,12 @@ class BiodataModel {
 
   static BiodataModel empty() => BiodataModel(
       id: 0,
-      userId: '',
+      userId: 0,
       nama: '',
       tempatLahir: '',
       tanggalLahir: '',
       alamat: '',
-      usia: '',
+      usia: 0,
       jenisKelamin: '',
       pendidikan: '',
       pekerjaan: '',
@@ -49,12 +49,12 @@ class BiodataModel {
 
   factory BiodataModel.fromJson(Map<String, dynamic> json) => BiodataModel(
         id: json["id"] ?? 0,
-        userId: json["user_id"] ?? "",
+        userId: json["user_id"] ?? 0,
         nama: json["nama"],
         tempatLahir: json["tempat_lahir"],
         tanggalLahir: json["tanggal_lahir"],
         alamat: json["alamat"],
-        usia: json["usia"],
+        usia: json["usia"] ?? 0,
         jenisKelamin: json["jenis_kelamin"],
         pendidikan: json["pendidikan"],
         pekerjaan: json["pekerjaan"],

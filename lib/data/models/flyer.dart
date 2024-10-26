@@ -4,7 +4,7 @@ class FlyerModel {
   final String image;
   final String type;
   final String url;
-  final String sortOrder;
+  final int sortOrder;
 
   FlyerModel({
     required this.id,
@@ -21,7 +21,7 @@ class FlyerModel {
         image: "",
         type: "",
         url: "",
-        sortOrder: "",
+        sortOrder: 0,
       );
 
   // Convert model to JSON structure
@@ -44,7 +44,7 @@ class FlyerModel {
       image: json["image"] ?? "",
       type: json["type"] ?? "",
       url: json["url"] ?? "",
-      sortOrder: json["sort_order"] ?? "",
+      sortOrder: json["sort_order"] ?? 0,
     );
   }
 }

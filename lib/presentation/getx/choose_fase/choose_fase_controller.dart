@@ -57,7 +57,8 @@ class ChooseFaseController extends GetxController {
       placeController.value.text = biodata.tempatLahir ?? "";
       dateController.value.text = biodata.tanggalLahir ?? "";
       addressController.value.text = biodata.alamat ?? "";
-      ageController.value.text = biodata.usia ?? "";
+      ageController.value.text =
+          biodata.usia == null ? '' : biodata.usia.toString();
       selectedGender.value = biodata.jenisKelamin ?? selectedGender.value;
       selectedEducation.value = biodata.pendidikan ?? selectedEducation.value;
       selectedLive.value = biodata.statusTinggal ?? selectedLive.value;
@@ -89,12 +90,12 @@ class ChooseFaseController extends GetxController {
 
       BiodataModel model = BiodataModel(
           id: 0,
-          userId: '20',
+          userId: 20,
           nama: nameController.value.text.trim(),
           tempatLahir: placeController.value.text.trim(),
           tanggalLahir: dateController.value.text.trim(),
           alamat: addressController.value.text.trim(),
-          usia: ageController.value.text.trim(),
+          usia: int.parse(ageController.value.text.trim()),
           jenisKelamin: selectedGender.value,
           pendidikan: selectedEducation.value,
           pekerjaan:

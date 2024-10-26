@@ -3,7 +3,7 @@ class OnBoardingModel {
   final String title;
   final String image;
   final String url;
-  final String sortOrder;
+  final int sortOrder;
   final String createdAt;
   final String updatedAt;
 
@@ -22,8 +22,8 @@ class OnBoardingModel {
       id: json['id'],
       title: json['title'],
       image: json['image'],
-      url: json['url'],
-      sortOrder: json['sort_order'],
+      url: json['url'] ?? "",
+      sortOrder: json['sort_order'] ?? 0,
       createdAt: json['created_at'] ?? '',
       updatedAt: json['updated_at'] ?? '',
     );

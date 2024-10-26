@@ -11,7 +11,7 @@ class CustomTimePickerTheme {
     ),
     elevation: 0,
     confirmButtonStyle: ButtonStyle(
-      textStyle: MaterialStateProperty.all(
+      textStyle: WidgetStateProperty.all(
         const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.normal,
@@ -19,7 +19,7 @@ class CustomTimePickerTheme {
       ),
     ),
     cancelButtonStyle: ButtonStyle(
-      textStyle: MaterialStateProperty.all(
+      textStyle: WidgetStateProperty.all(
         const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.normal,
@@ -50,7 +50,7 @@ class CustomTimePickerTheme {
     ),
     elevation: 0,
     confirmButtonStyle: ButtonStyle(
-      textStyle: MaterialStateProperty.all(
+      textStyle: WidgetStateProperty.all(
         const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.normal,
@@ -58,7 +58,7 @@ class CustomTimePickerTheme {
       ),
     ),
     cancelButtonStyle: ButtonStyle(
-      textStyle: MaterialStateProperty.all(
+      textStyle: WidgetStateProperty.all(
         const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.normal,
