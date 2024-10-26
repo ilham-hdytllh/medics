@@ -1,6 +1,6 @@
 import 'package:medics/data/models/answer.dart';
 
-class Question {
+class QuestionModel {
   int id;
   int questionCategoryId;
   String title;
@@ -10,7 +10,7 @@ class Question {
   DateTime updatedAt;
   List<Answer> answers;
 
-  Question({
+  QuestionModel({
     required this.id,
     required this.questionCategoryId,
     required this.title,
@@ -21,7 +21,7 @@ class Question {
     required this.answers,
   });
 
-  factory Question.fromJson(Map<String, dynamic> json) => Question(
+  factory QuestionModel.fromJson(Map<String, dynamic> json) => QuestionModel(
         id: json["id"],
         questionCategoryId: json["question_category_id"],
         title: json["title"],

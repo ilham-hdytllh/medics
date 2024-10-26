@@ -12,7 +12,7 @@ import '../presentation/pages/auth/signup.dart';
 import '../presentation/pages/auth/forgot_password.dart';
 import '../presentation/pages/auth/login.dart';
 import '../presentation/pages/auth/update_profile.dart';
-import '../presentation/pages/biodata/choose_fase.dart';
+import '../presentation/pages/biodata/biodata.dart';
 import '../presentation/pages/home/detail_flyer.dart';
 import '../presentation/pages/home/event_show_all.dart';
 import '../presentation/pages/home/news_show_all.dart';

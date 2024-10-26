@@ -23,4 +23,11 @@ class ContantAPI {
 
   static String sendMedicine =
       "https://tbr.ridinet.id/api/v1/send-take-medicine";
+
+  static String cekQuestionerStatus =
+      "https://tbr.ridinet.id/api/v1/questionnaire/status";
+  static String getQuestionerFirst =
+      "https://tbr.ridinet.id/api/v1/questionnaire?category=1";
+  static String getQuestioner30Day =
+      "https://tbr.ridinet.id/api/v1/questionnaire?category=2";
 }
