@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/core/constants/colors.dart';
 import 'package:medics/core/utils/validators/validation.dart';
-import 'package:medics/presentation/getx/choose_fase/choose_fase_controller.dart';
+import 'package:medics/presentation/getx/biodata/biodata_controller.dart';
 import '../../../core/constants/sizes.dart';
 
 class ChooseFaseScreen extends StatelessWidget {
@@ -10,7 +10,7 @@ class ChooseFaseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ChooseFaseController());
+    final controller = Get.put(BiodataController());
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),

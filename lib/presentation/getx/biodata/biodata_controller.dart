@@ -8,7 +8,7 @@ import 'package:medics/data/repositories/biodata/biodata_repository.dart';
 import '../../../core/utils/helpers/alarm_helper.dart';
 import '../../../routes/navigation_route.dart';
 
-class ChooseFaseController extends GetxController {
+class BiodataController extends GetxController {
   GlobalKey<FormState> biodataKey = GlobalKey<FormState>();
   final isLoading = false.obs;
   final isCustomJob = false.obs;
