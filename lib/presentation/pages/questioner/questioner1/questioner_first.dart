@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/core/constants/sizes.dart';
-import '../../getx/questioner/questioner_controller.dart';
+import '../../../getx/questioner/questioner_first_controller.dart';
 import 'widgets/step_container.dart';
 import 'widgets/button_prev_next.dart';
 import 'widgets/question_widget.dart';

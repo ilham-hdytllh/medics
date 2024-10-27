@@ -4,12 +4,12 @@ import 'package:intl/intl.dart';
 import 'package:medics/core/utils/helpers/shared_preference.dart';
 import 'package:medics/core/utils/sncakbar/snackbar.dart';
 import 'package:medics/data/models/biodata.dart';
+import 'package:medics/data/repositories/authentication/authentication_repository.dart';
 import 'package:medics/data/repositories/biodata/biodata_repository.dart';
 import '../../../core/utils/helpers/alarm_helper.dart';
 import '../../../routes/navigation_route.dart';
 
 class BiodataController extends GetxController {
-  GlobalKey<FormState> biodataKey = GlobalKey<FormState>();
   final isLoading = false.obs;
   final isCustomJob = false.obs;
   RxInt activeFase = 0.obs;
@@ -80,12 +80,6 @@ class BiodataController extends GetxController {
     isLoading(true);
 
     try {
-      // form validation
-      if (!biodataKey.currentState!.validate()) {
-        isLoading.value = false;
-        return;
-      }
-
       String? token = await SharedPreferencesHelper.getToken();
 
       BiodataModel model = BiodataModel(
@@ -119,7 +113,7 @@ class BiodataController extends GetxController {
 
       await alarmHelper.scheduleAlarm();
 
-      Get.offNamed(AppLinks.HOMESCREEN);
+      await AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       CustomSnackbar.errorSnackbar(title: "Error", message: e.toString());
     } finally {

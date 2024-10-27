@@ -18,7 +18,7 @@ class QuestionRepository extends GetxController {
     try {
       // Make GET request to API
       final response = await http.get(
-        Uri.parse(ContantAPI.getQuestionerFirst),
+        Uri.parse(ContantAPI.cekQuestionerStatus),
         headers: {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
@@ -120,6 +120,48 @@ class QuestionRepository extends GetxController {
           throw 'Session expired';
         default:
           return [];
+      }
+    } on FormatException catch (_) {
+      throw const CustomFormatException();
+    } on PlatformException catch (e) {
+      throw CustomPlatformException(e.code).message;
+    } catch (e) {
+      throw "$e";
+    }
+  }
+
+  Future<void> storeQuestioner(
+      String? token, List<Map<String, dynamic>> data) async {
+    try {
+      // Make GET request to API
+      final response = await http.post(
+        Uri.parse(ContantAPI.storeQuestioner),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: json.encode(
+          {"answers": data},
+        ),
+      );
+
+      final body = json.decode(response.body);
+      switch (response.statusCode) {
+        case 201:
+          print(body['message']);
+        case 401:
+        case 403:
+          await SharedPreferencesHelper.clearToken();
+          await SharedPreferencesHelper.clearUserData();
+          await SharedPreferencesHelper.clearFase();
+
+          Alarm.stop(1);
+          Get.offAllNamed(AppLinks.LOGIN);
+          Get.deleteAll();
+          throw 'Session expired';
+        default:
+          throw "${body['message']}";
       }
     } on FormatException catch (_) {
       throw const CustomFormatException();

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/core/utils/helpers/shared_preference.dart';
+import 'package:medics/core/utils/sncakbar/snackbar.dart';
 import 'package:medics/data/models/question.dart';
 import 'package:medics/data/repositories/questioner/questioner_repository.dart';
+
+import '../../../data/repositories/authentication/authentication_repository.dart';
 
 class QuestionerFirstController extends GetxController {
   RxList<QuestionModel> questionFirstData = <QuestionModel>[].obs;
   PageController pageController = PageController();
   RxInt index = 0.obs;
+  RxBool isLoading = false.obs;
   RxList<Map<String, int>> selectedAnswers = <Map<String, int>>[].obs;
 
   @override
@@ -63,6 +67,26 @@ class QuestionerFirstController extends GetxController {
       questionFirstData.addAll(listData);
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<void> storeQuestioner() async {
+    try {
+      isLoading(true);
+
+      String? token = await SharedPreferencesHelper.getToken();
+
+      await QuestionRepository.instance.storeQuestioner(token, selectedAnswers);
+
+      await AuthenticationRepository.instance.screenRedirect();
+
+      selectedAnswers.clear();
+      index.value = 0;
+      pageController.jumpToPage(0);
+    } catch (e) {
+      CustomSnackbar.errorSnackbar(title: "Error", message: e.toString());
+    } finally {
+      isLoading(false);
     }
   }
 }

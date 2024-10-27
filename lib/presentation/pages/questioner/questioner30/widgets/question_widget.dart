@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:medics/presentation/getx/questioner/questioner_controller.dart';
-import '../../../../core/constants/sizes.dart';
-import '../../../../data/models/answer.dart';
+import '../../../../../core/constants/sizes.dart';
+import '../../../../../data/models/answer.dart';
+import '../../../../getx/questioner/questioner_30_controller.dart';
 
 class QuestionWidget extends StatelessWidget {
   QuestionWidget(
@@ -16,7 +16,7 @@ class QuestionWidget extends StatelessWidget {
   final int questionID;
   final List<Answer> data;
 
-  final controller = Get.find<QuestionerFirstController>();
+  final controller = Get.find<Questioner30Controller>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class QuestionWidget extends StatelessWidget {
           SizedBox(
             height: CustomSizes.spaceBtwInputFields,
           ),
-          GetBuilder<QuestionerFirstController>(builder: (context) {
+          GetBuilder<Questioner30Controller>(builder: (context) {
             return ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
@@ -39,7 +39,11 @@ class QuestionWidget extends StatelessWidget {
                 leading: Checkbox(
                   value: controller.checkBoxTrueOrNot(data[index].id),
                   onChanged: (value) {
-                    controller.addAnswerToMap(questionID, data[index].id);
+                    if (controller.isLoading.value) {
+                      null;
+                    } else {
+                      controller.addAnswerToMap(questionID, data[index].id);
+                    }
                   },
                 ),
                 title: Text(

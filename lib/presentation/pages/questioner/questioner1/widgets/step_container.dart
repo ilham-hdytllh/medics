@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:medics/data/models/question.dart';
 
-import '../../../../core/constants/colors.dart';
-import '../../../getx/questioner/questioner_controller.dart';
+import '../../../../../core/constants/colors.dart';
+import '../../../../getx/questioner/questioner_first_controller.dart';
 
 class StepContainer extends StatelessWidget {
   StepContainer({super.key, required this.data});

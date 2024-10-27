@@ -30,4 +30,5 @@ class ContantAPI {
       "https://tbr.ridinet.id/api/v1/questionnaire?category=1";
   static String getQuestioner30Day =
       "https://tbr.ridinet.id/api/v1/questionnaire?category=2";
+  static String storeQuestioner = "https://tbr.ridinet.id/api/v1/questionnaire";
 }

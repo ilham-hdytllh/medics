@@ -26,15 +26,10 @@ class HomeScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         centerTitle: false,
         titleSpacing: 0.0,
-        title: GestureDetector(
-          onTap: () {
-            Get.toNamed(AppLinks.QUESTIONERFIRST);
-          },
-          child: Image.asset(
-            CustomImages.logo,
-            height: 120,
-            fit: BoxFit.fitHeight,
-          ),
+        title: Image.asset(
+          CustomImages.logo,
+          height: 120,
+          fit: BoxFit.fitHeight,
         ),
       ),
       body: RefreshIndicator(

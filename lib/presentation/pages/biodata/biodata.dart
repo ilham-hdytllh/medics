@@ -5,13 +5,15 @@ import 'package:medics/core/utils/validators/validation.dart';
 import 'package:medics/presentation/getx/biodata/biodata_controller.dart';
 import '../../../core/constants/sizes.dart';
 
+// ignore: must_be_immutable
 class ChooseFaseScreen extends StatelessWidget {
-  const ChooseFaseScreen({super.key});
+  ChooseFaseScreen({super.key});
+
+  GlobalKey<FormState> biodataKey = GlobalKey<FormState>();
+  final controller = Get.put(BiodataController());
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(BiodataController());
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -25,7 +27,7 @@ class ChooseFaseScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Form(
-                key: controller.biodataKey,
+                key: biodataKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -245,55 +247,59 @@ class ChooseFaseScreen extends StatelessWidget {
                     const SizedBox(
                       height: CustomSizes.spaceBtwItems,
                     ),
-                    Obx(
-                      () => SizedBox(
-                        height: CustomSizes.inputFieldHeight,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            controller.isLoading.value
-                                ? null
-                                : await controller.chooseFase();
-                          },
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.all(0),
-                            disabledBackgroundColor: CustomColors.grey,
-                            disabledForegroundColor: CustomColors.primary,
-                            foregroundColor: CustomColors.white,
-                            backgroundColor: CustomColors.primary,
-                          ),
-                          child: controller.isLoading.value
-                              ? Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      width: 25,
-                                      height: 25,
-                                      child: CircularProgressIndicator(
-                                        color: CustomColors.white,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      "Please wait..",
-                                    ),
-                                  ],
-                                )
-                              : Text(
-                                  "Lanjut",
-                                ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: CustomSizes.spaceBtwItems,
-                    ),
                   ],
                 ),
+              ),
+            ),
+          ),
+        ),
+        bottomNavigationBar: Container(
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+          color: CustomColors.white,
+          child: Obx(
+            () => SizedBox(
+              height: CustomSizes.inputFieldHeight,
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () async {
+                  // form validation
+                  if (biodataKey.currentState!.validate()) {
+                    controller.isLoading.value
+                        ? null
+                        : await controller.chooseFase();
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(0),
+                  disabledBackgroundColor: CustomColors.grey,
+                  disabledForegroundColor: CustomColors.primary,
+                  foregroundColor: CustomColors.white,
+                  backgroundColor: CustomColors.primary,
+                ),
+                child: controller.isLoading.value
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 25,
+                            height: 25,
+                            child: CircularProgressIndicator(
+                              color: CustomColors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            "Please wait..",
+                          ),
+                        ],
+                      )
+                    : Text(
+                        "Lanjut",
+                      ),
               ),
             ),
           ),

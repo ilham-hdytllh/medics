@@ -6,6 +6,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
+import 'package:medics/data/repositories/questioner/questioner_repository.dart';
 import 'package:medics/routes/navigation_route.dart';
 import '../../../core/constants/api_constants.dart';
 import '../../../core/utils/exceptions/format_exceptions.dart';
@@ -32,8 +33,19 @@ class AuthenticationRepository extends GetxController {
       if (fase == null) {
         Get.offAllNamed(AppLinks.CHOOSEFASE);
       } else {
-        // if user is logged in
-        Get.offAllNamed(AppLinks.HOMESCREEN);
+        final Map<String, dynamic> data =
+            await QuestionRepository.instance.checkQuestioner(token);
+
+        print(data);
+
+        if (data['first_questionnaire']) {
+          Get.offAllNamed(AppLinks.QUESTIONERFIRST);
+        } else if (data['thirty_day_questionnaire']) {
+          Get.offAllNamed(AppLinks.QUESTIONER30);
+        } else {
+          // if user is logged in
+          Get.offAllNamed(AppLinks.HOMESCREEN);
+        }
       }
     } else {
       // Local Storage
