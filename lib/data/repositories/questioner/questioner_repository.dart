@@ -12,7 +12,8 @@ import '../../../core/utils/exceptions/platform_exceptions.dart';
 import '../../../core/utils/helpers/shared_preference.dart';
 import '../../../routes/navigation_route.dart';
 
-class QuestionRepository {
+class QuestionRepository extends GetxController {
+  static QuestionRepository get instance => Get.find();
   Future<Map<String, dynamic>> checkQuestioner(String? token) async {
     try {
       // Make GET request to API
@@ -64,6 +65,7 @@ class QuestionRepository {
       switch (response.statusCode) {
         case 200:
           final body = json.decode(response.body);
+          print(body);
           return (body['data'] as List)
               .map((e) => QuestionModel.fromJson(e))
               .toList();

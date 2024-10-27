@@ -4,6 +4,7 @@ import 'package:medics/data/repositories/biodata/biodata_repository.dart';
 import 'package:medics/data/repositories/events/event_repository.dart';
 import 'package:medics/data/repositories/news/news_repository.dart';
 import 'package:medics/data/repositories/onboarding/onboarding.dart';
+import 'package:medics/data/repositories/questioner/questioner_repository.dart';
 import '../core/utils/helpers/network_manager.dart';
 import '../data/repositories/flyer/flyer_repository.dart';
 
@@ -18,5 +19,6 @@ class GeneralBindings extends Bindings {
     Get.put(NewsRepository());
     Get.put(EventRepository());
     Get.put(BiodataRepository());
+    Get.put(QuestionRepository());
   }
 }

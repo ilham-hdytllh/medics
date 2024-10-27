@@ -3,7 +3,6 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:get/get.dart';
 import 'package:medics/core/constants/colors.dart';
 import 'package:medics/presentation/getx/home/home_controller.dart';
-
 import '../profile/profile.dart';
 import 'home.dart';
 
@@ -17,9 +16,10 @@ class MainScreen extends StatelessWidget {
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: pagesController.pageController,
-        children: const [
+        children: [
           HomeScreen(),
-          ProfileScreen(),
+          // QuestionerFirst(),
+          const ProfileScreen(),
         ],
       ),
       bottomNavigationBar: Obx(

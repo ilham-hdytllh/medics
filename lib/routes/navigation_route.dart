@@ -5,8 +5,10 @@ import 'package:medics/presentation/pages/home/detail_event.dart';
 import 'package:medics/presentation/pages/home/detail_news.dart';
 import 'package:medics/presentation/pages/home/main.dart';
 import 'package:medics/presentation/pages/profile/profile.dart';
+import 'package:medics/presentation/pages/questioner/questioner_first.dart';
 import '../bindings/complete_biodata.dart';
 import '../bindings/general_bindings.dart';
+import '../bindings/questioner_bindings.dart';
 import '../presentation/pages/alarm/alarm_screen.dart';
 import '../presentation/pages/auth/signup.dart';
 import '../presentation/pages/auth/forgot_password.dart';
@@ -49,6 +51,11 @@ class AppRoutes {
         binding: CompleteBiodataBindings()),
     GetPage(name: AppLinks.ALLNEWS, page: () => NewsShowAllScreen()),
     GetPage(name: AppLinks.ALLEVENT, page: () => EventShowAllScreen()),
+    GetPage(
+        name: AppLinks.QUESTIONERFIRST,
+        page: () => QuestionerFirst(),
+        binding: QuestionerBindings()),
+    GetPage(name: AppLinks.QUESTIONER30, page: () => QuestionerFirst()),
   ];
 }
 
@@ -70,4 +77,6 @@ class AppLinks {
   static const String COMPLETEBIODATA = "/completeBiodata";
   static const String ALLNEWS = "/allNews";
   static const String ALLEVENT = "/allEvent";
+  static const String QUESTIONERFIRST = "/questionerFirst";
+  static const String QUESTIONER30 = "/questioner30";
 }

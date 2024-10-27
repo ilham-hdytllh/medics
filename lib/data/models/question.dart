@@ -6,8 +6,8 @@ class QuestionModel {
   String title;
   int sortOrder;
   int status;
-  DateTime createdAt;
-  DateTime updatedAt;
+  String createdAt;
+  String updatedAt;
   List<Answer> answers;
 
   QuestionModel({
@@ -27,9 +27,10 @@ class QuestionModel {
         title: json["title"],
         sortOrder: json["sort_order"],
         status: json["status"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        answers: List<Answer>.from(json["answers"].map((answer) => answer)),
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
+        answers: List<Answer>.from(
+            json["answers"].map((answer) => Answer.fromJson(answer))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -38,8 +39,9 @@ class QuestionModel {
         "title": title,
         "sort_order": sortOrder,
         "status": status,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
-        "answers": List<dynamic>.from(answers.map((x) => x)),
+        "created_at": createdAt,
+        "updated_at": updatedAt,
+        "answers": List<dynamic>.from(
+            answers.map((answer) => answer.toJson())), // Perbaikan di sini
       };
 }
