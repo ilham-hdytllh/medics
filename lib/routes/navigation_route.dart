@@ -20,6 +20,7 @@ import '../presentation/pages/home/event_show_all.dart';
 import '../presentation/pages/home/news_show_all.dart';
 import '../presentation/pages/onboarding/onboarding.dart';
 import '../presentation/pages/profile/complete_biodata.dart';
+import '../presentation/pages/questioner/questioner30/questioner_30.dart';
 
 class AppRoutes {
   static final pages = [
@@ -57,7 +58,7 @@ class AppRoutes {
         binding: QuestionerBindings()),
     GetPage(
         name: AppLinks.QUESTIONER30,
-        page: () => QuestionerFirst(),
+        page: () => Questioner30(),
         binding: QuestionerBindings()),
   ];
 }
