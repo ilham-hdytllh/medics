@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:medics/core/utils/helpers/shared_preference.dart';
 import 'package:medics/core/utils/sncakbar/snackbar.dart';
 import 'package:medics/data/models/user.dart';
@@ -12,18 +13,60 @@ class ProfileController extends GetxController {
   /// Variables
   GlobalKey<FormState> profileKey = GlobalKey<FormState>();
   RxBool isLoading = false.obs;
-  Rx<UserModel> userProfile =
-      Rx<UserModel>(UserModel(name: '', email: '', address: '', phone: ''));
+  Rx<UserModel> userProfile = Rx<UserModel>(
+      UserModel(name: '', email: '', address: '', phone: '', image: ''));
   final name = TextEditingController().obs;
   final email = TextEditingController().obs;
   final telp = TextEditingController().obs;
   final address = TextEditingController().obs;
+  RxString imageProfileActive = ''.obs;
   int? logGoogle;
+  RxString imagePath = ''.obs;
 
   @override
   void onInit() {
     fetchProfile();
     super.onInit();
+  }
+
+  Future<void> pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    isLoading.value = true;
+
+    try {
+      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+      if (image != null) {
+        imagePath.value = image.path;
+
+        // Navigasi ke halaman pratinjau
+        Get.toNamed('imagePreview');
+      }
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> uploadImage() async {
+    String? token = await SharedPreferencesHelper.getToken();
+
+    try {
+      isLoading(true);
+      if (imagePath.value.isNotEmpty) {
+        await AuthenticationRepository.instance
+            .changeImageProfile(token, imagePath.value);
+
+        Get.back();
+        fetchProfile();
+      } else {
+        CustomSnackbar.warningSnackbar(
+            title: "Oopps", message: "Anda belum memilih gambar");
+      }
+    } catch (e) {
+      CustomSnackbar.errorSnackbar(
+          title: "Error", message: "Terjadi kesalahan, coba lagi nanti");
+    } finally {
+      isLoading(false);
+    }
   }
 
   void fetchProfile() async {
@@ -53,6 +96,7 @@ class ProfileController extends GetxController {
       email.value.text = userProfile.value.email;
       telp.value.text = userProfile.value.phone;
       address.value.text = userProfile.value.address;
+      imageProfileActive.value = userProfile.value.image;
     } catch (e) {
       print(e);
     } finally {

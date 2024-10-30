@@ -9,6 +9,8 @@ class ContantAPI {
 
   static String getProfile = "https://tbalert.id/api/v1/user/profile";
   static String updateProfile = "https://tbalert.id/api/v1/user/profile";
+  static String updateImageProfile =
+      "https://tbalert.id/api/v1/user/profile/edit-photo";
   static String updatePassword =
       "https://tbalert.id/api/v1/user/profile/edit-password";
 

@@ -400,4 +400,55 @@ class AuthenticationRepository extends GetxController {
       throw "$e";
     }
   }
+
+  // Update Image Profile
+  Future<void> changeImageProfile(
+    String? token,
+    String pathImage,
+  ) async {
+    print(token);
+    print(pathImage);
+
+    var request = http.MultipartRequest(
+      'POST',
+      Uri.parse(ContantAPI.updateImageProfile),
+    );
+
+    // Menambahkan header Authorization
+    if (token != null) {
+      request.headers['Authorization'] = 'Bearer $token';
+    }
+
+    // Pastikan kunci di sini sama dengan yang Anda gunakan di Postman
+    request.files.add(await http.MultipartFile.fromPath('image', pathImage));
+
+    try {
+      var response = await request.send();
+      print(response.statusCode);
+      print(response);
+
+      switch (response.statusCode) {
+        case 200:
+          print("Sukses");
+          return;
+        case 401:
+        case 403:
+          await SharedPreferencesHelper.clearToken();
+          await SharedPreferencesHelper.clearUserData();
+          await SharedPreferencesHelper.clearFase();
+          Alarm.stop(1);
+          Get.offAllNamed(AppLinks.LOGIN);
+          Get.deleteAll();
+          throw 'Session expired';
+        default:
+          throw "Update profile image failed, please try again";
+      }
+    } on FormatException catch (_) {
+      throw const CustomFormatException();
+    } on PlatformException catch (e) {
+      throw CustomPlatformException(e.code).message;
+    } catch (e) {
+      throw "$e";
+    }
+  }
 }

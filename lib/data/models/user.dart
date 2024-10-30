@@ -3,12 +3,14 @@ class UserModel {
   final String email;
   final String address;
   final String phone;
+  final String image;
 
   UserModel({
     required this.name,
     required this.email,
     required this.address,
     required this.phone,
+    required this.image,
   });
 
   // Static function to create an empty UserModel
@@ -17,6 +19,7 @@ class UserModel {
         email: "",
         address: "",
         phone: "",
+        image: "",
       );
 
   // Convert model to JSON structure
@@ -26,6 +29,7 @@ class UserModel {
       'email': email,
       'address': address,
       'phone': phone,
+      'image': image,
     };
   }
 
@@ -36,6 +40,7 @@ class UserModel {
       email: json["email"] ?? "",
       address: json["address"] ?? "",
       phone: json["phone"] ?? "",
+      image: json["image"] ?? "",
     );
   }
 }

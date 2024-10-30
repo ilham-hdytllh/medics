@@ -55,47 +55,52 @@ Widget _buildUserProfile(
       SizedBox(
         height: 50,
       ),
-      Center(
-        child: Stack(
-          children: [
-            SizedBox(
-              height: 50,
-            ),
-            Container(
-              width: 110,
-              height: 110,
-              decoration: BoxDecoration(
-                  border: Border.all(width: 4, color: Colors.white),
-                  boxShadow: [
-                    BoxShadow(
-                        spreadRadius: 2,
-                        blurRadius: 10,
-                        color: Colors.black.withOpacity(0.1))
-                  ],
-                  shape: BoxShape.circle,
-                  image: const DecorationImage(
-                    image: AssetImage(CustomImages.emptyProfile),
-                    fit: BoxFit.cover,
-                  )),
-            ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: Container(
-                height: 30,
-                width: 30,
+      GestureDetector(
+        onTap: () => controller.pickImage(),
+        child: Center(
+          child: Stack(
+            children: [
+              SizedBox(
+                height: 50,
+              ),
+              Container(
+                width: 110,
+                height: 110,
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(width: 1, color: Colors.white),
-                  color: Colors.white,
-                ),
-                child: Icon(
-                  Iconsax.camera,
-                  size: CustomSizes.md,
+                    border: Border.all(width: 4, color: Colors.white),
+                    boxShadow: [
+                      BoxShadow(
+                          spreadRadius: 2,
+                          blurRadius: 10,
+                          color: Colors.black.withOpacity(0.1))
+                    ],
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: controller.imageProfileActive.value.isEmpty
+                          ? AssetImage(CustomImages.emptyProfile)
+                          : NetworkImage(controller.imageProfileActive.value),
+                      fit: BoxFit.cover,
+                    )),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: Container(
+                  height: 30,
+                  width: 30,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(width: 1, color: Colors.white),
+                    color: Colors.white,
+                  ),
+                  child: Icon(
+                    Iconsax.camera,
+                    size: CustomSizes.md,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       const SizedBox(

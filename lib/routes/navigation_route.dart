@@ -9,6 +9,7 @@ import 'package:medics/presentation/pages/questioner/questioner1/questioner_firs
 import '../bindings/complete_biodata.dart';
 import '../bindings/general_bindings.dart';
 import '../bindings/questioner_bindings.dart';
+import '../presentation/pages/profile/preview_image.dart';
 import '../presentation/pages/alarm/alarm_screen.dart';
 import '../presentation/pages/auth/signup.dart';
 import '../presentation/pages/auth/forgot_password.dart';
@@ -60,6 +61,10 @@ class AppRoutes {
         name: AppLinks.QUESTIONER30,
         page: () => Questioner30(),
         binding: QuestionerBindings()),
+    GetPage(
+      name: AppLinks.IMAGEPREVIEW,
+      page: () => ImagePreview(),
+    ),
   ];
 }
 
@@ -83,4 +88,6 @@ class AppLinks {
   static const String ALLEVENT = "/allEvent";
   static const String QUESTIONERFIRST = "/questionerFirst";
   static const String QUESTIONER30 = "/questioner30";
+
+  static const String IMAGEPREVIEW = "/imagePreview";
 }
