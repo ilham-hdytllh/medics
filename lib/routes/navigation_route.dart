@@ -6,9 +6,11 @@ import 'package:medics/presentation/pages/home/detail_news.dart';
 import 'package:medics/presentation/pages/home/main.dart';
 import 'package:medics/presentation/pages/profile/profile.dart';
 import 'package:medics/presentation/pages/questioner/questioner1/questioner_first.dart';
+import '../bindings/alarm_binding.dart';
 import '../bindings/complete_biodata.dart';
 import '../bindings/general_bindings.dart';
 import '../bindings/questioner_bindings.dart';
+import '../presentation/pages/alarm/alarm_notif.dart';
 import '../presentation/pages/profile/preview_image.dart';
 import '../presentation/pages/alarm/alarm_screen.dart';
 import '../presentation/pages/auth/signup.dart';
@@ -65,6 +67,11 @@ class AppRoutes {
       name: AppLinks.IMAGEPREVIEW,
       page: () => ImagePreview(),
     ),
+    GetPage(
+      name: AppLinks.ALARMSCREEN,
+      page: () => AlarmNotif(),
+      binding: AlarmBinding(),
+    ),
   ];
 }
 
@@ -90,4 +97,5 @@ class AppLinks {
   static const String QUESTIONER30 = "/questioner30";
 
   static const String IMAGEPREVIEW = "/imagePreview";
+  static const String ALARMSCREEN = "/alarmScreen";
 }

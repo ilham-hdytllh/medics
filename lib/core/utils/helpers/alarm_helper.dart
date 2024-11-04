@@ -2,14 +2,12 @@ import 'dart:async';
 import 'dart:io';
 import 'package:alarm/alarm.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 import 'package:medics/core/utils/helpers/shared_preference.dart';
-import 'package:medics/data/repositories/medicine/medicine_repository.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class AlarmHelper {
   static init() async {
-    print('alarm init');
     await Alarm.init();
     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
         FlutterLocalNotificationsPlugin();
@@ -28,28 +26,9 @@ class AlarmHelper {
       await Permission.scheduleExactAlarm.request();
     }
 
-    Future<void> fecthRepo() async {
-      print('fetchRepo');
-      String? token = await SharedPreferencesHelper.getToken();
-      if (token != null) {
-        String date = DateFormat('yyyy-MM-dd').format(DateTime.now());
-        String time = DateFormat('HH:mm').format(DateTime.now());
-
-        MediciniRepository controller = MediciniRepository();
-        await controller.medicinePost(token, date, time);
-      }
-    }
-
-    AlarmHelper alarmHelper = AlarmHelper();
-
-    Alarm.updateStream.stream.listen((alarm) async {
-      print('update');
-      await alarmHelper.scheduleAlarm();
-    });
-
     Alarm.ringStream.stream.listen((alarm) async {
       print('listen');
-      await fecthRepo();
+      Get.toNamed('/alarmScreen');
     });
   }
 
@@ -112,20 +91,20 @@ class AlarmHelper {
       assetAudioPath: 'assets/sounds/alarm.mp3',
       loopAudio: true,
       vibrate: true,
-      volume: 0.6,
+      volume: 0.2,
       fadeDuration: 3.0,
       warningNotificationOnKill: Platform.isIOS,
       androidFullScreenIntent: true,
       notificationSettings: const NotificationSettings(
         title: 'Pengingat!!!',
         body: 'Sudah waktunya minum obat, ayo segera minum obat.',
-        stopButton: 'Stop Alarm',
+        stopButton: '',
         icon: 'app_icon',
       ),
     );
   }
 
-// Fungsi untuk mendapatkan tanggal dan waktu berikutnya yang diizinkan
+  // Fungsi untuk mendapatkan tanggal dan waktu berikutnya yang diizinkan
   DateTime getNextAllowedDateTime(DateTime now) {
     DateTime nextDateTime;
 

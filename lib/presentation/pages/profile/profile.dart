@@ -27,6 +27,13 @@ class ProfileScreen extends StatelessWidget {
       extendBody: true,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        // actions: [
+        //   IconButton(
+        //     onPressed: () => Get.toNamed(AppLinks.ALARMSCREEN),
+        //     icon: Icon(Icons.abc_outlined),
+        //   ),
+        // ],
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.light,
