@@ -1,8 +1,8 @@
+import 'dart:convert';
 import 'package:alarm/alarm.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
 import '../../../core/constants/api_constants.dart';
 import '../../../core/utils/exceptions/format_exceptions.dart';
 import '../../../core/utils/exceptions/platform_exceptions.dart';
@@ -11,15 +11,22 @@ import '../../../routes/navigation_route.dart';
 
 class MediciniRepository {
   // Biodata update
-  Future<void> medicinePost(String? token) async {
+  Future<void> medicinePost(String? token, String date, String time) async {
     try {
       // Make GET request to API
       final response = await http.post(
         Uri.parse("${ContantAPI.sendMedicine}"),
         headers: {
           'Accept': 'application/json',
+          'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
         },
+        body: json.encode(
+          {
+            "date": date,
+            "time": time,
+          },
+        ),
       );
 
       switch (response.statusCode) {

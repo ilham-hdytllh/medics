@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:alarm/alarm.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:intl/intl.dart';
 import 'package:medics/core/utils/helpers/shared_preference.dart';
 import 'package:medics/data/repositories/medicine/medicine_repository.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -31,8 +32,11 @@ class AlarmHelper {
       print('fetchRepo');
       String? token = await SharedPreferencesHelper.getToken();
       if (token != null) {
+        String date = DateFormat('yyyy-MM-dd').format(DateTime.now());
+        String time = DateFormat('HH:mm').format(DateTime.now());
+
         MediciniRepository controller = MediciniRepository();
-        await controller.medicinePost(token);
+        await controller.medicinePost(token, date, time);
       }
     }
 
