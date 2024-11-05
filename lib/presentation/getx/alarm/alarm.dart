@@ -67,7 +67,7 @@ class AlarmController extends GetxController {
         notificationSettings: const NotificationSettings(
           title: 'Pengingat!!!',
           body: 'Sudah waktunya minum obat, ayo segera minum obat.',
-          stopButton: '',
+          stopButton: 'Open',
           icon: 'app_icon',
         ),
       ),

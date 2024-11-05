@@ -27,7 +27,6 @@ class AlarmHelper {
     }
 
     Alarm.ringStream.stream.listen((alarm) async {
-      print('listen');
       Get.toNamed('/alarmScreen');
     });
   }
@@ -98,7 +97,7 @@ class AlarmHelper {
       notificationSettings: const NotificationSettings(
         title: 'Pengingat!!!',
         body: 'Sudah waktunya minum obat, ayo segera minum obat.',
-        stopButton: '',
+        stopButton: 'Open',
         icon: 'app_icon',
       ),
     );

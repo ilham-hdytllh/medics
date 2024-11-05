@@ -42,9 +42,7 @@ class AlarmNotif extends StatelessWidget {
                       width: double.infinity,
                       child: OutlinedButton(
                         onPressed: () async {
-                          controller.isLoading.value == false
-                              ? await controller.snooze30()
-                              : null;
+                          await controller.snooze30();
                         },
                         style: OutlinedButton.styleFrom(
                           padding: const EdgeInsets.all(0),

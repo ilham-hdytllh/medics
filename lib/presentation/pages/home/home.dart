@@ -14,13 +14,12 @@ import '../../../core/constants/colors.dart';
 import '../../getx/events/event_controller.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final flyerController = Get.put(FlyerController());
+  final newsController = Get.put(NewsListController());
+  final eventController = Get.put(EventListController());
 
   @override
   Widget build(BuildContext context) {
-    final flyerController = Get.put(FlyerController());
-    final newsController = Get.put(NewsListController());
-    final eventController = Get.put(EventListController());
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

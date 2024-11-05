@@ -11,6 +11,7 @@ import 'package:medics/routes/navigation_route.dart';
 import '../../../core/constants/api_constants.dart';
 import '../../../core/utils/exceptions/format_exceptions.dart';
 import '../../../core/utils/exceptions/platform_exceptions.dart';
+import '../../../core/utils/helpers/alarm_helper.dart';
 import '../../../core/utils/helpers/shared_preference.dart';
 import '../../models/user.dart';
 
@@ -29,14 +30,17 @@ class AuthenticationRepository extends GetxController {
     String? token = await SharedPreferencesHelper.getToken();
     bool? isFirstTime = await SharedPreferencesHelper.isFirstTime();
     int? fase = await SharedPreferencesHelper.getFase();
+
+    AlarmHelper alarm = AlarmHelper();
+
+    await alarm.scheduleAlarm();
+
     if (token != null) {
       if (fase == null) {
         Get.offAllNamed(AppLinks.CHOOSEFASE);
       } else {
         final Map<String, dynamic> data =
             await QuestionRepository.instance.checkQuestioner(token);
-
-        print(data);
 
         if (data['first_questionnaire']) {
           Get.offAllNamed(AppLinks.QUESTIONERFIRST);
