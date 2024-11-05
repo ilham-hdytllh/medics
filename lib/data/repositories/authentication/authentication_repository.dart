@@ -33,10 +33,9 @@ class AuthenticationRepository extends GetxController {
 
     AlarmHelper alarm = AlarmHelper();
 
-    await alarm.scheduleAlarm();
-
     if (token != null) {
       if (fase == null) {
+        await alarm.scheduleAlarm();
         Get.offAllNamed(AppLinks.CHOOSEFASE);
       } else {
         final Map<String, dynamic> data =

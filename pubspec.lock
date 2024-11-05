@@ -13,10 +13,10 @@ packages:
     dependency: "direct main"
     description:
       name: alarm
-      sha256: "45a6feedfc00311b2acfcb24b1cd884e2b2e33304f124bd5444939a11eb86019"
+      sha256: "5c6e4e069ebc8cb5ac81c1f5985338cf753a99d3e1de8b872a9005a7fd48ac7f"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.4"
+    version: "4.0.9"
   ansicolor:
     dependency: transitive
     description:
