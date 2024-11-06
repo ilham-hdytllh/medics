@@ -35,9 +35,9 @@ class AuthenticationRepository extends GetxController {
 
     if (token != null) {
       if (fase == null) {
-        await alarm.scheduleAlarm();
         Get.offAllNamed(AppLinks.CHOOSEFASE);
       } else {
+        await alarm.scheduleAlarm();
         final Map<String, dynamic> data =
             await QuestionRepository.instance.checkQuestioner(token);
 
