@@ -44,7 +44,7 @@ class AppRoutes {
     GetPage(
         name: AppLinks.UPDATEPASSWORD,
         page: () => const UpdatePasswordScreen()),
-    GetPage(name: AppLinks.ALARM, page: () => const AlarmScreen()),
+    GetPage(name: AppLinks.ALARM, page: () => AlarmScreen()),
     GetPage(name: AppLinks.DETAILFLYER, page: () => DetailFlyer()),
     GetPage(name: AppLinks.DETAILEVENT, page: () => EventDetailPage()),
     GetPage(name: AppLinks.DETAILNEWS, page: () => NewsDetailPage()),
@@ -71,6 +71,7 @@ class AppRoutes {
       name: AppLinks.ALARMSCREEN,
       page: () => AlarmNotif(),
       binding: AlarmBinding(),
+      popGesture: false,
     ),
   ];
 }

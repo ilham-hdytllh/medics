@@ -92,7 +92,7 @@ class AlarmHelper {
       vibrate: true,
       volume: 0.2,
       fadeDuration: 3.0,
-      warningNotificationOnKill: Platform.isIOS,
+      warningNotificationOnKill: Platform.isAndroid,
       androidFullScreenIntent: true,
       notificationSettings: const NotificationSettings(
         title: 'Pengingat!!!',

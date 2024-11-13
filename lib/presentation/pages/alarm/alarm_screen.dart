@@ -4,11 +4,10 @@ import 'package:medics/presentation/getx/alarm/alarm.dart';
 import '../../../core/constants/colors.dart';
 
 class AlarmScreen extends StatelessWidget {
-  const AlarmScreen({super.key});
+  final setfaseController = Get.put(AlarmController());
 
   @override
   Widget build(BuildContext context) {
-    final setfaseController = Get.put(AlarmController());
     return Scaffold(
       appBar: AppBar(
         title: Text("Alarm"),
